@@ -2,8 +2,7 @@ sand.define('Moods/Master', [
   'Seed',
   'DOM/toDOM',
   'DataPackage/Controller->DP',
-  'Moods/Topbar',
-  'Moods/Leftbar',
+  'Moods/Bar',
   'Moods/Upload',
   'Moods/View',
   'Moods/Cover',
@@ -29,8 +28,8 @@ sand.define('Moods/Master', [
     tpl: function() {
       return {
         tag: '.moods', children: [
-          this.create(r.Topbar, {}, 'topbar').el,
-          this.create(r.Leftbar, {}, 'leftbar').el,
+          this.create(r.Bar, {side : "topbar"}, 'topbar').el,
+          this.create(r.Bar, {side : "leftbar"}, 'leftbar').el,
           {tag: '.moods-container', as: 'container', children: [
             {tag: '.moods-container-view', as: 'containerView', children: [
               this.create(r.View, {}, 'view').el,

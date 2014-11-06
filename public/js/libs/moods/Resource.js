@@ -153,7 +153,7 @@ sand.define('Moods/Resource', [
 					if(this.hintDiv.parentNode) this.hintDiv.parentNode.removeChild(this.hintDiv);
 
 					var next = this.hint(e,this.el);
-					if(next && next != this.fParent) {
+					if(next && (next == this.fParent || next.parentNode == this.fParent)) {
 						//next.addDroppedElement(this.model,Array.prototype.slice.call(this.el.parentNode.childNodes).indexOf(this.el));
 						//if(this.fParent.deleteRessource) this.fParent.deleteRessource(this.model,null,this.sIndex);
 					}
