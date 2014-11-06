@@ -29,26 +29,109 @@ footer
     width: 72px
     height: 80%
     float: left
-  .moods-container-view
-    border: 1px solid black
-    position: relative
-    float: left
-    height: 80%
-    width: 80%
-    .moods-view
+  .moods-container
+    width: 100%
+    height: 100%
+    .name
+      float: left
+    .button
+      cursor: pointer
+    .usual
+      position: relative
+      float: left
       width: 100%
-      .moods-view-comment
+    .col-comments
+      position: relative
+      float: left
+      width: 200px
+      overflow-y: auto
+      &.tool-colcom
+        width: 100%
         position: absolute
-        bottom: 0px
+        .group-comment
+          z-index: 50
+          border: none
+          width: 30%
+          border-radius: 6px
+      .collapse-col
+        top: -24px
+        font-family: "Lato", sans-serif
+        font-style: italic
+        color: #68b2f8
+        font-size: 14px
+        cursor: pointer
+        z-index: 2
         text-align: center
-    .moods-arrow
-      color: #1e1e1e
-      background-color: rgba(0, 0, 0, 0.3);
-      position: absolute
-      top: 40%
-      height: 24px
-      width: 24px
-    .moods-previous
-      left: 0px
-    .moods-next
-      right: 0px
+        border-top: 1px solid #eee
+        border-bottom: 1px solid #eee
+      .group-comment
+        position: absolute
+        float: left
+        width: 100%
+        box-sizing: border-box
+        background-color: #fefefe
+        border: 1px solid #eee
+        transition: top 0.3s, margin-left 0.3s, left 0.3s, width 0.2s
+        overflow: hidden
+        .wrap-comments
+          margin: 6px
+          border-left: 5px solid
+          .collapse-com
+            float: left
+            font-family: "Lato", sans-serif
+            font-style: italic
+            color: #68b2f8
+            font-size: 12px
+            cursor: pointer
+          .comment
+            padding: 3px 6px
+            font-family: "Open Sans", sans-serif
+            transition: top 0.3s
+            border-spacing: 6px 0px
+            .comment-name
+              width: 1px
+              font-weight: bold
+              vertical-align: top
+            .comment-right
+              min-width: 79%
+            .comment-txt
+              color: #525252
+              font-size: 14px
+              white-space: pre
+              &[contenteditable = true]
+                outline: 0px solid transparent
+            .comment-info
+              width: 100%
+              .comment-date
+                float: right
+                font-size: 12px
+                font-style: italic
+              .comment-button
+                display: inline
+                font-size: 12px
+                color: #68b2f8
+                font-weight: bold
+
+    .moods-container-view
+      border: 1px solid black
+      position: relative
+      float: left
+      height: 80%
+      width: 80%
+      .moods-view
+        width: 100%
+        .moods-view-comment
+          position: absolute
+          bottom: 0px
+          text-align: center
+      .moods-arrow
+        color: #1e1e1e
+        background-color: rgba(0, 0, 0, 0.3);
+        position: absolute
+        top: 40%
+        height: 24px
+        width: 24px
+      .moods-previous
+        left: 0px
+      .moods-next
+        right: 0px
