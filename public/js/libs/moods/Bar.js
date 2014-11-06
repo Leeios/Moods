@@ -1,4 +1,4 @@
-sand.define('Moods/Topbar', [
+sand.define('Moods/Bar', [
   'Seed',
   'DOM/toDOM',
   'Moods/Resource',
@@ -10,16 +10,16 @@ sand.define('Moods/Topbar', [
 */
 var Topbar = r.Seed.extend({
 
-    tpl: function() {
+    /*tpl: function() {
       return {
         tag: '.moods-topbar'
       }
-    },
+    },*/
 
     '+init' : function(opt) {
       
       this.scope = {}
-      this.el.appendChild(r.toDOM({ tag : '.resources'+(opt.type || "")},this.scope));
+      this.el = r.toDOM({ tag : ".moods"+(opt.side ? "-"+opt.side : ""), children : [{ tag : '.resources'+(opt.type || "")}]} , this.scope);
       this.scope.resources.setAttribute("dropzone",true);
 
     },
