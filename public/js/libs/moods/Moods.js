@@ -16,7 +16,9 @@ sand.define('Moods/Master', [
 
     options: function() {
       return {
-        dp: null,
+        dp: new r.DP({
+          data: {pages: [], resources: [], comments: []}
+        }),
         pages: [],
         cover: this.create(r.Cover),
         current: null
@@ -50,16 +52,36 @@ sand.define('Moods/Master', [
     },
 
     '+init': function() {
-      this.topbar.el.appendChild(this.create(r.Upload, {}, 'upload').el);
       console.log('Init Moods...');
+      this.topbar.el.appendChild(this.create(r.Upload, {}, 'upload').el);
       this.topbar.setResources(this.getMapResources());
       this.setView('cover');
+      ['insert', 'edit', 'delete'].each(function(e) {
+        this.dp.pages.on(e, function(model, options) {
+          this[e + 'Page'](model, options);
+        }.bind(this))
+      }.bind(this));
     },
 
+  /*Interface/ Droit d'utiliser*/
+  insertPageDP: function(model) {
+    /*Parse model ?*/
+    this.dp.pages.insert(model);
+  },
+  editPageDP: function(model, options) {
+    /*Parse model ?*/
+    this.dp.pages.edit(model, options);
+  },
+  deletePageDP: function(model) {
+    /*Parse model ?*/
+    this.dp.pages.delete(model);
+  },
+
   /*Page Managing*/
-    addPage: function(model, index) {
-      this.pages.splice(index || 0, 0, model);
-      this.leftbar.addPage(model, index);
+    insertPage: function(model, index) {
+      this.pages.splice(index || this.pages.length - 1, 0, model);
+      this.leftbar.insertPage(model, index);
+      // this.topbar.highlight(model);
     },
 
     editPage: function(model, options) {
@@ -73,7 +95,7 @@ sand.define('Moods/Master', [
       }
     },
 
-    removePage: function(model) {
+    deletePage: function(model) {
       for (var i = 0, len = this.pages.length; i < len; i++) {
         if (model.id === this.pages[i].id) {
           this.pages.splice(i, 1);
