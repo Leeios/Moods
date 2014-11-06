@@ -21,9 +21,10 @@ var Bar = r.Seed.extend({
       this.scope = {}
       this.el = r.toDOM({ tag : ".moods"+(opt.side ? "-"+opt.side : ""), children : [{ tag : '.resources'+(opt.type || "")}]} , this.scope);
       this.scope.resources.setAttribute("dropzone",true);
+      this.scope.resources.setAttribute("side",opt.side);
 
-      this.scope['resources'+(opt.type || "")].onResourceDropped = function (sIndex,eIndex) {
-          this.fire('onResourceDropped',sIndex,eIndex);
+      this.scope['resources'+(opt.type || "")].onResourceDropped = function (id,dropIndex) {
+          this.fire('onResourceDropped',id,dropIndex);
       }.bind(this)
 
       this.query('dp').resources.on('insert', this.insertResource.bind(this));

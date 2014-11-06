@@ -46,6 +46,19 @@ footer {
     width: 72px;
     height: 80%;
     float: left; }
+    .moods .moods-leftbar .resources {
+      width: 72px;
+      height: 80%;
+      position: absolute; }
+      .moods .moods-leftbar .resources .resource {
+        width: 70px;
+        height: 70px;
+        float: left; }
+        .moods .moods-leftbar .resources .resource .picto {
+          height: 60px;
+          width: 70px; }
+        .moods .moods-leftbar .resources .resource .label {
+          width: 70px; }
   .moods .moods-container {
     width: 100%;
     height: 100%; }
