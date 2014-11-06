@@ -1,12 +1,12 @@
 var sass = require('node-sass');
+var fs = require('fs');
 
 exports.main = function(req, res) {
   sass.render({
     file: 'public/css/index.sass',
-    outFile: '../public/css/index.css',
     success: function(css) {
-      console.log(css);
       console.log('Render sass file: OK');
+      fs.writeFile('public/css/index.css', css, function(err) {console.log('Write CSS file: ' + (err || 'OK'))});
       res.render('index.jade');
     },
     error: function(error) {

@@ -15,16 +15,17 @@ sand.define('Moods/View', [
     },
 
     tpl: function() {
-      return
-        ['.moods-view', [
+      return {
+        tag: '.moods-view', children: [
           {tag: '.moods-view-image-container', as: 'imgContainer'},
           {tag: '.moods-view-comment', as: 'comment'}
-        ]]
+        ]}
     },
 
     setCurrent: function(model) {
       this.imgContainer.innerHTML = '';
-      if (this.model.el) this.imgContainer.appendChild(model.el);
+      console.log(model);
+      if (model.el) this.imgContainer.appendChild(model.el);
       else {
         /*Resize ?*/
         this.imgContainer.appendChild(r.toDOM({

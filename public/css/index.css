@@ -1,0 +1,45 @@
+html {
+  height: 100%;
+  width: 100%; }
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #4f4f4f; }
+
+footer {
+  position: relative;
+  float: left;
+  width: 100%; }
+
+.moods {
+  float: left;
+  width: 100%;
+  height: 100%; }
+  .moods .moods-topbar {
+    background-color: #d9ea65;
+    width: 100%;
+    height: 72px;
+    float: left; }
+  .moods .moods-leftbar {
+    background-color: #4d5e5a;
+    width: 72px;
+    height: 100%;
+    float: left; }
+  .moods .moods-container-view {
+    float: left;
+    height: 80%;
+    width: 80%; }
+    .moods .moods-container-view .moods-view {
+      width: 100%; }
+    .moods .moods-container-view .moods-arrow {
+      color: #1e1e1e;
+      background-color: rgba(0, 0, 0, 0.3);
+      position: absolute;
+      top: 40%;
+      height: 24px;
+      width: 24px; }
+    .moods .moods-container-view .moods-previous {
+      left: 0px; }
+    .moods .moods-container-view .moods-previous {
+      right: 0px; }

@@ -1,12 +1,12 @@
 sand.define('Moods/Master', [
-  'DOM/toDOM',
   'Seed',
+  'DOM/toDOM',
   'DataPackage/Controller->DP',
   'Moods/Topbar',
   'Moods/Leftbar',
   'Moods/Upload',
   'Moods/View',
-  'Moods/Cover',
+  'Moods/Cover'
 ], function(r) {
 
   var Moods = r.Seed.extend({
@@ -29,26 +29,29 @@ sand.define('Moods/Master', [
           this.create(r.Topbar, {}, 'topbar').el,
           this.create(r.Leftbar, {}, 'leftbar').el,
           this.create(r.Upload, {}, 'upload').el,
-          this.create(r.View, {}, 'view').el,
-          {tag: '.moods-previous <<', events: {
-            click: function(e) {
-              if (this.current !== 'cover' && this.current) {
-                this.setView(this.current - 1);
-              }
-            }.bind(this)
-          }},
-          {tag: '.moods-next >>', events: {
-            click: function(e) {
-              if (this.current !== 'cover' && this.current < this.pages.length - 1) {
-                this.setView(this.current + 1);
-              }
-            }.bind(this)
-          }},
+          {tag: '.moods-container-view', children: [
+            this.create(r.View, {}, 'view').el,
+            {tag: '.moods-previous.moods-arrow <<', events: {
+              click: function(e) {
+                if (this.current !== 'cover' && this.current) {
+                  this.setView(this.current - 1);
+                }
+              }.bind(this)
+            }},
+            {tag: '.moods-next.moods-arrow >>', events: {
+              click: function(e) {
+                if (this.current !== 'cover' && this.current < this.pages.length - 1) {
+                  this.setView(this.current + 1);
+                }
+              }.bind(this)
+            }},
+          ]}
         ]
       }
     },
 
     '+init': function() {
+      console.log('Init Moods...');
       this.topbar.setResources(this.getMapResources());
       this.setView('cover');
     },
@@ -79,7 +82,7 @@ sand.define('Moods/Master', [
       }
     },
 
-    setPageIndex: function(prevIndex, newIndex) {
+    switchIndex: function(prevIndex, newIndex) {
       this.pages.splice(newIndex, 0, this.pages.splice(prevIndex, 1)[0]);
     },
 
@@ -93,12 +96,14 @@ sand.define('Moods/Master', [
       }
     },
 
+    getMapResources: function() {
+      return null;
+    },
+
     uploadResources: function() {
       ;
     }
 
   });
-
   return Moods;
-
 });
