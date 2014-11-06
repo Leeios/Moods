@@ -21,6 +21,10 @@ var Topbar = r.Seed.extend({
       this.scope = {}
       this.el = r.toDOM({ tag : ".moods"+(opt.side ? "-"+opt.side : ""), children : [{ tag : '.resources'+(opt.type || "")}]} , this.scope);
       this.scope.resources.setAttribute("dropzone",true);
+      
+      this.scope['resources'+(opt.type || "")].onResourceDropped = function (sIndex,eIndex) {
+          this.fire('onResourceDropped',sIndex,eIndex);
+      }.bind(this)
 
     },
 
