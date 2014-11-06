@@ -60,7 +60,7 @@ footer {
     .moods .moods-container .col-comments {
       position: relative;
       float: left;
-      width: 200px;
+      width: 35%;
       overflow-y: auto; }
       .moods .moods-container .col-comments.tool-colcom {
         width: 100%;
@@ -86,9 +86,9 @@ footer {
         float: left;
         width: 100%;
         box-sizing: border-box;
-        background-color: #fefefe;
+        background-color: transparent;
         border: 1px solid #eee;
-        transition: top 0.3s, margin-left 0.3s, left 0.3s, width 0.2s;
+        transition: top 0.3s, margin-left 0.3s, width 0.2s;
         overflow: hidden; }
         .moods .moods-container .col-comments .group-comment .wrap-comments {
           margin: 6px;
@@ -112,7 +112,7 @@ footer {
             .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-right {
               min-width: 79%; }
             .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-txt {
-              color: #525252;
+              color: #fff;
               font-size: 14px;
               white-space: pre; }
               .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-txt[contenteditable=true] {
@@ -133,7 +133,7 @@ footer {
       position: relative;
       float: left;
       height: 80%;
-      width: 80%; }
+      width: 60%; }
       .moods .moods-container .moods-container-view .moods-view {
         width: 100%; }
         .moods .moods-container .moods-container-view .moods-view .moods-view-comment {
