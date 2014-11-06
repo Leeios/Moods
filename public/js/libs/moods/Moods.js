@@ -6,7 +6,7 @@ sand.define('Moods/Master', [
   'Moods/Leftbar',
   'Moods/Upload',
   'Moods/View',
-  'Moods/Cover'
+  'Moods/Cover',
 ], function(r) {
 
   var Moods = r.Seed.extend({
