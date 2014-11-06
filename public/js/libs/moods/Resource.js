@@ -1,7 +1,7 @@
 sand.define('Moods/Resource', [
 	'Seed',
 	'DOM/handle',
-	'DOM/toDOM'
+	'DOM/toDOM',
 ], function(r) {
 
 		Function.prototype.curry = function () {
@@ -12,7 +12,7 @@ sand.define('Moods/Resource', [
 		};
 	}
 
-	return r.Seed.extend({
+	var ResourceSeed = r.Seed.extend({
 
 
 		/*tpl : function() {
@@ -82,6 +82,8 @@ sand.define('Moods/Resource', [
 				}
 			});
 
+			this.src = input.src;
+
 			this.handle = r.handle(this.el);
 			
 			this.handle.drag({
@@ -123,14 +125,6 @@ sand.define('Moods/Resource', [
 
 					this.el.style.pointerEvents = "none";
 					
-					/*$.each($("[dropzone=true]"),function(index,value){
-						$(value).hover(function (){
-							value.style.border = "1px solid #B5302b";
-						}.curry(value), function (){
-							value.style.border = "none";
-						}.curry(value))
-					})*/
-
 				}.wrap(this),
 				drag : function (e) {
 
@@ -146,22 +140,17 @@ sand.define('Moods/Resource', [
 						return;
 					}
 					
-					/*$.each($("[dropzone=true]"),function(index,value){ 
-						value.style.border = "none";
-						$(value).off( "mouseenter mouseleave" )
-					});*/
 
-					if(this.hintDiv.parentNode) this.hintDiv.parentNode.removeChild(this.hintDiv);
-
-					var next = this.hint(e,this.el);
-					if(next && (next == this.fParent || next.parentNode == this.fParent)) {
-						//console.log(this.el.parentNode.onResourceDropped)
-						this.el.parentNode.onResourceDropped(this.sIndex,[].concat.apply([],this.el.parentNode.childNodes).indexOf(this.el));
-
-						//next.addDroppedElement(this.model,Array.prototype.slice.call(this.el.parentNode.childNodes).indexOf(this.el));
-						//if(this.fParent.deleteRessource) this.fParent.deleteRessource(this.model,null,this.sIndex);
+					if(this.hintDiv.parentNode && this.hintDiv.parentNode.getAttribute("side") == "leftbar") {
+						
+						var dropIndex = [].concat.apply([],this.hintDiv.parentNode.childNodes).indexOf(this.hintDiv);
+						this.hintDiv.parentNode.onResourceDropped(this.id || "no Id",dropIndex);
+						if (this.fParent.getAttribute("side") == "topbar") this.hint(e,(this.create(ResourceSeed,{ src : this.src, title : dropIndex }).el))
+						else this.hint(e,this.el);
 					}
 
+					if(this.hintDiv.parentNode) this.hintDiv.parentNode.removeChild(this.hintDiv);
+					
 					this.el.style.pointerEvents = "auto"
 					this.el.style.left = null;
 					this.el.style.top = null;
@@ -173,17 +162,11 @@ sand.define('Moods/Resource', [
 
 		hint : function (e,elem) {
 			var next = document.elementFromPoint(e.xy[0],e.xy[1]);
-			if(next.getAttribute("dropzone") && !document.elementFromPoint(e.xy[0]+this.width,e.xy[1]).getAttribute("dropzone")&& !document.elementFromPoint(e.xy[0]-this.width,e.xy[1]).getAttribute("dropzone")) return null;
-			else if(next.getAttribute("dropzone") && !document.elementFromPoint(e.xy[0]+25,e.xy[1]).getAttribute("dropzone")){
-						var temp = document.elementFromPoint(e.xy[0]-25,e.xy[1])
-						$(elem).insertAfter($(temp));
-						return next;
-			}
-			else if(next.getAttribute("dropzone")) {
+			if(next.getAttribute("dropzone")) {
 				next.appendChild(elem);
 				return next;
 			} else if (next.parentNode.getAttribute("dropzone")){
-				e.xy[0] - $(next).offset().left <  parseInt($(next).width())*0.5 ? $(elem).insertBefore($(next)) : $(elem).insertAfter($(next));
+				e.xy[1] - $(next).offset().top <  parseInt($(next).height())*0.5 ? $(elem).insertBefore($(next)) : $(elem).insertAfter($(next));
 				return next.parentNode;
 			}
 
@@ -191,5 +174,5 @@ sand.define('Moods/Resource', [
 		}
 
 	})
-
+		return ResourceSeed
 });
