@@ -51,6 +51,7 @@ sand.define('Moods/Resource', [
 					}
 
 					this.fParent = this.el.parentNode;
+					this.sIndex = [].concat.apply([],this.el.parentNode.childNodes).indexOf(this.el);
 					//this.el.style.position = "absolute";
 
 					if(!this.hintDiv) this.hintDiv = document.createElement('div');
@@ -110,6 +111,9 @@ sand.define('Moods/Resource', [
 
 					var next = this.hint(e,this.el);
 					if(next && (next == this.fParent || next.parentNode == this.fParent)) {
+						//console.log(this.el.parentNode.onResourceDropped)
+						this.el.parentNode.onResourceDropped(this.sIndex,[].concat.apply([],this.el.parentNode.childNodes).indexOf(this.el));
+
 						//next.addDroppedElement(this.model,Array.prototype.slice.call(this.el.parentNode.childNodes).indexOf(this.el));
 						//if(this.fParent.deleteRessource) this.fParent.deleteRessource(this.model,null,this.sIndex);
 					}
@@ -125,7 +129,6 @@ sand.define('Moods/Resource', [
 
 		hint : function (e,elem) {
 			var next = document.elementFromPoint(e.xy[0],e.xy[1]);
-			console.log(next);
 			if(next.getAttribute("dropzone") && !document.elementFromPoint(e.xy[0]+this.width,e.xy[1]).getAttribute("dropzone")&& !document.elementFromPoint(e.xy[0]-this.width,e.xy[1]).getAttribute("dropzone")) return null;
 			else if(next.getAttribute("dropzone") && !document.elementFromPoint(e.xy[0]+25,e.xy[1]).getAttribute("dropzone")){
 						var temp = document.elementFromPoint(e.xy[0]-25,e.xy[1])
