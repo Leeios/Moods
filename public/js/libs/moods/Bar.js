@@ -8,7 +8,7 @@ sand.define('Moods/Bar', [
 **Fire: 2
 **On:   0
 */
-var Topbar = r.Seed.extend({
+var Bar = r.Seed.extend({
 
     /*tpl: function() {
       return {
@@ -17,21 +17,23 @@ var Topbar = r.Seed.extend({
     },*/
 
     '+init' : function(opt) {
-      
+
       this.scope = {}
       this.el = r.toDOM({ tag : ".moods"+(opt.side ? "-"+opt.side : ""), children : [{ tag : '.resources'+(opt.type || "")}]} , this.scope);
       this.scope.resources.setAttribute("dropzone",true);
 
+      this.query('dp').resources.on('insert', this.insertResource.bind(this));
+      this.query('dp').resources.on('delete', this.deleteResource.bind(this));
     },
 
-    addResource : function (src,title) {
-      this.scope.resources.appendChild(this.create(r.Resource,{ src: src,title : title},'lastResource').el);
+    insertResource : function (model, options) {
+      this.scope.resources.appendChild(this.create(r.Resource,{ src: model.src,title : model.title},'lastResource').el);
     },
 
-    setResources: function(data) {
+    deleteResource: function(model, options) {
       ;
     }
 
   });
-  return Topbar;
+  return Bar;
 });

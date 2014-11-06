@@ -58,7 +58,7 @@ sand.define('Moods/Master', [
       this.container.appendChild(this.create(r.ComModule, {attachEl: this.containerView, canvas: 'on', dp: this.dp}, 'commentsbar').el);
       console.log(this.commentsbar);
       this.topbar.el.appendChild(this.create(r.Upload, {}, 'upload').el);
-      this.topbar.setResources(this.getMapResources());
+      // this.topbar.setResources(this.getMapResources()); Faire avec DP.insert
       this.setView('cover');
       ['insert', 'edit', 'delete'].each(function(e) {
         this.dp.pages.on(e, function(model, options) {

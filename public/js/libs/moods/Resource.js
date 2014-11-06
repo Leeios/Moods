@@ -14,50 +14,6 @@ sand.define('Moods/Resource', [
 
 	return r.Seed.extend({
 
-
-		/*tpl : function() {
-			var style = {
-				pointerEvents : "none"
-			};
-
-			return {
-				tag : '.resource.resource-' + this.getPicto(),
-				children : [
-					{
-						tag : '.picto',
-						style : style
-					},
-					{
-						tag : '.label ' + (this.model.tm.originalFilename || '').shrink(20),
-						style : {
-							pointerEvents : "none",
-						}
-					}
-				],
-				style : {
-					position : "relative",
-				}
-			}
-		},
-
-		isImg : function() {
-			var ext = this.getExtension();
-			return /(jpg)|(jpeg)|(gif)|(png)/i.exec(ext);
-		},
-
-		getExtension : function() {
-			return (this.model.tm.originalFilename || '').split('.').last();
-		},
-
-		getPicto : function() {
-			var ext = this.getExtension();
-			return {
-				'docx' : 'doc',
-				'pptx' : 'ppt',
-				'xlsx' : 'xls'
-			}[ext] || ext;
-		},*/
-
 		'+init' : function(input) {
 
 			this.el = r.toDOM({
@@ -83,7 +39,7 @@ sand.define('Moods/Resource', [
 			});
 
 			this.handle = r.handle(this.el);
-			
+
 			this.handle.drag({
 				start : function (e){
 					e.preventDefault();
@@ -112,7 +68,7 @@ sand.define('Moods/Resource', [
 					this.height = $(this.el).height();
 
 					this.sIndex = Array.prototype.slice.call(this.el.parentNode.childNodes).indexOf(this.el);
-					
+
 
 					this.cOffsetX = e.xy[0] - $(this.el).offset().left;
 					this.cOffsetY = e.xy[1] - $(this.el).offset().top;
@@ -121,7 +77,7 @@ sand.define('Moods/Resource', [
 					this.el.style.top = e.xy[1] - this.oT  + $(document.body).scrollTop() - this.cOffsetY  + "px";
 
 					this.el.style.pointerEvents = "none";
-					
+
 					/*$.each($("[dropzone=true]"),function(index,value){
 						$(value).hover(function (){
 							value.style.border = "1px solid #B5302b";
@@ -144,8 +100,8 @@ sand.define('Moods/Resource', [
 						this.noDragNoDrop = false;
 						return;
 					}
-					
-					/*$.each($("[dropzone=true]"),function(index,value){ 
+
+					/*$.each($("[dropzone=true]"),function(index,value){
 						value.style.border = "none";
 						$(value).off( "mouseenter mouseleave" )
 					});*/
@@ -180,7 +136,7 @@ sand.define('Moods/Resource', [
 				next.appendChild(elem);
 				return next;
 			} else if (next.parentNode.getAttribute("dropzone")){
-				e.xy[0] - $(next).offset().left <  parseInt($(next).width())*0.5 ? $(elem).insertBefore($(next)) : $(elem).insertAfter($(next));
+				e.xy[0] - $(next).offset().left < parseInt($(next).width())*0.5 ? $(elem).insertBefore($(next)) : $(elem).insertAfter($(next));
 				return next.parentNode;
 			}
 
