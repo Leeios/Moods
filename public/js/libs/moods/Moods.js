@@ -83,18 +83,14 @@ sand.define('Moods/Master', [
   },
 
   /*Page Managing*/
-    insertPage: function(model, index) {
-      this.pages.splice(index || this.pages.length - 1, 0, model);
-      this.leftbar.insertPage(model, index);
-      // this.topbar.highlight(model);
+    insertPage: function(model) {
+      this.pages.splice(model.index || this.pages.length - 1, 0, model);
     },
 
     editPage: function(model, options) {
       for (var i = 0, len = this.pages.length; i < len; i++) {
         if (model.id === this.pages[i].id) {
-          for (var j in options) {
-            if (this.pages[i][j]) this.pages[i][j] = options[j];
-          }
+            if (options.index) this.pages[model.index] = model;
           return ;
         }
       }
@@ -109,8 +105,20 @@ sand.define('Moods/Master', [
       }
     },
 
-    switchIndex: function(prevIndex, newIndex) {
-      this.pages.splice(newIndex, 0, this.pages.splice(prevIndex, 1)[0]);
+    offsetIndexPage: function (indexes) {
+      var prevIndex = index[0];
+      var newIndex = index[1];
+      this.dp.pages.edit(
+        this.dp.pages.where(function(e) {e.index === prevIndex}.bind(this))[0],
+        {index: newIndex}
+      )
+      for (var i = 0, len = this.pages.length; i < len; i++) {
+        this.dp.pages.where(function(e) {
+          return e.index > Math.min(prevIndex, newIndex) + Math.abs(prevIndex - newIndex);
+        }.bind(this)).each(function(e) {
+          this.dp.pages.edit(e, {index: e.index + 1})
+        }.bind(this))
+      }
     },
 
     setView: function(pageIndex) {
