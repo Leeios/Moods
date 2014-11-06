@@ -7,6 +7,7 @@ sand.define('Moods/Master', [
   'Moods/Upload',
   'Moods/View',
   'Moods/Cover',
+  'Review/ComModule'
 ], function(r) {
 
   var Moods = r.Seed.extend({
@@ -30,22 +31,24 @@ sand.define('Moods/Master', [
         tag: '.moods', children: [
           this.create(r.Topbar, {}, 'topbar').el,
           this.create(r.Leftbar, {}, 'leftbar').el,
-          {tag: '.moods-container-view', children: [
-            this.create(r.View, {}, 'view').el,
-            {tag: '.moods-previous.moods-arrow <<', events: {
-              click: function(e) {
-                if (this.current !== 'cover' && this.current) {
-                  this.setView(this.current - 1);
-                }
-              }.bind(this)
-            }},
-            {tag: '.moods-next.moods-arrow >>', events: {
-              click: function(e) {
-                if (this.current !== 'cover' && this.current < this.pages.length - 1) {
-                  this.setView(this.current + 1);
-                }
-              }.bind(this)
-            }},
+          {tag: '.moods-container', as: 'container', children: [
+            {tag: '.moods-container-view', as: 'containerView', children: [
+              this.create(r.View, {}, 'view').el,
+              {tag: '.moods-previous.moods-arrow <<', events: {
+                click: function(e) {
+                  if (this.current !== 'cover' && this.current) {
+                    this.setView(this.current - 1);
+                  }
+                }.bind(this)
+              }},
+              {tag: '.moods-next.moods-arrow >>', events: {
+                click: function(e) {
+                  if (this.current !== 'cover' && this.current < this.pages.length - 1) {
+                    this.setView(this.current + 1);
+                  }
+                }.bind(this)
+              }}
+            ]}
           ]}
         ]
       }
@@ -53,6 +56,8 @@ sand.define('Moods/Master', [
 
     '+init': function() {
       console.log('Init Moods...');
+      this.container.appendChild(this.create(r.ComModule, {attachEl: this.containerView, canvas: 'on', dp: this.dp}, 'commentsbar').el);
+      console.log(this.commentsbar);
       this.topbar.el.appendChild(this.create(r.Upload, {}, 'upload').el);
       this.topbar.setResources(this.getMapResources());
       this.setView('cover');
