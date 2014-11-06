@@ -14,6 +14,12 @@ sand.define('Moods/Resource', [
 
 	return r.Seed.extend({
 
+		'+options': function () {
+			return {
+				id: 0
+			}
+		},
+
 		'+init' : function(input) {
 
 			this.el = r.toDOM({

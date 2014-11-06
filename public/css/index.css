@@ -134,12 +134,20 @@ footer {
       float: left;
       height: 80%;
       width: 60%; }
+      .moods .moods-container .moods-container-view canvas {
+        position: absolute;
+        top: 0px;
+        left: 0px; }
       .moods .moods-container .moods-container-view .moods-view {
-        width: 100%; }
-        .moods .moods-container .moods-container-view .moods-view .moods-view-comment {
-          position: absolute;
-          bottom: 0px;
-          text-align: center; }
+        width: 100%;
+        height: 100%; }
+        .moods .moods-container .moods-container-view .moods-view .moods-view-image-container {
+          width: 100%;
+          height: 100%; }
+          .moods .moods-container .moods-container-view .moods-view .moods-view-image-container .moods-view-comment {
+            position: absolute;
+            bottom: 0px;
+            text-align: center; }
       .moods .moods-container .moods-container-view .moods-arrow {
         color: #1e1e1e;
         background-color: rgba(0, 0, 0, 0.3);

@@ -21,7 +21,7 @@ var Bar = r.Seed.extend({
       this.scope = {}
       this.el = r.toDOM({ tag : ".moods"+(opt.side ? "-"+opt.side : ""), children : [{ tag : '.resources'+(opt.type || "")}]} , this.scope);
       this.scope.resources.setAttribute("dropzone",true);
-      
+
       this.scope['resources'+(opt.type || "")].onResourceDropped = function (sIndex,eIndex) {
           this.fire('onResourceDropped',sIndex,eIndex);
       }.bind(this)
@@ -31,7 +31,7 @@ var Bar = r.Seed.extend({
     },
 
     insertResource : function (model, options) {
-      this.scope.resources.appendChild(this.create(r.Resource,{ src: model.src,title : model.title},'lastResource').el);
+      this.scope.resources.appendChild(this.create(r.Resource,{ src: model[0].src,title : model[0].title, id: model[0].id},'lastResource').el);
     },
 
     deleteResource: function(model, options) {

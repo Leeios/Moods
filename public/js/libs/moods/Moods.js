@@ -55,16 +55,29 @@ sand.define('Moods/Master', [
 
     '+init': function() {
       console.log('Init Moods...');
+
       this.container.appendChild(this.create(r.ComModule, {attachEl: this.containerView, canvas: 'on', dp: this.dp}, 'commentsbar').el);
-      console.log(this.commentsbar);
-      this.topbar.el.appendChild(this.create(r.Upload, {}, 'upload').el);
-      // this.topbar.setResources(this.getMapResources()); Faire avec DP.insert
+      // this.topbar.el.appendChild(this.create(r.Upload, {}, 'upload').el);
       this.setView('cover');
+
+      /*Listeners*/
       ['insert', 'edit', 'delete'].each(function(e) {
         this.dp.pages.on(e, function(model, options) {
           this[e + 'Page'](model, options);
         }.bind(this))
       }.bind(this));
+      this.leftbar.on('resourceDrop', function(data) {
+        var trueIndex = data.index || 0;
+        data.index = this.pages.length;
+        this.insertPageDP(data);
+        this.offsetIndexPage([this.pages.length - 1], trueIndex);
+        this.setView(0);
+      }.bind(this));
+
+      /*TEST*/
+      var id = this.dp.resources.insert({src: "/img/skybox/nz.jpg", title: "TEST"}).id;
+      this.dp.pages.insert({index:0, id: id});
+      this.setView(0);
     },
 
   /*Interface/ Droit d'utiliser*/
@@ -83,13 +96,14 @@ sand.define('Moods/Master', [
 
   /*Page Managing*/
     insertPage: function(model) {
-      this.pages.splice(model.index || this.pages.length - 1, 0, model);
+      this.pages[model[0].index] = model[0].id;
+      // this.pages.splice(model.index || this.pages.length - 1, 0, model);
     },
 
     editPage: function(model, options) {
       for (var i = 0, len = this.pages.length; i < len; i++) {
         if (model.id === this.pages[i].id) {
-            if (options.index) this.pages[model.index] = model;
+            if (options.index) this.pages[model.index] = model.id;
           return ;
         }
       }
@@ -108,7 +122,7 @@ sand.define('Moods/Master', [
       var prevIndex = index[0];
       var newIndex = index[1];
       this.dp.pages.edit(
-        this.dp.pages.where(function(e) {e.index === prevIndex}.bind(this))[0],
+        this.dp.pages.one(function(e) {e.index === prevIndex}.bind(this)),
         {index: newIndex}
       )
       for (var i = 0, len = this.pages.length; i < len; i++) {
@@ -126,7 +140,10 @@ sand.define('Moods/Master', [
         this.view.setCurrent(this.cover)
       } else {
         this.current = pageIndex;
-        this.view.setCurrent(this.pages[pageIndex]);
+        this.view.setCurrent(
+          this.dp.resources.one(function(e) {
+            return e.id === this.pages[pageIndex];
+        }.bind(this)))
       }
     },
 
