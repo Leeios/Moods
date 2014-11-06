@@ -28,7 +28,6 @@ sand.define('Moods/Master', [
         tag: '.moods', children: [
           this.create(r.Topbar, {}, 'topbar').el,
           this.create(r.Leftbar, {}, 'leftbar').el,
-          this.create(r.Upload, {}, 'upload').el,
           {tag: '.moods-container-view', children: [
             this.create(r.View, {}, 'view').el,
             {tag: '.moods-previous.moods-arrow <<', events: {
@@ -51,6 +50,7 @@ sand.define('Moods/Master', [
     },
 
     '+init': function() {
+      this.topbar.el.appendChild(this.create(r.Upload, {}, 'upload').el);
       console.log('Init Moods...');
       this.topbar.setResources(this.getMapResources());
       this.setView('cover');

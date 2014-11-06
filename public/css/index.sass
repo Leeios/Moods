@@ -5,6 +5,8 @@ body
   margin: 0
   padding: 0
   background-color: #4f4f4f
+  height: 100%
+  width: 100%
 footer
   position: relative
   float: left
@@ -13,6 +15,10 @@ footer
   float: left
   width: 100%
   height: 100%
+  .upload-wrapper
+    position: absolute
+    top: 0px
+    left: 0px
   .moods-topbar
     background-color: #d9ea65
     width: 100%
@@ -21,14 +27,20 @@ footer
   .moods-leftbar
     background-color: #4d5e5a
     width: 72px
-    height: 100%
+    height: 80%
     float: left
   .moods-container-view
+    border: 1px solid black
+    position: relative
     float: left
     height: 80%
     width: 80%
     .moods-view
       width: 100%
+      .moods-view-comment
+        position: absolute
+        bottom: 0px
+        text-align: center
     .moods-arrow
       color: #1e1e1e
       background-color: rgba(0, 0, 0, 0.3);
@@ -38,5 +50,5 @@ footer
       width: 24px
     .moods-previous
       left: 0px
-    .moods-previous
+    .moods-next
       right: 0px

@@ -23,8 +23,8 @@ sand.define('Moods/View', [
     },
 
     setCurrent: function(model) {
+      if (!model) return ;
       this.imgContainer.innerHTML = '';
-      console.log(model);
       if (model.el) this.imgContainer.appendChild(model.el);
       else {
         /*Resize ?*/
