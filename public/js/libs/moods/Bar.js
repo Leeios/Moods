@@ -32,6 +32,7 @@ var Bar = r.Seed.extend({
     },
 
     insertResource : function (model, options) {
+      console.log(model[0].id)
       this.scope.resources.appendChild(this.create(r.Resource,{ src: model[0].src,title : model[0].title, id: model[0].id},'lastResource').el);
     },
 
