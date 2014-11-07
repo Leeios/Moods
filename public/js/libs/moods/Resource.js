@@ -57,11 +57,11 @@ sand.define('Moods/Resource', [
 					//this.el.style.position = "absolute";
 
 					if(!this.hintDiv) this.hintDiv = document.createElement('div');
-					this.hintDiv.style.width = "1px";
+					/*this.hintDiv.style.width = "1px";
 					this.hintDiv.style.height = "66px";
 					this.hintDiv.style.cssFloat = "left";
 					this.hintDiv.style.backgroundColor = "#B5302b";
-					this.hintDiv.style.marginRight = "-1px";
+					this.hintDiv.style.marginRight = "-1px";*/
 
 					this.sL = this.el.style.left;
 					this.sT = this.el.style.top;

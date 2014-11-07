@@ -85,7 +85,7 @@ sand.define('Moods/Master', [
       /*TEST*/
       var id = this.dp.resources.insert({src: "/img/skybox/nz.jpg", title: "TEST"}).id;
       this.dp.pages.insert({index:0, id: id});
-      this.setView(0);
+      this.setView('cover');
     },
 
   /*Interface/ Droit d'utiliser*/
