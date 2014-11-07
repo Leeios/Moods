@@ -57,7 +57,7 @@ sand.define('Moods/Master', [
       console.log('Init Moods...');
 
       this.container.appendChild(this.create(r.ComModule, {attachEl: this.containerView, canvas: 'on', dp: this.dp}, 'commentsbar').el);
-      // this.topbar.el.appendChild(this.create(r.Upload, {}, 'upload').el);
+      this.topbar.el.appendChild(this.create(r.Upload, {}, 'upload').el);
       this.setView('cover');
 
       /*Listeners*/
