@@ -135,7 +135,7 @@ sand.define('Moods/Master', [
     },
 
     setView: function(pageIndex) {
-      if (pageIndex === 'cover') {
+      /*if (pageIndex === 'cover') {
         this.current = -1;
         this.view.setCurrent(this.cover)
       } else {
@@ -144,7 +144,7 @@ sand.define('Moods/Master', [
           this.dp.resources.one(function(e) {
             return e.id === this.pages[pageIndex];
         }.bind(this)))
-      }
+      }*/
     },
 
     getMapResources: function() {

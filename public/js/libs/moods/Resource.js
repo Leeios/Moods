@@ -82,8 +82,8 @@ sand.define('Moods/Resource', [
 					this.cOffsetX = e.xy[0] - $(this.el).offset().left;
 					this.cOffsetY = e.xy[1] - $(this.el).offset().top;
 
-					this.el.style.left = e.xy[0] - this.oL + $(document.body).scrollLeft() - this.cOffsetX + "px";
-					this.el.style.top = e.xy[1] - this.oT  + $(document.body).scrollTop() - this.cOffsetY  + "px";
+					this.el.style.left = e.xy[0] - this.oL /*+ $(document.body).scrollLeft()*/ - this.cOffsetX + "px";
+					this.el.style.top = e.xy[1] - this.oT  /*+ $(document.body).scrollTop()*/ - this.cOffsetY  + "px";
 
 					this.el.style.pointerEvents = "none";
 				}.wrap(this),
