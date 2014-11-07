@@ -71,8 +71,10 @@ sand.define('Moods/View',['Moods/Case','DOM/toDOM','Moods/BP','Seed'], function 
 			}
 		},
             setCurrent: function(model) {
+              console.log(model);
               if (!model) return ;
               this.src = model.src;
+              this.imgCase.loadCase(true);
             }
 	})
 })
