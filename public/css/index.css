@@ -167,6 +167,13 @@ footer {
         top: 0px;
         left: 0px;
         display: none; }
+      .moods .moods-container .moods-container-view .cover {
+        width: 100%;
+        height: 100%;
+        background-color: #FFFFFF;
+        z-Index: -5; }
+        .moods .moods-container .moods-container-view .cover .case {
+          border: 1px solid #000000; }
       .moods .moods-container .moods-container-view .view.stories, .moods .moods-container .moods-container-view .view.moods {
         width: 100%;
         height: 100%;
