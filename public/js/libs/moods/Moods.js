@@ -61,7 +61,9 @@ sand.define('Moods/Master', [
         this.dp.resources.insert({src: file.content, title: file.name});
       }.bind(this)}, 'upload').el);
       this.leftbar.on('onResourceDropped', function(data) {
+        data.index--;/*DIRTY*/
         this.dp.pages.insert(data);
+        console.log(data, this.pages)
       }.bind(this));
       // this.setView('cover');
 
