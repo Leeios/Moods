@@ -31,10 +31,12 @@ var Bar = r.Seed.extend({
         this.query('dp').resources.on('insert', this.insertResource.bind(this));
         this.query('dp').resources.on('delete', this.deleteResource.bind(this));
       } else if (this.side == "leftbar") {
-        this.query('dp').pages.on('insert', this.insertResource.bind(this));
-        this.query('dp').pages.on('delete', this.deleteResource.bind(this));
+        this.query('dp').pages.on('insert', function(model) {
+          this.insertResource(this.query('dp').resources.where(function(e) { return e.id === model[0].id}));
+        }.bind(this));
+        //this.query('dp').pages.on('delete', this.deleteResource.bind(this));
       }
-      
+
     },
 
     insertResource : function (model, options) {
