@@ -103,7 +103,6 @@ sand.define('Moods/Resource', [
 					if(this.hintDiv.parentNode && this.hintDiv.parentNode.getAttribute("side") == "leftbar") {
 
 						var dropIndex = [].concat.apply([],this.hintDiv.parentNode.childNodes).indexOf(this.hintDiv);
-						console.log(this.id);
 						this.hintDiv.parentNode.onResourceDropped(this.id || "no Id",dropIndex);
 						if (this.fParent.getAttribute("side") == "topbar") this.hint(e,(this.create(ResourceSeed,{ src : this.src, title : dropIndex }).el))
 						else this.hint(e,this.el);
