@@ -350,8 +350,9 @@ sand.define('Moods/Case', [
 				this.img.style.height = state.height;
 		},
 
-		onImageDrop : function () {
-			
+		changeImage : function (src) {
+			this.img.src = src;
+			this.loadCase();
 		}
 	})
 })
