@@ -40,7 +40,7 @@ sand.define('Moods/View',['Moods/Case','DOM/toDOM','Moods/BP','Seed'], function 
 				this.el.appendChild(this.create(r.Case,{ width : 400, height : 400, imgSrc : this.src },'imgCase').el);
 				this.el.appendChild(this.create(r.BP,null,'comments').el);
 			} else if (this.type === "moods"){
-				
+
 				this.caseBox = r.toDOM({
 					tag : '.caseBox',
 					style : {
@@ -61,8 +61,8 @@ sand.define('Moods/View',['Moods/Case','DOM/toDOM','Moods/BP','Seed'], function 
 				},this.scope)
 
 				this.el.appendChild(this.caseBox);
-								
-				
+
+
 				this.imgCase.on('case:imageMovedInt',function (x,y,iWidth,iHeight) {
 					this.scope.label.style.left = Math.min(Math.max(x - 50,-50),parseInt(this.imgCase.el.style.width)) + 'px';
 					this.scope.label.style.top =  Math.max(Math.min(y + iHeight - 35,parseInt(this.imgCase.el.style.height)-35), - 35) + 'px';
@@ -72,7 +72,7 @@ sand.define('Moods/View',['Moods/Case','DOM/toDOM','Moods/BP','Seed'], function 
 		},
             setCurrent: function(model) {
               if (!model) return ;
-              ;
+              this.src = model.src;
             }
 	})
 })

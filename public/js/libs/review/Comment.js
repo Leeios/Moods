@@ -36,6 +36,7 @@ var Comment = r.Seed.extend({
               if (e.keyCode === 13) {
                 this.valid();
                 this.onCreate();
+                return false;
               }
             }.bind(this)
           }},
