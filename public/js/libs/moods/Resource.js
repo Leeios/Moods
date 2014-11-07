@@ -14,7 +14,7 @@ sand.define('Moods/Resource', [
 
 	var ResourceSeed = r.Seed.extend({
 
-		'+options': function () {
+		'options': function () {
 			return {
 				id: 0
 			}
