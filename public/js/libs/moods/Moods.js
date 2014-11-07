@@ -43,7 +43,7 @@ sand.define('Moods/Master', [
               }},
               {tag: '.moods-next.moods-arrow >>', events: {
                 click: function(e) {
-                  console.log('next view')
+                  console.log('next view', this.current)
                   if (this.current < this.pages.length - 1) {
                     this.setView(this.current + 1);
                   }
@@ -63,7 +63,7 @@ sand.define('Moods/Master', [
         this.dp.resources.insert({src: file.content, title: file.name});
       }.bind(this)}, 'upload').el);
       this.leftbar.on('onResourceDropped', function(data) {
-        data.index--;/*DIRTY*/
+        data.index++;/*DIRTY*/
         this.dp.pages.insert(data);
       }.bind(this));
 
@@ -144,8 +144,8 @@ sand.define('Moods/Master', [
 
     setView: function(pageIndex) {
       console.log('Set view: ', pageIndex, this.pages)
-      if (pageIndex === 'cover') {
-        this.current = -1;
+      if (pageIndex === 'cover' || pageIndex === 0) {
+        this.current = 0;
         this.view.setCurrent(this.cover)
       } else {
         this.current = pageIndex;
