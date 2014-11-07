@@ -32,7 +32,7 @@ sand.define('Moods/Master', [
           this.create(r.Bar, {side : "leftbar"}, 'leftbar').el,
           {tag: '.moods-container', as: 'container', children: [
             {tag: '.moods-container-view', as: 'containerView', children: [
-              this.create(r.View, {type : "moods"}, 'view').el,
+              this.create(r.View, {type : "stories"}, 'view').el,
               {tag: '.moods-previous.moods-arrow <<', events: {
                 click: function(e) {
                   if (this.current !== 'cover' && this.current) {
@@ -56,8 +56,11 @@ sand.define('Moods/Master', [
     '+init': function() {
       console.log('Init Moods...');
 
-      this.container.appendChild(this.create(r.ComModule, {attachEl: this.containerView, canvas: 'on', dp: this.dp}, 'commentsbar').el);
+      this.container.appendChild(this.create(r.ComModule, {attachEl: this.containerView, dp: this.dp}, 'commentsbar').el);
       this.topbar.el.appendChild(this.create(r.Upload, {}, 'upload').el);
+      this.leftbar.on('onResourceDropped', function(data) {
+        this.dp.pages.insert(data);
+      }.bind(this));
       this.setView('cover');
 
       /*Listeners*/
@@ -135,7 +138,7 @@ sand.define('Moods/Master', [
     },
 
     setView: function(pageIndex) {
-      /*if (pageIndex === 'cover') {
+      if (pageIndex === 'cover') {
         this.current = -1;
         this.view.setCurrent(this.cover)
       } else {
@@ -144,7 +147,7 @@ sand.define('Moods/Master', [
           this.dp.resources.one(function(e) {
             return e.id === this.pages[pageIndex];
         }.bind(this)))
-      }*/
+      }
     },
 
     getMapResources: function() {
@@ -157,7 +160,7 @@ sand.define('Moods/Master', [
 
     resourceToView : function (ressource) {
       //this.create(r.View,{ src : resources.src})
-    }
+    },
 
   });
   return Moods;

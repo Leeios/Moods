@@ -103,6 +103,10 @@ footer {
         border: 1px solid #eee;
         transition: top 0.3s, margin-left 0.3s, width 0.2s;
         overflow: hidden; }
+        .moods .moods-container .col-comments .group-comment .pin-picto {
+          width: 10px;
+          height: 10px;
+          background-color: #FF0000; }
         .moods .moods-container .col-comments .group-comment .wrap-comments {
           margin: 6px;
           border-left: 5px solid; }

@@ -1,5 +1,5 @@
 sand.define('Moods/BP',['DOM/toDOM','Seed','DOM/handle'], function (r) {
-	
+
 	function placeCaretAtEnd(el) {
 		if (typeof window.getSelection != "undefined" && typeof document.createRange != "undefined") {
 			var range = document.createRange();
@@ -18,7 +18,7 @@ sand.define('Moods/BP',['DOM/toDOM','Seed','DOM/handle'], function (r) {
 
 	return r.Seed.extend({
 		'+init' : function (opt) {
-			
+
 			this.scope = {};
 			this.el = r.toDOM('.bp-commentaries',this.scope)
 			this.addComment();
@@ -31,7 +31,7 @@ sand.define('Moods/BP',['DOM/toDOM','Seed','DOM/handle'], function (r) {
 				children : [
 					'.pin-picto',
 				{
-					
+
 					tag : '.textfield',
 					attr : {
 						contentEditable : true
@@ -44,7 +44,7 @@ sand.define('Moods/BP',['DOM/toDOM','Seed','DOM/handle'], function (r) {
 							if(e.keyCode == 13) {
 								e.preventDefault();
 								this.addComment();
-							} 
+							}
 						}.bind(this),
 						keydown : function (e) {
 							if(e.keyCode == 13) {
@@ -66,7 +66,7 @@ sand.define('Moods/BP',['DOM/toDOM','Seed','DOM/handle'], function (r) {
 			var pinPicto = scope['pin-picto'];
 			r.handle(pinPicto).drag({
 				start : function (e) {
-					
+
 					pinPicto.style.position = "relative"
 					console.log(pinPicto.style.left,$(pinPicto).offset().left);
 					if(!pinPicto.oL) pinPicto.oL = $(pinPicto).offset().left;
@@ -96,7 +96,6 @@ sand.define('Moods/BP',['DOM/toDOM','Seed','DOM/handle'], function (r) {
 					pinPicto.line.style.transformOrigin = "0 0";
 					pinPicto.line.style.transform = "rotate("+Math.atan2(parseInt(pinPicto.style.top)+0.5*$(pinPicto).height(),(parseInt(pinPicto.style.left)+0.5*$(pinPicto).width()))*180/Math.PI+"deg)";
 					pinPicto.line.style.width = Math.sqrt(Math.pow(parseInt(pinPicto.style.left)+0.5*$(pinPicto).width(),2) + Math.pow(parseInt(pinPicto.style.top)+0.5*$(pinPicto).height(),2)) +"px";
-					console.log();
 				}.wrap(this),
 				end : function (e) {
 					pinPicto.style.pointerEvents = "auto";
@@ -119,7 +118,7 @@ sand.define('Moods/BP',['DOM/toDOM','Seed','DOM/handle'], function (r) {
 				children : [
 					'.pin-picto',
 				{
-					
+
 					tag : '.textfield',
 					attr : {
 						contentEditable : true

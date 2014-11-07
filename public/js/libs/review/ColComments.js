@@ -29,10 +29,12 @@ var ColComments = r.Seed.extend({
     this.dp.comments.on('insert', this.appendCom.bind(this), this);
     this.dp.comments.on('remove', this.deleteCom.bind(this), this);
     this.dp.comments.on('insert edit remove', function() {setTimeout(function() { this.display(); }.bind(this), 0)}.bind(this), this);
+    this.suggestComment({});
   },
 
   suggestComment: function(data) {/*INTERFACE*/
     if (this.tmpGroup !== null) {
+      this.tmpGroup.main.focus();
       data.x ? this.tmpGroup.main.x = data.x : null;
       data.y ? this.tmpGroup.main.y = data.y : null;
       data.data && data.data.points ? this.tmpGroup.setAreas(data.data.points, this.ctx) : null;
@@ -49,16 +51,21 @@ var ColComments = r.Seed.extend({
       onCreate: function() {
         this.tmpGroup.insertMain();
         this.tmpGroup = null;
+        this.suggestComment({});
+        this.display();
       }.bind(this),
       onRemove: function() {
         this.tmpGroup.el.remove();
         this.tmpGroup = null;
+        this.suggestComment({});
+        this.display();
       }.bind(this)
     });
     this.tmpGroup.el.style.zIndex = 50;
     this.tmpGroup.main.setAuthor('You');
     this.tmpGroup.on('redraw', this.drawAreas.bind(this), this);
     this.el.appendChild(this.tmpGroup.el);
+    this.tmpGroup.main.focus();
     this.display();
   },
 
@@ -110,6 +117,7 @@ var ColComments = r.Seed.extend({
     if (this.tmpGroup !== null) {
       this.tmpGroup.el.style.top = this.tmpGroup.main.y + 'px';
       this.tmpGroup.el.style.left = 0;
+      this.commentsList.push(this.tmpGroup);
     }
     this.commentsList.sort(function (a, b) {
       return a.main.y - b.main.y;
@@ -123,6 +131,12 @@ var ColComments = r.Seed.extend({
         this.commentsList[i].el.style.top = prevDown + 3 + 'px';
       }
       // this.commentsList[i].show();
+    }
+    for (var i = 0, len = this.commentsList.length; i < len; i++) {
+      if (this.commentsList[i] === this.tmpGroup) {
+        this.commentsList.splice(i, 1);
+        return ;
+      }
     }
   },
 

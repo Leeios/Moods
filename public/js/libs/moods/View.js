@@ -1,8 +1,8 @@
 sand.define('Moods/View',['Moods/Case','DOM/toDOM','Moods/BP','Seed'], function (r) {
 	var Case = r.Case;
 
-	
-	
+
+
 	return r.Seed.extend({
 
 		'+init' : function (opt) {
@@ -69,6 +69,10 @@ sand.define('Moods/View',['Moods/Case','DOM/toDOM','Moods/BP','Seed'], function 
 				}.bind(this));7
 
 			}
-		}
+		},
+            setCurrent: function(model) {
+              if (!model) return ;
+              ;
+            }
 	})
 })

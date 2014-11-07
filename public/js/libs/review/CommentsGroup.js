@@ -1,6 +1,7 @@
 sand.define('Review/CommentsGroup', [
   'Seed',
   'DOM/toDOM',
+  'DOM/handle',
   'Review/Library',
   'Review/Comment',
   'Review/Canvas/CanvasArea'
@@ -11,6 +12,7 @@ var CommentsGroup = r.Seed.extend({
   tpl: function() {
     return {
       tag: '.group-comment', children: [
+        {tag: '.pin-picto', as: 'pinPicto'},
         {tag: '.wrap-comments.usual', as: 'wrap', children: [
           this.create(r.Comment, {
             id: this.id,
@@ -65,6 +67,7 @@ var CommentsGroup = r.Seed.extend({
     this.query('dp').comments.on('insert', this.setReply.bind(this), this);
     this.query('dp').comments.on('edit', this.editCom.bind(this), this);
     this.query('dp').comments.on('remove', this.removeReply.bind(this), this);
+    this.bulletPoint();
   },
 
   insertMain: function() {
@@ -189,6 +192,45 @@ var CommentsGroup = r.Seed.extend({
       }
     }
   },
+
+  bulletPoint: function() {
+      r.handle(this.pinPicto).drag({
+        start : function (e) {
+
+          this.pinPicto.style.position = "relative"
+          console.log(this.pinPicto.style.left,$(this.pinPicto).offset().left);
+          if(!this.pinPicto.oL) this.pinPicto.oL = $(this.pinPicto).offset().left;
+          if(!this.pinPicto.oT) this.pinPicto.oT = $(this.pinPicto).offset().top;
+          if(!this.pinPicto.line) {
+            this.pinPicto.line = r.toDOM({
+              tag : '.line',
+              style : {
+                position : "absolute",
+                height : "1px",
+                backgroundColor : "#000000",
+              }
+            })
+            $(this.pinPicto.line).insertBefore(this.pinPicto.parentNode.childNodes[0])
+          }
+          this.pinPicto.cOffsetX = e.xy[0] - $(this.pinPicto).offset().left;
+          this.pinPicto.cOffsetY = e.xy[1] - $(this.pinPicto).offset().top;
+          this.pinPicto.style.left = e.xy[0] + $(document.body).scrollLeft() - this.pinPicto.oL + "px";
+          this.pinPicto.style.top = e.xy[1] + $(document.body).scrollTop()- this.pinPicto.oT  + "px";
+          this.pinPicto.style.pointerEvents = "none"
+        }.wrap(this),
+        drag : function (e) {
+          this.pinPicto.style.left = e.xy[0]  + $(document.body).scrollLeft()- this.pinPicto.oL + "px";
+          this.pinPicto.style.top = e.xy[1] + $(document.body).scrollTop() - this.pinPicto.oT  + "px";
+          this.pinPicto.line.style.transformOrigin = "0 0";
+          this.pinPicto.line.style.transform = "rotate("+Math.atan2(parseInt(this.pinPicto.style.top)+0.5*$(this.pinPicto).height(),(parseInt(this.pinPicto.style.left)+0.5*$(this.pinPicto).width()))*180/Math.PI+"deg)";
+          this.pinPicto.line.style.width = Math.sqrt(Math.pow(parseInt(this.pinPicto.style.left)+0.5*$(this.pinPicto).width(),2) + Math.pow(parseInt(this.pinPicto.style.top)+0.5*$(this.pinPicto).height(),2)) +"px";
+        }.wrap(this),
+        end : function (e) {
+          this.pinPicto.style.pointerEvents = "auto";
+        }.wrap(this)
+      })
+  },
+
 
   collapseCom: function() {
     if (this.collapseEl !== null) { return ;}
