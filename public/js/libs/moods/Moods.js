@@ -35,6 +35,7 @@ sand.define('Moods/Master', [
               this.create(r.View, {type : "stories"}, 'view').el,
               {tag: '.moods-previous.moods-arrow <<', events: {
                 click: function(e) {
+                  console.log('previous view')
                   if (this.current !== 'cover' && this.current) {
                     this.setView(this.current - 1);
                   }
@@ -42,6 +43,7 @@ sand.define('Moods/Master', [
               }},
               {tag: '.moods-next.moods-arrow >>', events: {
                 click: function(e) {
+                  console.log('next view')
                   if (this.current < this.pages.length - 1) {
                     this.setView(this.current + 1);
                   }
@@ -63,7 +65,6 @@ sand.define('Moods/Master', [
       this.leftbar.on('onResourceDropped', function(data) {
         data.index--;/*DIRTY*/
         this.dp.pages.insert(data);
-        console.log(data, this.pages)
       }.bind(this));
       // this.setView('cover');
 
