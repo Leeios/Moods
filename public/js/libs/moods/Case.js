@@ -122,7 +122,6 @@ sand.define('Moods/Case', [
 				this.z = 0;
 
 				this.start = function (e) {
-					console.log("ok");
 					this.clicking = true;
 					this.posClick[0] = e.xy[0]
 					this.posClick[1] = e.xy[1]
@@ -146,29 +145,22 @@ sand.define('Moods/Case', [
 						var tCenter = [e.x - $(this.div).offset().left,e.y -  $(this.div).offset().top].add([document.body.scrollLeft, document.body.scrollTop]);
 					}
 
-					this.imgCenter = [parseInt(this.div.style.width)/2,parseInt(this.div.style.height)/2];
+					this.imgCenter = [parseInt(this.img.style.width)/2,parseInt(this.img.style.height)/2];
 					this.staticPoint = new r.Geo.Point([tCenter[0] || e.xy[0]  ,tCenter[1] || e.xy[1]]); //origine du referentiel du zoom = curseur
 					
 					this.potentialRect = this.imgRect.move({staticPoint : this.staticPoint, scale : this.lastFactor});// Merci Geo
 
-					if( (!this.fit && (( this.potentialRect.segX.length() >= this.divRect.segX.length() ) && ( this.potentialRect.segY.length() >= this.divRect.segY.length() ) ) ) ) {
+					if( this.potentialRect.segX.length() >= this.divRect.segX.length() && this.potentialRect.segY.length() >= this.divRect.segY.length()  )  {
 					
 						this.zoom(this.lastFactor);
 						this.fire('case:imageMovedPx',this.img.style.left,this.img.style.top,this.img.style.width,this.img.style.height);
 						this.fire('case:imageMovedInt',parseInt(this.img.style.left),parseInt(this.img.style.top),parseInt(this.img.style.width),parseInt(this.img.style.height));
 					
 					}else if (this.fit) {
-						if(!(Math.ceil(this.potentialRect.segX.c2) >= this.divRect.segX.c2 && Math.floor(this.potentialRect.segX.c1) <= this.divRect.segX.c1 && Math.floor(this.potentialRect.segY.c1) <= this.divRect.segY.c1 && Math.ceil(this.potentialRect.segY.c2) >= this.divRect.segY.c2 ) ) {
-						this.imgRect.setCenter(this.divRect.getCenter())
-						this.staticPoint = this.imgCenter
-						
-						this.zoom(this.lastFactor,2);
-						
+						//this.staticPoint = new r.Geo.Point(this.imgCenter);
+						this.zoom(this.lastFactor);
 						this.fire('case:imageMovedPx',this.img.style.left,this.img.style.top,this.img.style.width,this.img.style.height);
 						this.fire('case:imageMovedInt',parseInt(this.img.style.left),parseInt(this.img.style.top),parseInt(this.img.style.width),parseInt(this.img.style.height));
-						}else {
-							this.zoom(this.lastFactor);
-						}
 					}
 				}
 
@@ -203,9 +195,11 @@ sand.define('Moods/Case', [
 						this.potentialRect.segY.c2 = Math.max(this.divRect.segY.c2,this.potentialRect.segY.c2);
 						this.potentialRect.segY.c1 = this.potentialRect.segY.c2 - lY;
 						
-						this.img.style.left = this.potentialRect.segX.c1 + 'px';
-						this.img.style.top = this.potentialRect.segY.c1 + 'px';
-						this.imgRect = this.potentialRect;
+						if(((this.imgRect.segX.length() >= this.divRect.segX.length()) && (this.imgRect.segY.length() >= this.divRect.segY.length()))) {
+							this.img.style.left = this.potentialRect.segX.c1 + 'px';
+							this.img.style.top = this.potentialRect.segY.c1 + 'px';
+							this.imgRect = this.potentialRect;
+						}
 						
 						this.fire('case:imageMovedPx',this.img.style.left,this.img.style.top,this.img.style.width,this.img.style.height);
 						this.fire('case:imageMovedInt',parseInt(this.img.style.left),parseInt(this.img.style.top),parseInt(this.img.style.width),parseInt(this.img.style.height));
@@ -244,13 +238,12 @@ sand.define('Moods/Case', [
 
 		zoom : function (factor) {// Merci Geo !
 			this.imgRect = this.imgRect.move({staticPoint : this.staticPoint, scale : factor});
-			console.log(factor);
 			this.img.style.width = this.imgRect.segX.getLength() + 'px';
 			this.img.style.height = this.imgRect.segY.getLength() + 'px';
 			this.img.style.left =  this.imgRect.segX.c1 + 'px';
 			this.img.style.top = this.imgRect.segY.c1 + 'px';
 
-			if (!this.fit && !(this.imgRect.segX.c2 >= this.divRect.segX.c2 && this.imgRect.segX.c1 <= this.divRect.segX.c1 && this.imgRect.segY.c1 <= this.divRect.segY.c1 && this.imgRect.segY.c2 >= this.divRect.segY.c2)){
+			if ((this.imgRect.segX.c2 >= this.divRect.segX.c2 && this.imgRect.segX.c1 <= this.divRect.segX.c1 && this.imgRect.segY.c1 <= this.divRect.segY.c1 && this.imgRect.segY.c2 >= this.divRect.segY.c2)){
 				var fitImg = this.divRect.move({staticPoint : this.staticPoint}).forcedIn(this.imgRect);
 				
 				this.imgRect.segX.c1 = this.imgRect.segX.c1 - fitImg.segX.c1;
@@ -259,6 +252,10 @@ sand.define('Moods/Case', [
 				this.img.style.top =  this.imgRect.segY.c1 + 'px';
 				this.imgRect.segY.c2 = this.imgRect.segY.c1 + parseInt(this.img.style.height);
 				this.imgRect.segX.c2 = this.imgRect.segX.c1 + parseInt(this.img.style.width);
+			} else if (this.fit) {
+				this.imgRect = this.imgRect.setCenter(this.divRect.getCenter());
+				this.img.style.left =  this.imgRect.segX.c1 + 'px';
+				this.img.style.top = this.imgRect.segY.c1 + 'px';
 			}
 		},
 
