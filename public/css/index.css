@@ -78,7 +78,8 @@ footer {
       position: relative;
       float: left;
       width: 20%;
-      overflow-y: auto; }
+      overflow-y: auto;
+      z-index: 2; }
       .moods .moods-container .col-comments.tool-colcom {
         width: 100%;
         position: absolute; }
@@ -107,7 +108,12 @@ footer {
         border: 1px solid #eee;
         transition: top 0.3s, margin-left 0.3s, width 0.2s;
         overflow: hidden; }
+        .moods .moods-container .col-comments .group-comment .wrap-picto {
+          z-index: initial; }
+        .moods .moods-container .col-comments .group-comment .line {
+          z-index: -1; }
         .moods .moods-container .col-comments .group-comment .pin-picto {
+          z-index: -1;
           width: 10px;
           height: 10px;
           background-color: #FF0000; }
@@ -154,7 +160,8 @@ footer {
       position: relative;
       float: left;
       height: 545px;
-      width: 60%; }
+      width: 60%;
+      z-index: -1; }
       .moods .moods-container .moods-container-view canvas {
         position: absolute;
         top: 0px;

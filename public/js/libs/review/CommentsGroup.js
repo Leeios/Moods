@@ -12,7 +12,9 @@ var CommentsGroup = r.Seed.extend({
   tpl: function() {
     return {
       tag: '.group-comment', children: [
-        {tag: '.pin-picto', as: 'pinPicto'},
+        ['.wrap-picto', [
+          {tag: '.pin-picto', as: 'pinPicto'}
+        ]],
         {tag: '.wrap-comments.usual', as: 'wrap', children: [
           this.create(r.Comment, {
             id: this.id,
@@ -112,7 +114,7 @@ var CommentsGroup = r.Seed.extend({
   },
 
   usualStyle: function() {
-    this.el.style.zIndex = '0';
+    this.el.style.zIndex = '5';
     this.fire('redraw');
     this.drawAreas();
   },
