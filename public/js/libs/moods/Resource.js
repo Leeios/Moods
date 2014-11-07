@@ -90,12 +90,12 @@ sand.define('Moods/Resource', [
 				}.wrap(this),
 				end: function (e) {
 					
-					if(this.hintDiv.parentNode && this.hintDiv.parentNode.getAttribute("side") == "leftbar") {
+					if(this.hintDiv.parentNode && this.hintDiv.parentNode.getAttribute("side") == "leftbar" && this.fParent.getAttribute("side") != "leftbar") {
 
 						var dropIndex = [].concat.apply([],this.hintDiv.parentNode.childNodes).indexOf(this.hintDiv);
 						this.hintDiv.parentNode.onResourceDropped(this.id || "no Id",dropIndex);
 						/*if (this.fParent.getAttribute("side") == "topbar") this.hint(e,(this.create(ResourceSeed,{ src : this.src, title : dropIndex }).el))
-						else this.hint(e,this.el);*/
+						else this.hint(e,this.el);*/	
 					} else if(e.target.className == 'case') e.target.refresh(this.src);
 
 					if(this.hintDiv.parentNode) this.hintDiv.parentNode.removeChild(this.hintDiv);
