@@ -66,7 +66,6 @@ sand.define('Moods/Master', [
         data.index--;/*DIRTY*/
         this.dp.pages.insert(data);
       }.bind(this));
-      // this.setView('cover');
 
       /*Listeners*/
       ['insert', 'edit', 'delete'].each(function(e) {
@@ -83,9 +82,10 @@ sand.define('Moods/Master', [
       }.bind(this));
 
       /*TEST*/
-      var id = this.dp.resources.insert({src: "/img/skybox/nz.jpg", title: "TEST"}).id;
-      this.dp.pages.insert({index:0, id: id});
-      this.setView(0);
+      // var id = this.dp.resources.insert({src: "/img/skybox/nz.jpg", title: "TEST"}).id;
+      // this.dp.pages.insert({index:0, id: id});
+
+      this.setView('cover');
     },
 
   /*Interface/ Droit d'utiliser*/

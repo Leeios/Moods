@@ -72,6 +72,10 @@ sand.define('Moods/View',['Moods/Case','DOM/toDOM','Moods/BP','Seed'], function 
 		},
             setCurrent: function(model) {
               if (!model) return ;
+              if (model.el) {
+                this.el.appendChild(model.el);
+                return ;
+              }
               this.src = model.src;
               this.imgCase.img.src = model.src;
               this.imgCase.loadCase(true);
