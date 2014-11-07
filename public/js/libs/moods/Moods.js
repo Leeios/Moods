@@ -56,8 +56,11 @@ sand.define('Moods/Master', [
     '+init': function() {
       console.log('Init Moods...');
 
-      this.container.appendChild(this.create(r.ComModule, {attachEl: this.containerView, canvas: 'on', dp: this.dp}, 'commentsbar').el);
-      // this.topbar.el.appendChild(this.create(r.Upload, {}, 'upload').el);
+      this.container.appendChild(this.create(r.ComModule, {attachEl: this.containerView, dp: this.dp}, 'commentsbar').el);
+      this.topbar.el.appendChild(this.create(r.Upload, {}, 'upload').el);
+      this.leftbar.on('onResourceDropped', function(data) {
+        this.dp.pages.insert(data);
+      }.bind(this));
       this.setView('cover');
 
       /*Listeners*/
@@ -135,7 +138,7 @@ sand.define('Moods/Master', [
     },
 
     setView: function(pageIndex) {
-      /*if (pageIndex === 'cover') {
+      if (pageIndex === 'cover') {
         this.current = -1;
         this.view.setCurrent(this.cover)
       } else {
@@ -144,7 +147,7 @@ sand.define('Moods/Master', [
           this.dp.resources.one(function(e) {
             return e.id === this.pages[pageIndex];
         }.bind(this)))
-      }*/
+      }
     },
 
     getMapResources: function() {

@@ -24,7 +24,7 @@ var Bar = r.Seed.extend({
       this.scope.resources.setAttribute("side",opt.side);
 
       this.scope['resources'+(opt.type || "")].onResourceDropped = function (id,dropIndex) {
-          this.fire('onResourceDropped',id,dropIndex);
+          this.fire('onResourceDropped',{id: id, index: dropIndex});
       }.bind(this)
 
       this.query('dp').resources.on('insert', this.insertResource.bind(this));

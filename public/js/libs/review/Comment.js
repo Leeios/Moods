@@ -3,7 +3,24 @@ sand.define('Review/Comment', [
   'Review/Canvas/CanvasArea',
   'prettyDate'
 ], function(r) {
+/**/
+  function placeCaretAtEnd(el) {
+    if (typeof window.getSelection != "undefined" && typeof document.createRange != "undefined") {
+      var range = document.createRange();
+      range.selectNodeContents(el);
+      range.collapse(false);
+      var sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+    }else if (typeof document.body.createTextRange != "undefined") {
+      var textRange = document.body.createTextRange();
+      textRange.moveToElementText(el);
+      textRange.collapse(false);
+      textRange.select();
+    }
+  }
 
+/**/
 var Comment = r.Seed.extend({
 
   tpl: function() {
@@ -14,7 +31,14 @@ var Comment = r.Seed.extend({
       ['tr', [
         { tag: 'td.comment-name', attr: {rowspan: 2, width: '100%'}, as: 'elName', innerHTML: this.author},
         ['td.comment-right', [
-          { tag:".comment-txt", as: 'elDiv' },
+          { tag:".comment-txt", as: 'elDiv', events: {
+            keydown: function(e) {
+              if (e.keyCode === 13) {
+                this.valid();
+                this.onCreate();
+              }
+            }.bind(this)
+          }},
         ]]
       ]],
       ['tr', [
@@ -86,6 +110,10 @@ var Comment = r.Seed.extend({
 
   edit: function() {
     this.query('dp').comments.one(function(e) { return this.id === e.id }.bind(this)).edit({'txt': this.txt, date: this.date});
+  },
+
+  focus: function() {
+    this;placeCaretAtEnd(this.elDiv);
   },
 
   setAtt: function(data) {
