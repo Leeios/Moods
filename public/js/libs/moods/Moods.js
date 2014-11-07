@@ -32,7 +32,7 @@ sand.define('Moods/Master', [
           this.create(r.Bar, {side : "leftbar"}, 'leftbar').el,
           {tag: '.moods-container', as: 'container', children: [
             {tag: '.moods-container-view', as: 'containerView', children: [
-              this.create(r.View, {type : "moods"}, 'view').el,
+              this.create(r.View, {type : "stories"}, 'view').el,
               {tag: '.moods-previous.moods-arrow <<', events: {
                 click: function(e) {
                   if (this.current !== 'cover' && this.current) {
@@ -163,7 +163,7 @@ sand.define('Moods/Master', [
 
     resourceToView : function (ressource) {
       //this.create(r.View,{ src : resources.src})
-    }
+    },
 
   });
   return Moods;

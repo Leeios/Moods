@@ -348,6 +348,11 @@ sand.define('Moods/Case', [
 				this.img.style.top = state.top;
 				this.img.style.width = state.width;
 				this.img.style.height = state.height;
+		},
+
+		changeImage : function (src) {
+			this.img.src = src;
+			this.loadCase();
 		}
 	})
 })
