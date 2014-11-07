@@ -41,7 +41,11 @@ sand.define('Moods/Resource', [
 				],
 				style : {
 					position : "relative",
-				}
+				},
+				events: {
+					click: function(e) {
+						console.log('Fire set page to resource id ' + this.id);
+				}.bind(this)}
 			});
 
 			this.src = input.src;
@@ -89,7 +93,7 @@ sand.define('Moods/Resource', [
 					this.hint(e,this.hintDiv);
 				}.wrap(this),
 				end: function (e) {
-					
+
 					if(this.hintDiv.parentNode && this.hintDiv.parentNode.getAttribute("side") == "leftbar") {
 
 						var dropIndex = [].concat.apply([],this.hintDiv.parentNode.childNodes).indexOf(this.hintDiv);
