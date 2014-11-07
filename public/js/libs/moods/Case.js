@@ -245,7 +245,7 @@ sand.define('Moods/Case', [
 			this.img.style.left =  this.imgRect.segX.c1 + 'px';
 			this.img.style.top = this.imgRect.segY.c1 + 'px';
 
-			if (!(this.imgRect.segX.c2 >= this.divRect.segX.c2 && this.imgRect.segX.c1 <= this.divRect.segX.c1 && this.imgRect.segY.c1 <= this.divRect.segY.c1 && this.imgRect.segY.c2 >= this.divRect.segY.c2)){
+			if (!(this.imgRect.segX.c2 >= this.divRect.segX.c2 && this.imgRect.segX.c1 <= this.divRect.segX.c1 && this.imgRect.segY.c1 <= this.divRect.segY.c1 && this.imgRect.segY.c2 >= this.divRect.segY.c2) && !this.fit){
 				var fitImg = this.divRect.move({staticPoint : this.staticPoint}).forcedIn(this.imgRect);
 
 				this.imgRect.segX.c1 = this.imgRect.segX.c1 - fitImg.segX.c1;
@@ -254,7 +254,7 @@ sand.define('Moods/Case', [
 				this.img.style.top =  this.imgRect.segY.c1 + 'px';
 				this.imgRect.segY.c2 = this.imgRect.segY.c1 + parseInt(this.img.style.height);
 				this.imgRect.segX.c2 = this.imgRect.segX.c1 + parseInt(this.img.style.width);
-			} else if (this.fit) {
+			} else {
 				this.imgRect = this.imgRect.setCenter(this.divRect.getCenter());
 				this.img.style.left =  this.imgRect.segX.c1 + 'px';
 				this.img.style.top = this.imgRect.segY.c1 + 'px';

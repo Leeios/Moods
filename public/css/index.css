@@ -161,7 +161,7 @@ footer {
       float: left;
       height: 545px;
       width: 60%;
-      z-index: -1; }
+      z-index: 0; }
       .moods .moods-container .moods-container-view canvas {
         position: absolute;
         top: 0px;
