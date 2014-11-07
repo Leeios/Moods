@@ -52,12 +52,6 @@ sand.define('Moods/Resource', [
 				start : function (e){
 					e.preventDefault();
 
-					if(e.target == this.remove) {
-						//Sthis.el.parentNode.deleteRessource(this.model,this.el,Array.prototype.slice.call(this.el.parentNode.childNodes).indexOf(this.el));
-						this.noDragNoDrop = true;
-						return;
-					}
-
 					this.fParent = this.el.parentNode;
 					this.sIndex = [].concat.apply([],this.el.parentNode.childNodes).indexOf(this.el);
 					//this.el.style.position = "absolute";
@@ -89,24 +83,20 @@ sand.define('Moods/Resource', [
 				}.wrap(this),
 				drag : function (e) {
 
-					if(this.noDragNoDrop) return;
 
 					this.el.style.left = e.xy[0] - this.oL /*+ $(document.body).scrollLeft()*/ - this.cOffsetX + "px";
 					this.el.style.top = e.xy[1] - this.oT /*+	$(document.body).scrollTop()*/ - this.cOffsetY + "px";
 					this.hint(e,this.hintDiv);
 				}.wrap(this),
 				end: function (e) {
-					if(this.noDragNoDrop) {
-						this.noDragNoDrop = false;
-						return;
-					}
+					
 					if(this.hintDiv.parentNode && this.hintDiv.parentNode.getAttribute("side") == "leftbar") {
 
 						var dropIndex = [].concat.apply([],this.hintDiv.parentNode.childNodes).indexOf(this.hintDiv);
 						this.hintDiv.parentNode.onResourceDropped(this.id || "no Id",dropIndex);
 						if (this.fParent.getAttribute("side") == "topbar") this.hint(e,(this.create(ResourceSeed,{ src : this.src, title : dropIndex }).el))
 						else this.hint(e,this.el);
-					}
+					} else if(e.target.className == 'case') e.target.refresh(this.src);
 
 					if(this.hintDiv.parentNode) this.hintDiv.parentNode.removeChild(this.hintDiv);
 

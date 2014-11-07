@@ -70,6 +70,10 @@ sand.define('Moods/Case', [
 				}
 			})
 
+			this.el.refresh = function (src) {
+				this.changeImage(src);
+			}.bind(this)
+
 			//this.div.appendChild(this.debugScope);
 
 			if(this.type === 'txt') {

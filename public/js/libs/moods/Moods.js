@@ -32,7 +32,7 @@ sand.define('Moods/Master', [
           this.create(r.Bar, {side : "leftbar"}, 'leftbar').el,
           {tag: '.moods-container', as: 'container', children: [
             {tag: '.moods-container-view', as: 'containerView', children: [
-              this.create(r.View, {type : "stories"}, 'view').el,
+              this.create(r.Cover, /*{type : "stories"}*/null, 'cover').el,
               {tag: '.moods-previous.moods-arrow <<', events: {
                 click: function(e) {
                   if (this.current !== 'cover' && this.current) {
@@ -63,7 +63,7 @@ sand.define('Moods/Master', [
       this.leftbar.on('onResourceDropped', function(data) {
         this.dp.pages.insert(data);
       }.bind(this));
-      this.setView('cover');
+      //this.setView('cover');
 
       /*Listeners*/
       ['insert', 'edit', 'delete'].each(function(e) {
@@ -82,7 +82,7 @@ sand.define('Moods/Master', [
       /*TEST*/
       var id = this.dp.resources.insert({src: "/img/skybox/nz.jpg", title: "TEST"}).id;
       this.dp.pages.insert({index:1, id: id});
-      this.setView(1);
+      //this.setView(1);
     },
 
   /*Interface/ Droit d'utiliser*/
@@ -139,7 +139,7 @@ sand.define('Moods/Master', [
       }
     },
 
-    setView: function(pageIndex) {
+    /*setView: function(pageIndex) {
       console.log('Set view: ', pageIndex, this.pages)
       if (pageIndex === 'cover') {
         this.current = -1;
@@ -151,7 +151,7 @@ sand.define('Moods/Master', [
             return e.id === this.pages[pageIndex];
         }.bind(this)))
       }
-    },
+    },*/
 
     getMapResources: function() {
       return null;
