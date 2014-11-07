@@ -41,7 +41,11 @@ sand.define('Moods/Resource', [
 				],
 				style : {
 					position : "relative",
-				}
+				},
+				events: {
+					click: function(e) {
+						console.log('Fire set page to resource id ' + this.id);
+				}.bind(this)}
 			});
 
 			this.src = input.src;
@@ -89,13 +93,11 @@ sand.define('Moods/Resource', [
 					this.hint(e,this.hintDiv);
 				}.wrap(this),
 				end: function (e) {
-					
 					if(this.hintDiv.parentNode && this.hintDiv.parentNode.getAttribute("side") == "leftbar" && this.fParent.getAttribute("side") != "leftbar") {
-
 						var dropIndex = [].concat.apply([],this.hintDiv.parentNode.childNodes).indexOf(this.hintDiv);
 						this.hintDiv.parentNode.onResourceDropped(this.id || "no Id",dropIndex);
 						/*if (this.fParent.getAttribute("side") == "topbar") this.hint(e,(this.create(ResourceSeed,{ src : this.src, title : dropIndex }).el))
-						else this.hint(e,this.el);*/	
+						else this.hint(e,this.el);*/
 					} else if(e.target.className == 'case') e.target.refresh(this.src);
 
 					if(this.hintDiv.parentNode) this.hintDiv.parentNode.removeChild(this.hintDiv);
@@ -111,6 +113,7 @@ sand.define('Moods/Resource', [
 
 		hint : function (e,elem) {
 			var next = document.elementFromPoint(e.xy[0],e.xy[1]);
+			if (!next) return;
 			if(next.getAttribute("dropzone")) {
 				next.appendChild(elem);
 				return next;
