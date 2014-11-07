@@ -215,6 +215,15 @@ footer {
           width: 100%;
           position: relative;
           float: left; }
+          .moods .moods-container .moods-container-view .view.stories .bp-commentaries .comment .pin-picto {
+            width: 10px;
+            height: 10px;
+            background-color: #CC00DD;
+            float: left; }
+            .moods .moods-container .moods-container-view .view.stories .bp-commentaries .comment .pin-picto .textfield {
+              width: 188px;
+              float: left;
+              outline: none; }
           .moods .moods-container .moods-container-view .view.stories .bp-commentaries .comment .response {
             width: 80%;
             left: 25px;
@@ -223,15 +232,6 @@ footer {
               background-color: #FF0000; }
             .moods .moods-container .moods-container-view .view.stories .bp-commentaries .comment .response .textfield {
               width: 150px;
-              float: left;
-              outline: none; }
-          .moods .moods-container .moods-container-view .view.stories .bp-commentaries .comment .pin-picto {
-            width: 10px;
-            height: 10px;
-            background-color: #CC00DD;
-            float: left; }
-            .moods .moods-container .moods-container-view .view.stories .bp-commentaries .comment .pin-picto .textfield {
-              width: 188px;
               float: left;
               outline: none; }
       .moods .moods-container .moods-container-view .moods-arrow {

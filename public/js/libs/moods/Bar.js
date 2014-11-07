@@ -17,7 +17,7 @@ var Bar = r.Seed.extend({
     },*/
 
     '+init' : function(opt) {
-
+      this.side = opt.side;
       this.scope = {}
       this.el = r.toDOM({ tag : ".moods"+(opt.side ? "-"+opt.side : ""), children : [{ tag : '.resources'+(opt.type || "")}]} , this.scope);
       this.scope.resources.setAttribute("dropzone",true);
@@ -27,8 +27,14 @@ var Bar = r.Seed.extend({
           this.fire('onResourceDropped',{id: id, index: dropIndex});
       }.bind(this)
 
-      this.query('dp').resources.on('insert', this.insertResource.bind(this));
-      this.query('dp').resources.on('delete', this.deleteResource.bind(this));
+      if(this.side == "topbar"){
+        this.query('dp').resources.on('insert', this.insertResource.bind(this));
+        this.query('dp').resources.on('delete', this.deleteResource.bind(this));
+      } else if (this.side == "leftbar") {
+        this.query('dp').pages.on('insert', this.insertResource.bind(this));
+        this.query('dp').pages.on('delete', this.deleteResource.bind(this));
+      }
+      
     },
 
     insertResource : function (model, options) {
