@@ -5,7 +5,6 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background-color: #4f4f4f;
   height: 100%;
   width: 100%; }
 
@@ -19,50 +18,73 @@ footer {
   width: 100%;
   height: 100%; }
   .moods .upload-wrapper {
-    position: absolute;
+    display: inline;
+    float: left;
+    width: 36px;
+    height: 36px;
+    position: relative;
+    margin-left: 6px; }
+    .moods .upload-wrapper .upload-file {
+      position: relative;
+      overflow: hidden;
+      text-align: right;
+      width: 100%;
+      -moz-opacity: 0;
+      opacity: 0;
+      z-index: 2; }
+    .moods .upload-wrapper .upload-fakebutton {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      float: left;
+      height: 100%;
+      width: 100%;
+      z-index: 1;
+      box-sizing: border-box;
+      padding: 6px 0px;
+      font-size: 18px; }
+    .moods .upload-wrapper .upload-wrapper:hover {
+      color: #cccccc;
+      border-bottom: 5px solid; }
+  .moods .upload-wrapper {
+    position: relative;
     top: 0px;
     left: 0px; }
-  .moods .moods-topbar {
-    background-color: #d9ea65;
-    width: 100%;
+  .moods .resource {
+    width: 72px;
     height: 72px;
     float: left; }
+    .moods .resource .picto {
+      background-size: cover;
+      background-repeat: no-repeat;
+      height: 60px;
+      width: 72px; }
+    .moods .resource .label {
+      font-family: "Lato", sans-serif;
+      font-size: 10px;
+      height: 12px;
+      width: 72px; }
+  .moods .moods-topbar {
+    background-color: #7093DB;
+    width: 99%;
+    height: 72px;
+    float: left;
+    margin: 6px 3px; }
     .moods .moods-topbar .resources {
       width: 60%;
       height: 99%;
       right: 0px;
       position: absolute; }
-      .moods .moods-topbar .resources .resource {
-        width: 70px;
-        height: 70px;
-        float: left; }
-        .moods .moods-topbar .resources .resource .picto {
-          background-size: cover;
-          background-repeat: no-repeat;
-          height: 60px;
-          width: 70px; }
-        .moods .moods-topbar .resources .resource .label {
-          width: 70px; }
   .moods .moods-leftbar {
-    background-color: #4d5e5a;
+    background-color: #ffae1a;
     width: 72px;
-    height: 80%;
-    float: left; }
+    height: 90%;
+    float: left;
+    margin-left: 3px; }
     .moods .moods-leftbar .resources {
       width: 72px;
       height: 80%;
       position: absolute; }
-      .moods .moods-leftbar .resources .resource {
-        width: 70px;
-        height: 70px;
-        float: left; }
-        .moods .moods-leftbar .resources .resource .picto {
-          background-size: cover;
-          background-repeat: no-repeat;
-          height: 60px;
-          width: 70px; }
-        .moods .moods-leftbar .resources .resource .label {
-          width: 70px; }
   .moods .moods-container {
     width: 100%;
     height: 100%; }
@@ -80,6 +102,9 @@ footer {
       width: 20%;
       overflow-y: auto;
       z-index: 2; }
+      .moods .moods-container .col-comments ::-webkit-scrollbar {
+        border-radius: 10px;
+        color: #4f4f4f; }
       .moods .moods-container .col-comments.tool-colcom {
         width: 100%;
         position: absolute; }
@@ -105,18 +130,18 @@ footer {
         width: 100%;
         box-sizing: border-box;
         background-color: transparent;
-        border: 1px solid #eee;
-        transition: top 0.3s, margin-left 0.3s, width 0.2s;
+        transition: margin-left 0.3s, width 0.2s;
         overflow: hidden; }
         .moods .moods-container .col-comments .group-comment .wrap-picto {
-          z-index: initial; }
-        .moods .moods-container .col-comments .group-comment .line {
-          z-index: -1; }
+          position: absolute;
+          z-index: 100;
+          top: 12px;
+          left: -1px; }
         .moods .moods-container .col-comments .group-comment .pin-picto {
-          z-index: -1;
-          width: 10px;
-          height: 10px;
-          background-color: #FF0000; }
+          float: left;
+          width: 20px;
+          height: 20px;
+          border-radius: 10px; }
         .moods .moods-container .col-comments .group-comment .wrap-comments {
           margin: 6px;
           border-left: 5px solid; }
@@ -139,9 +164,9 @@ footer {
             .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-right {
               min-width: 79%; }
             .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-txt {
-              color: #fff;
+              color: #000;
               font-size: 14px;
-              white-space: pre; }
+              word-break: break-all; }
               .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-txt[contenteditable=true] {
                 outline: 0px solid transparent; }
             .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-info {
@@ -156,7 +181,6 @@ footer {
                 color: #68b2f8;
                 font-weight: bold; }
     .moods .moods-container .moods-container-view {
-      border: 1px solid black;
       position: relative;
       float: left;
       height: 545px;
@@ -243,11 +267,12 @@ footer {
               outline: none; }
       .moods .moods-container .moods-container-view .moods-arrow {
         color: #1e1e1e;
-        background-color: rgba(0, 0, 0, 0.3);
         position: absolute;
         top: 40%;
         height: 24px;
-        width: 24px; }
+        width: 24px;
+        font-family: "Lato", sans-serif;
+        font-weight: bold1; }
       .moods .moods-container .moods-container-view .moods-previous {
         left: 0px; }
       .moods .moods-container .moods-container-view .moods-next {

@@ -87,8 +87,9 @@ var Comment = r.Seed.extend({
 
     this.infoCom.innerHTML = '';
     this.refreshDate();
-    this.infoCom.appendChild(this.createEl);
-    this.infoCom.appendChild(document.createTextNode(' - '))
+    /*HARDCODE*/
+    // this.infoCom.appendChild(this.createEl);
+    // this.infoCom.appendChild(document.createTextNode(' - '))
     this.infoCom.appendChild(this.removeEl);
     this.infoCom.appendChild(this.timeDiv);
     this.elDiv.setAttribute('contenteditable', true);
@@ -114,7 +115,7 @@ var Comment = r.Seed.extend({
   },
 
   focus: function() {
-    this;placeCaretAtEnd(this.elDiv);
+    placeCaretAtEnd(this.elDiv);
   },
 
   setAtt: function(data) {

@@ -64,6 +64,7 @@ var CommentsGroup = r.Seed.extend({
     this.setAreas(this.areas, this.ctx);
 
     this.wrap.style['border-color'] = this.main.color;
+    this.pinPicto.style['background-color'] = this.main.color;
 
     /*Set events*/
     this.query('dp').comments.on('insert', this.setReply.bind(this), this);
@@ -105,7 +106,7 @@ var CommentsGroup = r.Seed.extend({
   },
 
   highStyle: function() {
-    this.el.style.zIndex = '10';
+    // this.el.style.zIndex = '10';
     this.fire('redraw');
     this.main.areas[0] && ((this.ctx.strokeStyle =  this.main.color) && (this.ctx.globalAlpha = 0.3));
     this.drawAreas();
@@ -114,7 +115,7 @@ var CommentsGroup = r.Seed.extend({
   },
 
   usualStyle: function() {
-    this.el.style.zIndex = '5';
+    // this.el.style.zIndex = '5';
     this.fire('redraw');
     this.drawAreas();
   },
@@ -141,7 +142,6 @@ var CommentsGroup = r.Seed.extend({
   setAreas: function(areas, ctx) {
     if (ctx) {
       this.ctx = ctx;
-      // console.log(areas)
       this.main.areas.push(this.create(r.CanvasArea, {form: 'points', points: areas, ctx: this.ctx}));
     }
   },
@@ -179,6 +179,8 @@ var CommentsGroup = r.Seed.extend({
       }.bind(this)
     });
     this.wrap.appendChild(this.tmpReply.el);
+    this.tmpReply.focus();
+    this.fire('redraw');
   },
 
   removeReply: function(models, op) {
@@ -209,7 +211,7 @@ var CommentsGroup = r.Seed.extend({
               style : {
                 position : "absolute",
                 height : "1px",
-                backgroundColor : "#000000",
+                backgroundColor : this.main.color,
               }
             })
             $(this.pinPicto.line).insertBefore(this.pinPicto.parentNode.childNodes[0])
@@ -279,9 +281,6 @@ var CommentsGroup = r.Seed.extend({
     this.tmpReply.preValid();
     this.tmpReply.valid(model[0].date);
     this.replies.push(this.tmpReply);
-    if (this.replies.length === 1) {
-      this.collapseCom();
-    }
     this.tmpReply = null;
   }
 

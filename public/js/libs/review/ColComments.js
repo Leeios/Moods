@@ -21,6 +21,7 @@ var ColComments = r.Seed.extend({
       dp: this.query('dp'),
       commentsList: [],
       tmpGroup: null,
+      nbCom: 0,
       display: function() {console.log('Display is not set yet...')}
     }
   },
@@ -45,7 +46,7 @@ var ColComments = r.Seed.extend({
       mainID: this.mainID,
       parentID: 0,
       x: data.x || 0,
-      y: data.y || 0,
+      y: data.y || this.nbCom++ || 0,
       ctx: this.ctx,
       areas: data.data && data.data.points ? data.data.points : [],
       onCreate: function() {
@@ -147,7 +148,7 @@ var ColComments = r.Seed.extend({
     for (var i = 0, len = this.commentsList.length; i < len; i++) {
       this.commentsList[i].drawAreas();
     }
-    // this.display();
+    this.display();
   },
 
   /*SIDE CANVAS*/

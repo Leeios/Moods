@@ -63,7 +63,7 @@ sand.define('Moods/Master', [
         this.dp.resources.insert({src: file.content, title: file.name});
       }.bind(this)}, 'upload').el);
       this.leftbar.on('onResourceDropped', function(data) {
-        data.index++;/*DIRTY*/
+        data.index++;/*DIRTY TO LET COVER AS 0*/
         this.dp.pages.insert(data);
       }.bind(this));
 
@@ -78,14 +78,14 @@ sand.define('Moods/Master', [
         data.index = this.pages.length;
         this.insertPageDP(data);
         this.offsetIndexPage([this.pages.length - 1], trueIndex);
-        this.setView(0);
+        this.setView(data.index);
       }.bind(this));
 
       /*TEST*/
       // var id = this.dp.resources.insert({src: "/img/skybox/nz.jpg", title: "TEST"}).id;
       // this.dp.pages.insert({index:0, id: id});
 
-      this.setView('cover');
+      this.setView(0);
     },
 
   /*Interface/ Droit d'utiliser*/
@@ -144,7 +144,7 @@ sand.define('Moods/Master', [
 
     setView: function(pageIndex) {
       console.log('Set view: ', pageIndex, this.pages)
-      if (pageIndex === 'cover' || pageIndex === 0) {
+      if (pageIndex === 0) {
         this.current = 0;
         this.view.setCurrent(this.cover)
       } else {

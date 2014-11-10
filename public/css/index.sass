@@ -4,7 +4,6 @@ html
 body
   margin: 0
   padding: 0
-  background-color: #4f4f4f
   height: 100%
   width: 100%
 footer
@@ -12,54 +11,84 @@ footer
   float: left
   width: 100%
 .moods
+
+  .upload-wrapper
+    display: inline
+    float: left
+    width: 36px
+    height: 36px
+    position: relative
+    margin-left: 6px
+    .upload-file
+      position: relative
+      overflow: hidden
+      text-align: right
+      width: 100%
+      -moz-opacity: 0
+      opacity: 0
+      z-index: 2
+    .upload-fakebutton
+      position: absolute
+      top: 0px
+      left: 0px
+      float: left
+      height: 100%
+      width: 100%
+      z-index: 1
+      box-sizing: border-box
+      padding: 6px 0px
+      font-size: 18px
+    .upload-wrapper:hover
+      color: #cccccc
+      border-bottom: 5px solid
+
   float: left
   width: 100%
   height: 100%
   .upload-wrapper
-    position: absolute
+    position: relative
     top: 0px
     left: 0px
+
+  .resource
+    width : 72px
+    height : 72px
+    float : left
+    overflow: hidden
+    .picto
+      background-size: cover
+      background-repeat : no-repeat
+      height : 60px
+      width : 72px
+    .label
+      font-family: "Lato", sans-serif
+      font-size: 10px
+      height: 12px
+      width : 72px
+
   .moods-topbar
-    background-color: #d9ea65
-    width: 100%
+    background-color: #7093DB
+    width: 99%
     height: 72px
     float: left
+    margin: 6px 3px
     .resources
       width : 60%
       height : 99%
       right : 0px
       position : absolute
-      .resource
-        width : 70px
-        height : 70px
-        float : left
-        .picto
-          background-size: cover
-          background-repeat : no-repeat
-          height : 60px
-          width : 70px
-        .label
-          width : 70px
+
   .moods-leftbar
-    background-color: #4d5e5a
+    background-color: #ffae1a
     width: 72px
-    height: 80%
+    height: 90%
     float: left
+    margin-left: 3px
     .resources
       width : 72px
       height : 80%
       position : absolute
-      .resource
-        width : 70px
-        height : 70px
-        float : left
-        .picto
-          background-size: cover
-          background-repeat : no-repeat
-          height : 60px
-          width : 70px
-        .label
-          width : 70px
+
   .moods-container
     width: 100%
     height: 100%
@@ -71,12 +100,16 @@ footer
       position: relative
       float: left
       width: 100%
+
     .col-comments
       position: relative
       float: left
       width: 20%
       overflow-y: auto
       z-index: 2
+      ::-webkit-scrollbar
+        border-radius: 10px
+        color: #4f4f4f
       &.tool-colcom
         width: 100%
         position: absolute
@@ -98,21 +131,22 @@ footer
         border-bottom: 1px solid #eee
       .group-comment
         .wrap-picto
-          z-index: initial
-        .line
-          z-index: -1
+          position: absolute
+          z-index: 100
+          top: 12px
+          left: -1px
         .pin-picto
-          z-index: -1
-          width: 10px
-          height: 10px
-          background-color : #FF0000
+          float: left
+          width: 20px
+          height: 20px
+          border-radius: 10px
         position: absolute
         float: left
         width: 100%
         box-sizing: border-box
         background-color: transparent
-        border: 1px solid #eee
-        transition: top 0.3s, margin-left 0.3s, width 0.2s
+        // border: 1px solid #eee
+        transition: margin-left 0.3s, width 0.2s
         overflow: hidden
         .wrap-comments
           margin: 6px
@@ -136,9 +170,10 @@ footer
             .comment-right
               min-width: 79%
             .comment-txt
-              color: #fff
+              color: #000
               font-size: 14px
-              white-space: pre
+              // white-space: pre
+              word-break: break-all
               &[contenteditable = true]
                 outline: 0px solid transparent
             .comment-info
@@ -152,13 +187,13 @@ footer
                 font-size: 12px
                 color: #68b2f8
                 font-weight: bold
+
     .moods-container-view
       canvas
         position: absolute
         top: 0px
         left: 0px
         display : none
-      border: 1px solid black
       position: relative
       float: left
       height: 545px
@@ -243,11 +278,12 @@ footer
                 outline : none
       .moods-arrow
         color: #1e1e1e
-        background-color: rgba(0, 0, 0, 0.3);
         position: absolute
         top: 40%
         height: 24px
         width: 24px
+        font-family: "Lato", sans-serif
+        font-weight: bold1
       .moods-previous
         left: 0px
       .moods-next
