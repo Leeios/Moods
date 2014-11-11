@@ -53,7 +53,8 @@ footer {
   .moods .resource {
     width: 72px;
     height: 72px;
-    float: left; }
+    float: left;
+    overflow: hidden; }
     .moods .resource .picto {
       background-size: cover;
       background-repeat: no-repeat;
@@ -139,38 +140,45 @@ footer {
           left: -1px; }
         .moods .moods-container .col-comments .group-comment .pin-picto {
           float: left;
-          width: 20px;
-          height: 20px;
-          border-radius: 10px; }
+          width: 30px;
+          height: 30px;
+          border-radius: 15px;
+          border: 1px solid black; }
         .moods .moods-container .col-comments .group-comment .wrap-comments {
           margin: 6px;
-          border-left: 5px solid; }
+          border-left: 5px solid;
+          box-sizing: border-box; }
           .moods .moods-container .col-comments .group-comment .wrap-comments .collapse-com {
             float: left;
-            font-family: "Lato", sans-serif;
+            font-family: "Futura";
             font-style: italic;
             color: #68b2f8;
             font-size: 12px;
             cursor: pointer; }
           .moods .moods-container .col-comments .group-comment .wrap-comments .comment {
             padding: 3px 6px;
-            font-family: "Open Sans", sans-serif;
             transition: top 0.3s;
-            border-spacing: 6px 0px; }
+            border-spacing: 6px 0px;
+            box-sizing: border-box; }
+            .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-down {
+              text-align: center; }
             .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-name {
-              width: 1px;
+              position: absolute;
+              top: 0px;
+              left: 0px;
               font-weight: bold;
               vertical-align: top; }
-            .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-right {
-              min-width: 79%; }
             .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-txt {
+              width: 100%;
+              min-width: 100%;
               color: #000;
               font-size: 14px;
               word-break: break-all; }
               .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-txt[contenteditable=true] {
                 outline: 0px solid transparent; }
             .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-info {
-              width: 100%; }
+              width: 100%;
+              font-family: "Open Sans", sans-serif; }
               .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-info .comment-date {
                 float: right;
                 font-size: 12px;

@@ -10,6 +10,7 @@ footer
   position: relative
   float: left
   width: 100%
+
 .moods
 
   .upload-wrapper
@@ -137,9 +138,10 @@ footer
           left: -1px
         .pin-picto
           float: left
-          width: 20px
-          height: 20px
-          border-radius: 10px
+          width: 30px
+          height: 30px
+          border-radius: 15px
+          border: 1px solid black
         position: absolute
         float: left
         width: 100%
@@ -151,25 +153,32 @@ footer
         .wrap-comments
           margin: 6px
           border-left: 5px solid
+          box-sizing: border-box
           .collapse-com
             float: left
-            font-family: "Lato", sans-serif
+            font-family: "Futura"
             font-style: italic
             color: #68b2f8
             font-size: 12px
             cursor: pointer
           .comment
             padding: 3px 6px
-            font-family: "Open Sans", sans-serif
+            // font-family: "Open Sans", sans-serif
             transition: top 0.3s
             border-spacing: 6px 0px
+            box-sizing: border-box
+            .comment-up
+            .comment-down
+              text-align: center
             .comment-name
-              width: 1px
+              position: absolute
+              top: 0px
+              left: 0px
               font-weight: bold
               vertical-align: top
-            .comment-right
-              min-width: 79%
             .comment-txt
+              width: 100%
+              min-width: 100%
               color: #000
               font-size: 14px
               // white-space: pre
@@ -178,6 +187,7 @@ footer
                 outline: 0px solid transparent
             .comment-info
               width: 100%
+              font-family: "Open Sans", sans-serif
               .comment-date
                 float: right
                 font-size: 12px

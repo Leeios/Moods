@@ -64,7 +64,7 @@ var CommentsGroup = r.Seed.extend({
     this.setAreas(this.areas, this.ctx);
 
     this.wrap.style['border-color'] = this.main.color;
-    this.pinPicto.style['background-color'] = this.main.color;
+    this.pinPicto.style['border-color'] = this.main.color;
 
     /*Set events*/
     this.query('dp').comments.on('insert', this.setReply.bind(this), this);
