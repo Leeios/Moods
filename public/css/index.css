@@ -13,6 +13,13 @@ footer {
   float: left;
   width: 100%; }
 
+@font-face {
+  font-family: "futurastd";
+  src: url('/font/FuturaFont/FuturaStd-Book.eot');
+  src: local('futurastd');
+  src: url('/font/FuturaFont/FuturaStd-Book.svg#bingo') format('svg');
+  src: url('/font/FuturaFont/FuturaStd-Book.otf') format('opentype'); }
+
 .moods {
   float: left;
   width: 100%;
@@ -101,8 +108,7 @@ footer {
       position: relative;
       float: left;
       width: 20%;
-      overflow-y: auto;
-      z-index: 2; }
+      overflow: visible; }
       .moods .moods-container .col-comments ::-webkit-scrollbar {
         border-radius: 10px;
         color: #4f4f4f; }
@@ -110,7 +116,6 @@ footer {
         width: 100%;
         position: absolute; }
         .moods .moods-container .col-comments.tool-colcom .group-comment {
-          z-index: 50;
           border: none;
           width: 30%;
           border-radius: 6px; }
@@ -126,16 +131,17 @@ footer {
         border-top: 1px solid #eee;
         border-bottom: 1px solid #eee; }
       .moods .moods-container .col-comments .group-comment {
+        overflow: visible;
         position: absolute;
         float: left;
         width: 100%;
         box-sizing: border-box;
         background-color: transparent;
-        transition: margin-left 0.3s, width 0.2s;
-        overflow: hidden; }
+        transition: margin-left 0.3s, width 0.2s; }
         .moods .moods-container .col-comments .group-comment .wrap-picto {
-          position: absolute;
+          overflow: visible;
           z-index: 100;
+          position: absolute;
           top: 12px;
           left: -1px; }
         .moods .moods-container .col-comments .group-comment .pin-picto {
@@ -147,10 +153,12 @@ footer {
         .moods .moods-container .col-comments .group-comment .wrap-comments {
           margin: 6px;
           border-left: 5px solid;
-          box-sizing: border-box; }
+          box-sizing: border-box;
+          overflow: visible;
+          z-index: 1; }
           .moods .moods-container .col-comments .group-comment .wrap-comments .collapse-com {
             float: left;
-            font-family: "Futura";
+            font-family: "futurastd";
             font-style: italic;
             color: #68b2f8;
             font-size: 12px;
@@ -172,8 +180,7 @@ footer {
               width: 100%;
               min-width: 100%;
               color: #000;
-              font-size: 14px;
-              word-break: break-all; }
+              font-size: 14px; }
               .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-txt[contenteditable=true] {
                 outline: 0px solid transparent; }
             .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-info {

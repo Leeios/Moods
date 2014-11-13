@@ -74,6 +74,7 @@ var Comment = r.Seed.extend({
       onReply: function() { console.log('reply is not available on this element'); },
       y: 0,
       x: 0,
+      bpPosition
       areas: [],
       author: 'unnamed',
       color: '',
