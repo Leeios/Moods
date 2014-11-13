@@ -28,8 +28,10 @@ var Comment = r.Seed.extend({
       tag: ".comment.usual",
       children: [
         ['.comment-up.usual', [
-          { tag: '.comment-name', attr: {}, as: 'elName', innerHTML: this.author},
           { tag:".comment-txt", as: 'elDiv',
+          children: [
+            { tag: '.comment-name', attr: {}, as: 'elName', innerHTML: this.author}
+          ],
           events: {
             keydown: function(e) {
               if (e.keyCode === 13) {
@@ -74,7 +76,7 @@ var Comment = r.Seed.extend({
       onReply: function() { console.log('reply is not available on this element'); },
       y: 0,
       x: 0,
-      bpPosition
+      bpPosition: [0, 0],
       areas: [],
       author: 'unnamed',
       color: '',
