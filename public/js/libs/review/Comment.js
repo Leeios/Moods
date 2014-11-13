@@ -28,10 +28,8 @@ var Comment = r.Seed.extend({
       tag: ".comment.usual",
       children: [
         ['.comment-up.usual', [
-          { tag:".comment-txt", as: 'elDiv',
-          children: [
-            { tag: '.comment-name', attr: {}, as: 'elName', innerHTML: this.author}
-          ],
+          { tag: '.comment-name', attr: {}, as: 'elName', innerHTML: this.author},
+          { tag:"p.comment-txt", as: 'elDiv',
           events: {
             keydown: function(e) {
               if (e.keyCode === 13) {

@@ -171,13 +171,14 @@ footer {
             .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-down {
               text-align: center; }
             .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-name {
-              position: absolute;
-              top: 0px;
-              left: 0px;
-              font-weight: bold; }
+              float: left;
+              display: inline-block;
+              font-weight: bold;
+              vertical-align: top; }
             .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-txt {
-              width: 100%;
-              min-width: 100%;
+              display: inline-block;
+              min-width: 72px;
+              min-height: 14px;
               color: #000;
               font-size: 14px; }
               .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-txt[contenteditable=true] {
