@@ -96,6 +96,14 @@ var ColComments = r.Seed.extend({
     }
   },
 
+  refreshDP: function() {
+    this.dp.comments.where(function(e) { return e.mainID === this.mainID}.bind(this)).each(
+      function(item) {
+        this.appendCom([item]);
+    }.bind(this));
+
+  },
+
 
   setHeight: function(h) {
     this.el.style.height = h + 'px';
