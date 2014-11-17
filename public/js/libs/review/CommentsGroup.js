@@ -64,6 +64,7 @@ var CommentsGroup = r.Seed.extend({
     this.setAreas(this.areas, this.ctx);
 
     this.wrap.style['border-color'] = this.main.color;
+    this.pinPicto.style['border-color'] = this.main.color;
 
     /*Set events*/
     this.query('dp').comments.on('insert', this.setReply.bind(this), this);
@@ -105,7 +106,7 @@ var CommentsGroup = r.Seed.extend({
   },
 
   highStyle: function() {
-    this.el.style.zIndex = '10';
+    // this.el.style.zIndex = '10';
     this.fire('redraw');
     this.main.areas[0] && ((this.ctx.strokeStyle =  this.main.color) && (this.ctx.globalAlpha = 0.3));
     this.drawAreas();
@@ -114,7 +115,7 @@ var CommentsGroup = r.Seed.extend({
   },
 
   usualStyle: function() {
-    this.el.style.zIndex = '5';
+    // this.el.style.zIndex = '5';
     this.fire('redraw');
     this.drawAreas();
   },
@@ -141,7 +142,6 @@ var CommentsGroup = r.Seed.extend({
   setAreas: function(areas, ctx) {
     if (ctx) {
       this.ctx = ctx;
-      // console.log(areas)
       this.main.areas.push(this.create(r.CanvasArea, {form: 'points', points: areas, ctx: this.ctx}));
     }
   },
@@ -179,6 +179,8 @@ var CommentsGroup = r.Seed.extend({
       }.bind(this)
     });
     this.wrap.appendChild(this.tmpReply.el);
+    this.tmpReply.focus();
+    this.fire('redraw');
   },
 
   removeReply: function(models, op) {
@@ -209,7 +211,7 @@ var CommentsGroup = r.Seed.extend({
               style : {
                 position : "absolute",
                 height : "1px",
-                backgroundColor : "#000000",
+                backgroundColor : this.main.color,
               }
             })
             $(this.pinPicto.line).insertBefore(this.pinPicto.parentNode.childNodes[0])
@@ -221,13 +223,15 @@ var CommentsGroup = r.Seed.extend({
           this.pinPicto.style.pointerEvents = "none"
         }.wrap(this),
         drag : function (e) {
-          this.pinPicto.style.left = e.xy[0]  + $(document.body).scrollLeft()- this.pinPicto.oL + "px";
-          this.pinPicto.style.top = e.xy[1] + $(document.body).scrollTop() - this.pinPicto.oT  + "px";
+          this.main.bpPosition = [e.xy[0] + $(document.body).scrollLeft()- this.pinPicto.oL, e.xy[1] + $(document.body).scrollTop() - this.pinPicto.oT];
+          this.pinPicto.style.left = this.main.bpPosition[0] + "px";
+          this.pinPicto.style.top = this.main.bpPosition[1] + "px";
           this.pinPicto.line.style.transformOrigin = "0 0";
           this.pinPicto.line.style.transform = "rotate("+Math.atan2(parseInt(this.pinPicto.style.top)+0.5*$(this.pinPicto).height(),(parseInt(this.pinPicto.style.left)+0.5*$(this.pinPicto).width()))*180/Math.PI+"deg)";
           this.pinPicto.line.style.width = Math.sqrt(Math.pow(parseInt(this.pinPicto.style.left)+0.5*$(this.pinPicto).width(),2) + Math.pow(parseInt(this.pinPicto.style.top)+0.5*$(this.pinPicto).height(),2)) +"px";
         }.wrap(this),
         end : function (e) {
+          /*edit bpPosition*/
           this.pinPicto.style.pointerEvents = "auto";
         }.wrap(this)
       })
@@ -279,9 +283,6 @@ var CommentsGroup = r.Seed.extend({
     this.tmpReply.preValid();
     this.tmpReply.valid(model[0].date);
     this.replies.push(this.tmpReply);
-    if (this.replies.length === 1) {
-      this.collapseCom();
-    }
     this.tmpReply = null;
   }
 

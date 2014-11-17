@@ -5,7 +5,6 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background-color: #4f4f4f;
   height: 100%;
   width: 100%; }
 
@@ -14,55 +13,86 @@ footer {
   float: left;
   width: 100%; }
 
+@font-face {
+  font-family: "futurastd";
+  src: url('/font/FuturaFont/FuturaStd-Book.eot');
+  src: local('futurastd');
+  src: url('/font/FuturaFont/FuturaStd-Book.svg#bingo') format('svg');
+  src: url('/font/FuturaFont/FuturaStd-Book.otf') format('opentype'); }
+
 .moods {
   float: left;
   width: 100%;
   height: 100%; }
   .moods .upload-wrapper {
-    position: absolute;
+    display: inline;
+    float: left;
+    width: 36px;
+    height: 36px;
+    position: relative;
+    margin-left: 6px; }
+    .moods .upload-wrapper .upload-file {
+      position: relative;
+      overflow: hidden;
+      text-align: right;
+      width: 100%;
+      -moz-opacity: 0;
+      opacity: 0;
+      z-index: 2; }
+    .moods .upload-wrapper .upload-fakebutton {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      float: left;
+      height: 100%;
+      width: 100%;
+      z-index: 1;
+      box-sizing: border-box;
+      padding: 6px 0px;
+      font-size: 18px; }
+    .moods .upload-wrapper .upload-wrapper:hover {
+      color: #cccccc;
+      border-bottom: 5px solid; }
+  .moods .upload-wrapper {
+    position: relative;
     top: 0px;
     left: 0px; }
-  .moods .moods-topbar {
-    background-color: #d9ea65;
-    width: 100%;
+  .moods .resource {
+    width: 72px;
     height: 72px;
-    float: left; }
+    float: left;
+    overflow: hidden; }
+    .moods .resource .picto {
+      background-size: cover;
+      background-repeat: no-repeat;
+      height: 60px;
+      width: 72px; }
+    .moods .resource .label {
+      font-family: "Lato", sans-serif;
+      font-size: 10px;
+      height: 12px;
+      width: 72px; }
+  .moods .moods-topbar {
+    background-color: #7093DB;
+    width: 99%;
+    height: 72px;
+    float: left;
+    margin: 6px 3px; }
     .moods .moods-topbar .resources {
       width: 60%;
       height: 99%;
       right: 0px;
       position: absolute; }
-      .moods .moods-topbar .resources .resource {
-        width: 70px;
-        height: 70px;
-        float: left; }
-        .moods .moods-topbar .resources .resource .picto {
-          background-size: cover;
-          background-repeat: no-repeat;
-          height: 60px;
-          width: 70px; }
-        .moods .moods-topbar .resources .resource .label {
-          width: 70px; }
   .moods .moods-leftbar {
-    background-color: #4d5e5a;
+    background-color: #ffae1a;
     width: 72px;
-    height: 80%;
-    float: left; }
+    height: 90%;
+    float: left;
+    margin-left: 3px; }
     .moods .moods-leftbar .resources {
       width: 72px;
       height: 80%;
       position: absolute; }
-      .moods .moods-leftbar .resources .resource {
-        width: 70px;
-        height: 70px;
-        float: left; }
-        .moods .moods-leftbar .resources .resource .picto {
-          background-size: cover;
-          background-repeat: no-repeat;
-          height: 60px;
-          width: 70px; }
-        .moods .moods-leftbar .resources .resource .label {
-          width: 70px; }
   .moods .moods-container {
     width: 100%;
     height: 100%; }
@@ -78,13 +108,14 @@ footer {
       position: relative;
       float: left;
       width: 20%;
-      overflow-y: auto;
-      z-index: 2; }
+      overflow: visible; }
+      .moods .moods-container .col-comments ::-webkit-scrollbar {
+        border-radius: 10px;
+        color: #4f4f4f; }
       .moods .moods-container .col-comments.tool-colcom {
         width: 100%;
         position: absolute; }
         .moods .moods-container .col-comments.tool-colcom .group-comment {
-          z-index: 50;
           border: none;
           width: 30%;
           border-radius: 6px; }
@@ -100,52 +131,61 @@ footer {
         border-top: 1px solid #eee;
         border-bottom: 1px solid #eee; }
       .moods .moods-container .col-comments .group-comment {
+        overflow: visible;
         position: absolute;
         float: left;
         width: 100%;
         box-sizing: border-box;
         background-color: transparent;
-        border: 1px solid #eee;
-        transition: top 0.3s, margin-left 0.3s, width 0.2s;
-        overflow: hidden; }
+        transition: margin-left 0.3s, width 0.2s; }
         .moods .moods-container .col-comments .group-comment .wrap-picto {
-          z-index: initial; }
-        .moods .moods-container .col-comments .group-comment .line {
-          z-index: -1; }
+          overflow: visible;
+          z-index: 100;
+          position: absolute;
+          top: 12px;
+          left: -1px; }
         .moods .moods-container .col-comments .group-comment .pin-picto {
-          z-index: -1;
-          width: 10px;
-          height: 10px;
-          background-color: #FF0000; }
+          float: left;
+          width: 30px;
+          height: 30px;
+          border-radius: 15px;
+          border: 1px solid black; }
         .moods .moods-container .col-comments .group-comment .wrap-comments {
           margin: 6px;
-          border-left: 5px solid; }
+          border-left: 5px solid;
+          box-sizing: border-box;
+          overflow: visible;
+          z-index: 1; }
           .moods .moods-container .col-comments .group-comment .wrap-comments .collapse-com {
             float: left;
-            font-family: "Lato", sans-serif;
+            font-family: "futurastd";
             font-style: italic;
             color: #68b2f8;
             font-size: 12px;
             cursor: pointer; }
           .moods .moods-container .col-comments .group-comment .wrap-comments .comment {
             padding: 3px 6px;
-            font-family: "Open Sans", sans-serif;
             transition: top 0.3s;
-            border-spacing: 6px 0px; }
+            border-spacing: 6px 0px;
+            box-sizing: border-box; }
+            .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-down {
+              text-align: center; }
             .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-name {
-              width: 1px;
+              float: left;
+              display: inline-block;
               font-weight: bold;
               vertical-align: top; }
-            .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-right {
-              min-width: 79%; }
             .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-txt {
-              color: #fff;
-              font-size: 14px;
-              white-space: pre; }
+              display: inline-block;
+              min-width: 72px;
+              min-height: 14px;
+              color: #000;
+              font-size: 14px; }
               .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-txt[contenteditable=true] {
                 outline: 0px solid transparent; }
             .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-info {
-              width: 100%; }
+              width: 100%;
+              font-family: "Open Sans", sans-serif; }
               .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-info .comment-date {
                 float: right;
                 font-size: 12px;
@@ -156,7 +196,6 @@ footer {
                 color: #68b2f8;
                 font-weight: bold; }
     .moods .moods-container .moods-container-view {
-      border: 1px solid black;
       position: relative;
       float: left;
       height: 545px;
@@ -242,11 +281,12 @@ footer {
               outline: none; }
       .moods .moods-container .moods-container-view .moods-arrow {
         color: #1e1e1e;
-        background-color: rgba(0, 0, 0, 0.3);
         position: absolute;
         top: 40%;
         height: 24px;
-        width: 24px; }
+        width: 24px;
+        font-family: "Lato", sans-serif;
+        font-weight: bold1; }
       .moods .moods-container .moods-container-view .moods-previous {
         left: 0px; }
       .moods .moods-container .moods-container-view .moods-next {

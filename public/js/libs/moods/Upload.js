@@ -21,7 +21,7 @@ var UploadFile = r.Seed.extend({
     return {
       diffColor: null,
       complete: function() {
-        console.log('FileView not defined');
+        console.log('Upload function not defined');
       }
     }
   },
@@ -46,6 +46,8 @@ var UploadFile = r.Seed.extend({
     if (file.name.match(/\.(jpg)|(jpeg)|(gif)|(png)$/i)) {
       reader.readAsDataURL(fRead);
     } else {
+      console.log('This is not a valid file');
+      return ;
       reader.readAsText(fRead);
     }
 

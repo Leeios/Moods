@@ -25,13 +25,12 @@ var Comment = r.Seed.extend({
 
   tpl: function() {
     return {
-      tag: "table.comment.usual",
-      attr: { cellpadding: 0, cellspacing: 0},
+      tag: ".comment.usual",
       children: [
-      ['tr', [
-        { tag: 'td.comment-name', attr: {rowspan: 2, width: '100%'}, as: 'elName', innerHTML: this.author},
-        ['td.comment-right', [
-          { tag:".comment-txt", as: 'elDiv', events: {
+        ['.comment-up.usual', [
+          { tag: '.comment-name', attr: {}, as: 'elName', innerHTML: this.author},
+          { tag:"p.comment-txt", as: 'elDiv',
+          events: {
             keydown: function(e) {
               if (e.keyCode === 13) {
                 this.valid();
@@ -40,28 +39,27 @@ var Comment = r.Seed.extend({
               }
             }.bind(this)
           }},
+        ]],
+        ['.comment-down', [
+          { tag: ".comment-info.comment-right", as: 'infoCom', children: [
+            { tag:".comment-button.button", as: 'createEl', innerHTML: 'Create', events: {
+              click: function(){ this.valid(); this.onCreate(); }.bind(this)
+            }},
+            { tag:".comment-button.button", as: 'replyEl', innerHTML: 'Reply', events: {
+              click: this.onReply.bind(this)
+            }},
+            { tag:".comment-button.button", as: 'editEl', innerHTML: 'Edit', events: {
+              click: function(){
+                if (this.elDiv.isContentEditable) { this.valid(); this.edit();}
+                else { this.elDiv.setAttribute('contenteditable', true); this.preValid(); this.switchEdit(); }
+              }.bind(this)
+            }},
+            { tag:".comment-button.button", as: 'removeEl', innerHTML: 'Delete', events: {
+              click: function(){ this.onRemove(this.id); }.bind(this)
+            }},
+            { tag: '.comment-date', as: 'timeDiv'}
+          ]}
         ]]
-      ]],
-      ['tr', [
-        { tag: "td.comment-info.comment-right", as: 'infoCom', children: [
-          { tag:".comment-button.button", as: 'createEl', innerHTML: 'Create', events: {
-            click: function(){ this.valid(); this.onCreate(); }.bind(this)
-          }},
-          { tag:".comment-button.button", as: 'removeEl', innerHTML: 'Delete', events: {
-            click: function(){ this.onRemove(this.id); }.bind(this)
-          }},
-          { tag:".comment-button.button", as: 'editEl', innerHTML: 'Edit', events: {
-            click: function(){
-              if (this.elDiv.isContentEditable) { this.valid(); this.edit();}
-              else { this.elDiv.setAttribute('contenteditable', true); this.preValid(); this.switchEdit(); }
-            }.bind(this)
-          }},
-          { tag:".comment-button.button", as: 'replyEl', innerHTML: 'Reply', events: {
-            click: this.onReply.bind(this)
-          }},
-          { tag: '.comment-date', as: 'timeDiv'}
-        ]}
-      ]]
     ]}
   },
 
@@ -76,6 +74,7 @@ var Comment = r.Seed.extend({
       onReply: function() { console.log('reply is not available on this element'); },
       y: 0,
       x: 0,
+      bpPosition: [0, 0],
       areas: [],
       author: 'unnamed',
       color: '',
@@ -87,10 +86,11 @@ var Comment = r.Seed.extend({
 
     this.infoCom.innerHTML = '';
     this.refreshDate();
-    this.infoCom.appendChild(this.createEl);
-    this.infoCom.appendChild(document.createTextNode(' - '))
+    /*HARDCODE*/
+    // this.infoCom.appendChild(this.createEl);
+    // this.infoCom.appendChild(document.createTextNode(' - '))
     this.infoCom.appendChild(this.removeEl);
-    this.infoCom.appendChild(this.timeDiv);
+    // this.infoCom.appendChild(this.timeDiv);
     this.elDiv.setAttribute('contenteditable', true);
   },
 
@@ -114,7 +114,7 @@ var Comment = r.Seed.extend({
   },
 
   focus: function() {
-    this;placeCaretAtEnd(this.elDiv);
+    placeCaretAtEnd(this.elDiv);
   },
 
   setAtt: function(data) {
@@ -133,20 +133,20 @@ var Comment = r.Seed.extend({
     if (this.elDiv.isContentEditable) {
       this.infoCom.appendChild(this.editEl);
     } else {
+      if (this.replyEl) {
+        this.infoCom.appendChild(this.replyEl);
+        this.infoCom.appendChild(document.createTextNode(' - '))
+      }
       this.infoCom.appendChild(this.removeEl);
       this.infoCom.appendChild(document.createTextNode(' - '))
       this.infoCom.appendChild(this.editEl);
-      if (this.replyEl) {
-        this.infoCom.appendChild(document.createTextNode(' - '))
-        this.infoCom.appendChild(this.replyEl);
-      }
     }
-    this.infoCom.appendChild(this.timeDiv);
+    // this.infoCom.appendChild(this.timeDiv);
   },
 
   setAuthor: function(author) {
     this.author = author;
-    this.elName.innerHTML = this.author + ':';
+    this.elName.innerHTML = this.author + '&nbsp';
     this.elName.style.color = this.color;
   },
 
