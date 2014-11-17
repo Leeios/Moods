@@ -58,7 +58,7 @@ sand.define('Moods/Master', [
     '+init': function() {
       console.log('Init Moods...');
 
-      this.container.appendChild(this.create(r.ComModule, {attachEl: this.containerView, dp: this.dp}, 'commentsbar').el);
+      this.container.appendChild(this.create(r.ComModule, {attachEl: this.containerView, dp: this.dp, id: 'cover'}, 'commentsbar').el);
       this.topbar.el.appendChild(this.create(r.Upload, {complete: function(file) {
         this.dp.resources.insert({src: file.content, title: file.name});
       }.bind(this)}, 'upload').el);
@@ -147,13 +147,15 @@ sand.define('Moods/Master', [
       console.log('Set view: ', pageIndex, this.pages)
       if (pageIndex === 0) {
         this.current = 0;
-        this.view.setCurrent(this.cover)
+        this.view.setCurrent(this.cover);
+        this.commentsbar.setID('cover', this.container);
       } else {
         this.current = pageIndex;
-        this.view.setCurrent(
-          this.dp.resources.one(function(e) {
-            return e.id === this.pages[pageIndex];
-        }.bind(this)))
+        var res = this.dp.resources.one(function(e) {
+          return e.id === this.pages[pageIndex];
+        }.bind(this));
+        this.view.setCurrent(res);
+        this.commentsbar.setID(res.id, this.container);
       }
     },
 
