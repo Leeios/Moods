@@ -17,7 +17,7 @@ sand.define('Moods/View',['Moods/Case','DOM/toDOM','Moods/BP','Seed'], function 
 				{
 					tag : '.header',
 					children : [
-					this.create(r.Case,{ width : 55, height : 27	, imgSrc : this.logoSrc },'logoCase').el,
+					this.create(r.Case,{ width : 83, height : 40	, imgSrc : this.logoSrc },'logoCase').el,
 					{
 						tag : '.title',
 						attr : {
