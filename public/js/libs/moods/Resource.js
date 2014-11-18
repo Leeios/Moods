@@ -57,7 +57,11 @@ sand.define('Moods/Resource', [
 			this.handle.drag({
 				start : function (e){
 					e.preventDefault();
-
+					
+					this.buffEl = this.el.cloneNode(true);
+					$('.moods')[0].appendChild(this.buffEl);
+					this.buffEl.style.position = "absolute";
+					this.buffEl.style.pointerEvents = "none";
 					this.fParent = this.el.parentNode;
 					this.sIndex = [].concat.apply([],this.el.parentNode.childNodes).indexOf(this.el);
 					//this.el.style.position = "absolute";
@@ -71,8 +75,8 @@ sand.define('Moods/Resource', [
 
 					this.sL = this.el.style.left;
 					this.sT = this.el.style.top;
-					this.oL = $(this.el).offset().left;
-					this.oT = $(this.el).offset().top;
+					this.oL = /*$(this.el.parentNode)*/$('.moods').offset().left;
+					this.oT = /*$(this.el.parentNode)*/$('.moods').offset().top;
 					this.width = $(this.el).width();
 					this.height = $(this.el).height();
 
@@ -82,28 +86,28 @@ sand.define('Moods/Resource', [
 					this.cOffsetX = e.xy[0] - $(this.el).offset().left;
 					this.cOffsetY = e.xy[1] - $(this.el).offset().top;
 
-					this.el.style.left = e.xy[0] - this.oL /*+ $(document.body).scrollLeft()*/ - this.cOffsetX + "px";
-					this.el.style.top = e.xy[1] - this.oT  /*+ $(document.body).scrollTop()*/ - this.cOffsetY  + "px";
+					this.buffEl.style.left = e.xy[0] - this.oL /*+ $(document.body).scrollLeft()*/ - this.cOffsetX + "px";
+					this.buffEl.style.top = e.xy[1] - this.oT  /*+ $(document.body).scrollTop()*/ - this.cOffsetY  + "px";
 
 					this.el.style.pointerEvents = "none";
 				}.wrap(this),
 				drag : function (e) {
 
 
-					this.el.style.left = e.xy[0] - this.oL /*+ $(document.body).scrollLeft()*/ - this.cOffsetX + "px";
-					this.el.style.top = e.xy[1] - this.oT /*+	$(document.body).scrollTop()*/ - this.cOffsetY + "px";
-					this.hint(e,this.hintDiv);
+					this.buffEl.style.left = e.xy[0] - this.oL /*+ $(document.body).scrollLeft()*/ - this.cOffsetX + "px";
+					this.buffEl.style.top = e.xy[1] - this.oT /*+	$(document.body).scrollTop()*/ - this.cOffsetY + "px";
+					
 				}.wrap(this),
 				end: function (e) {
+					this.hint(e,this.hintDiv);
 					if(this.hintDiv.parentNode && this.hintDiv.parentNode.getAttribute("side") == "leftbar" && this.fParent.getAttribute("side") != "leftbar") {
 						var dropIndex = [].concat.apply([],this.hintDiv.parentNode.childNodes).indexOf(this.hintDiv);
 						this.hintDiv.parentNode.onResourceDropped(this.id || "no Id",dropIndex);
-						/*if (this.fParent.getAttribute("side") == "topbar") this.hint(e,(this.create(ResourceSeed,{ src : this.src, title : dropIndex }).el))
-						else this.hint(e,this.el);*/
 					} else if(e.target.className == 'case') e.target.refresh(this.src);
 
 					if(this.hintDiv.parentNode) this.hintDiv.parentNode.removeChild(this.hintDiv);
-
+					$('.moods')[0].removeChild(this.buffEl);
+					
 					this.el.style.pointerEvents = "auto"
 					this.el.style.left = null;
 					this.el.style.top = null;

@@ -24,9 +24,6 @@ var Bar = r.Seed.extend({
         children : [
           {
             tag : ".resources-wrap",
-            style : {
-              pointerEvents : "none"
-            },
             children : [
             {
               tag : '.resources'+(opt.type || "")
@@ -35,7 +32,6 @@ var Bar = r.Seed.extend({
           }
         ]
       },this.scope)
-      console.log(this.el)
       this.scope.resources.setAttribute("dropzone",true);
       this.scope.resources.setAttribute("side",opt.side);
 
