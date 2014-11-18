@@ -50,6 +50,8 @@ sand.define('Moods/Resource', [
 
 			this.src = input.src;
 
+			$(this.el).hover(function () { this.el.className = "resource hovered";}.bind(this),function () { this.el.className = "resource";}.bind(this))
+
 			this.handle = r.handle(this.el);
 
 			this.handle.drag({

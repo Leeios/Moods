@@ -58,10 +58,10 @@ sand.define('Moods/Master', [
     '+init': function() {
       console.log('Init Moods...');
 
-      this.container.appendChild(this.create(r.ComModule, {attachEl: this.containerView, dp: this.dp, id: 'cover'}, 'commentsbar').el);
-      this.topbar.el.insertBefore(this.create(r.Upload, {complete: function(file) {
+      this.container.appendChild(this.create(r.ComModule, {attachEl: this.containerView, dp: this.dp}, 'commentsbar').el);
+      this.topbar.el.appendChild(this.create(r.Upload, {complete: function(file) {
         this.dp.resources.insert({src: file.content, title: file.name});
-      }.bind(this)}, 'upload').el,this.topbar.scope.resources);
+      }.bind(this)}, 'upload').el);
       this.leftbar.on('onResourceDropped', function(data) {
         data.index++;/*DIRTY TO LET COVER AS 0*/
         this.dp.pages.insert(data);
@@ -85,8 +85,12 @@ sand.define('Moods/Master', [
 
       // var id = this.dp.resources.insert({src: "/img/skybox/nz.jpg", title: "TEST"}).id;
       // this.dp.pages.insert({index:0, id: id});
+<<<<<<< HEAD
+      this.setView('cover');
+=======
 
       this.setView(0);
+>>>>>>> 0bc717eb4159f06da725dde163beff21d8ededf8
     },
 
   /*Interface/ Droit d'utiliser*/
@@ -147,15 +151,13 @@ sand.define('Moods/Master', [
       console.log('Set view: ', pageIndex, this.pages)
       if (pageIndex === 0) {
         this.current = 0;
-        this.view.setCurrent(this.cover);
-        this.commentsbar.setID('cover', this.container);
+        this.view.setCurrent(this.cover)
       } else {
         this.current = pageIndex;
-        var res = this.dp.resources.one(function(e) {
-          return e.id === this.pages[pageIndex];
-        }.bind(this));
-        this.view.setCurrent(res);
-        this.commentsbar.setID(res.id, this.container);
+        this.view.setCurrent(
+          this.dp.resources.one(function(e) {
+            return e.id === this.pages[pageIndex];
+        }.bind(this)))
       }
     },
 

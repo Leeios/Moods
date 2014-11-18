@@ -11,7 +11,7 @@ sand.define('Moods/Cover', [
 
     '+init' : function (opt) {
       
-      this.layout = opt.layout || [[50,50,200,200],[350,50,200,200],[50,350,200,200],[350,350,200,200]];
+      this.layout = opt.layout || [[50,50,200,200],[350,50,200,200],[50,325,200,200],[350,325,200,200]];
       this.el = r.toDOM('.cover');
 
       for (var i = 0, n = this.layout.length; i < n; i++) {
