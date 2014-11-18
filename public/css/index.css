@@ -234,7 +234,7 @@ footer {
         height: 100%;
         background-color: #FFFFFF; }
         .moods .moods-container .moods-container-view .cover .case {
-          border: 1px solid #000000; }
+          border: 1px dotted #D5D5D5; }
       .moods .moods-container .moods-container-view .view.stories, .moods .moods-container .moods-container-view .view.moods {
         width: 100%;
         height: 100%;
@@ -247,12 +247,14 @@ footer {
             top: 30%; }
           .moods .moods-container .moods-container-view .view.stories .header .title, .moods .moods-container .moods-container-view .view.moods .header .title {
             width: 60%;
-            height: 50%;
-            top: 30%;
+            top: 12%;
             left: 20%;
             position: absolute;
             outline: none;
-            font-size: 42px; }
+            font-size: 42px;
+            font-family: futurastd;
+            text-align: center;
+            color: #8186bc; }
       .moods .moods-container .moods-container-view .view.moods .caseBox {
         top: 17%;
         left: 20%; }
