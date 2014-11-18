@@ -11,7 +11,7 @@ exports.main = function(req, res) {
     },
     error: function(error) {
       console.log('An error occured in index.sass rendering: ' + error);
-      res.redirect('/CSSError');
+      res.redirect('/');
     }
   });
 

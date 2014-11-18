@@ -49,7 +49,11 @@ sand.define('Moods/Master', [
                   }
                 }.bind(this)
               }}
-            ]}
+            ]},
+            {tag: '.moods-arrow-comment', as: 'arrowCom', events: {
+                click: this.showCom.bind(this)
+              }, children: ['.moods-arrow-comment-txt |']
+            }
           ]}
         ]
       }
@@ -58,7 +62,7 @@ sand.define('Moods/Master', [
     '+init': function() {
       console.log('Init Moods...');
 
-      this.container.appendChild(this.create(r.ComModule, {attachEl: this.containerView, dp: this.dp, id: 'cover'}, 'commentsbar').el);
+      this.create(r.ComModule, {attachEl: this.containerView, dp: this.dp, id: 'cover'}, 'commentsbar');
       this.topbar.el.insertBefore(this.create(r.Upload, {complete: function(file) {
         this.dp.resources.insert({src: file.content, title: file.name});
       }.bind(this)}, 'upload').el,this.topbar.scope.resources);
@@ -87,6 +91,7 @@ sand.define('Moods/Master', [
       // this.dp.pages.insert({index:0, id: id});
 
       this.setView(0);
+      this.showCom();
     },
 
   /*Interface/ Droit d'utiliser*/
@@ -157,6 +162,23 @@ sand.define('Moods/Master', [
         this.view.setCurrent(res);
         this.commentsbar.setID(res.id, this.container);
       }
+    },
+
+    showCom: function() {
+      if (this.commentsbar.el.style.left === '0px') {
+        this.hideCom();
+        return ;
+      }
+      this.container.appendChild(this.commentsbar.el);
+      this.containerView.style.width = "70%";
+      this.commentsbar.el.style.left = "0px";
+      this.commentsbar.colCom.display();
+    },
+
+    hideCom: function() {
+      this.containerView.style.width = "95%";
+      this.commentsbar.el.style.left = "20%";
+      setTimeout(function() {this.commentsbar.el.remove();}.bind(this), 300);
     },
 
     getMapResources: function() {

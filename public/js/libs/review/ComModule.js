@@ -86,14 +86,18 @@ var ComModule = r.Seed.extend({
 
 /*Not modulable*/
   setID: function(id, container) {
+    var prevLeft = this.el.style.left;
     if (this.canvas) this.canvas.clearCanvas();
     this.id = id;
-    this.colCom.el.remove();
+    this.el.remove();
     this.colCom = this.create(r.ColComments, {mainID: this.id});
-    container.appendChild(this.colCom.el);
+    this.el = this.colCom.el;
+    this.el.style.left = prevLeft;
+    if (prevLeft === '0px') container.appendChild(this.el);
     this.colCom.setHeight(this.attachEl.clientHeight || this.attachEl.offsetHeight || this.attachEl.scrollHeight || this.attachEl.style.height || 0);
     this.colCom.refreshDP();
     this.setDisplay('column');
+    this.colCom.display();
   },
 
   guid: function() {

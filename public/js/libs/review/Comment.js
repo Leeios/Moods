@@ -147,7 +147,7 @@ var Comment = r.Seed.extend({
   setAuthor: function(author) {
     this.author = author;
     this.elName.innerHTML = this.author + '&nbsp';
-    this.elName.style.color = this.color;
+    // this.elName.style.color = this.color;
   },
 
   refreshDate: function() {
