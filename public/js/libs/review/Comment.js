@@ -28,7 +28,7 @@ var Comment = r.Seed.extend({
       tag: ".comment.usual",
       children: [
         ['.comment-up.usual', [
-          { tag: '.comment-name', attr: {}, as: 'elName', innerHTML: this.author},
+          { tag: '.comment-name', attr: {}, as: 'elName', innerHTML: this.author + '&nbsp'},
           { tag:"p.comment-txt", as: 'elDiv',
           events: {
             keydown: function(e) {
@@ -45,16 +45,16 @@ var Comment = r.Seed.extend({
             { tag:".comment-button.button", as: 'createEl', innerHTML: 'Create', events: {
               click: function(){ this.valid(); this.onCreate(); }.bind(this)
             }},
-            { tag:".comment-button.button", as: 'replyEl', innerHTML: 'Reply', events: {
+            { tag:".comment-button.button R", as: 'replyEl', events: {
               click: this.onReply.bind(this)
             }},
-            { tag:".comment-button.button", as: 'editEl', innerHTML: 'Edit', events: {
+            { tag:".comment-button.button E", as: 'editEl', events: {
               click: function(){
                 if (this.elDiv.isContentEditable) { this.valid(); this.edit();}
                 else { this.elDiv.setAttribute('contenteditable', true); this.preValid(); this.switchEdit(); }
               }.bind(this)
             }},
-            { tag:".comment-button.button", as: 'removeEl', innerHTML: 'Delete', events: {
+            { tag:".delete-button.button X", as: 'removeEl', events: {
               click: function(){ this.onRemove(this.id); }.bind(this)
             }},
             { tag: '.comment-date', as: 'timeDiv'}
@@ -89,7 +89,7 @@ var Comment = r.Seed.extend({
     /*HARDCODE*/
     // this.infoCom.appendChild(this.createEl);
     // this.infoCom.appendChild(document.createTextNode(' - '))
-    this.infoCom.appendChild(this.removeEl);
+    // this.infoCom.appendChild(this.removeEl);
     // this.infoCom.appendChild(this.timeDiv);
     this.elDiv.setAttribute('contenteditable', true);
   },
@@ -124,6 +124,7 @@ var Comment = r.Seed.extend({
     this.date = data.date;
     this.y = data.y;
     this.x = data.x;
+    this.bpPosition = data.bpPosition;
     this.preValid();
     this.valid(data.date);
   },
@@ -147,7 +148,7 @@ var Comment = r.Seed.extend({
   setAuthor: function(author) {
     this.author = author;
     this.elName.innerHTML = this.author + '&nbsp';
-    this.elName.style.color = this.color;
+    // this.elName.style.color = this.color;
   },
 
   refreshDate: function() {
@@ -157,7 +158,7 @@ var Comment = r.Seed.extend({
   getData: function() {
     return { id: this.id, parentID: this.parentID, mainID: this.mainID, txt: this.txt,
       author: this.author || this.getAuthorName(), y: this.y, x: this.x,
-      color: this.color, areas: this.getAreas(), date: this.date};
+      color: this.color, areas: this.getAreas(), date: this.date, bpPosition: this.bpPosition};
   },
 
   getAreas: function() {
