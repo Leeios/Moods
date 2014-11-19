@@ -66,7 +66,7 @@ var Bar = r.Seed.extend({
         this.query('dp').resources.on('delete', this.deleteResource.bind(this));
       } else if (this.side == "leftbar") {
         this.query('dp').pages.on('insert', function(model) {
-          this.insertResource(this.query('dp').resources.where(function(e) { return e.id === model[0].id}));
+          this.insertResource(this.query('dp').resources.where(function(e) { return e.id === model[0].resourceID}), model[0].id);
         }.bind(this));
         this.query('dp').pages.on('delete', this.deleteResource.bind(this));
       }
@@ -94,14 +94,13 @@ var Bar = r.Seed.extend({
 
     },
 
-    insertResource : function (model, options) {
+    insertResource : function (model, pageID) {
       this.scope.resources.appendChild(this.create(r.Resource,{ src: model[0].src,title : model[0].title, id: model[0].id},'lastResource').el);
       var tmp = this.lastResource;
       tmp.el.addEventListener('mousedown', function(e) {
-        console.log(this.query('dp').pages.all, tmp.id)
         if (this.side !== 'leftbar') return ;
         this.fire('setPage', this.query('dp').pages.one(function(e) {
-          return e.id === tmp.id;
+          return (e.resourceID === tmp.id) && (typeof pageID === 'undefined' ? 1 : e.id === pageID);
         }.bind(this)).index);
       }.bind(this))
     },

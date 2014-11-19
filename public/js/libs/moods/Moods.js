@@ -63,11 +63,16 @@ sand.define('Moods/Master', [
       console.log('Init Moods...');
 
       this.create(r.ComModule, {attachEl: this.containerView, dp: this.dp, id: 'cover'}, 'commentsbar');
+
+      this.dp.resources.insert({id: 'cover', src: '/img/tex_00.jpg', title: 'cover'});
+
       this.topbar.el.insertBefore(this.create(r.Upload, {complete: function(file) {
         this.dp.resources.insert({src: file.content, title: file.name});
       }.bind(this)}, 'upload').el,this.topbar.scope["resources-wrap"]);
+
       this.leftbar.on('onResourceDropped', function(data) {
-        data.index++;/*DIRTY TO LET COVER AS 0*/
+        data.resourceID = data.id;
+        delete data.id;
         this.dp.pages.insert(data);
       }.bind(this));
 
@@ -86,10 +91,8 @@ sand.define('Moods/Master', [
         this.setView(data.index);
       }.bind(this));
 
-      /*TEST*/
-
-      // var id = this.dp.resources.insert({src: "/img/skybox/nz.jpg", title: "TEST"}).id;
-      // this.dp.pages.insert({index:0, id: id});
+      /*Insert cover*/
+      this.dp.pages.insert({resourceID: 'cover', index: 0});
 
       this.setView(0);
       this.showCom();
@@ -111,14 +114,14 @@ sand.define('Moods/Master', [
 
   /*Page Managing*/
     insertPage: function(model) {
-      this.pages[model[0].index] = model[0].id;
+      this.pages[model[0].index] = model[0].resourceID;
       // this.pages.splice(model.index || this.pages.length - 1, 0, model);
     },
 
     editPage: function(model, options) {
       for (var i = 0, len = this.pages.length; i < len; i++) {
-        if (model.id === this.pages[i].id) {
-            if (options.index) this.pages[model.index] = model.id;
+        if (model.resourceID === this.pages[i]) {
+            if (options.index) this.pages[model.index] = model.resourceID;
           return ;
         }
       }
@@ -126,7 +129,7 @@ sand.define('Moods/Master', [
 
     deletePage: function(model) {
       for (var i = 0, len = this.pages.length; i < len; i++) {
-        if (model.id === this.pages[i].id) {
+        if (model.id === this.pages[i]) {
           this.pages.splice(i, 1);
           return ;
         }
@@ -155,15 +158,14 @@ sand.define('Moods/Master', [
         this.current = 0;
         this.view.setCurrent(this.cover);
         this.commentsbar.setID('cover', this.container);
-      }
-      else {
+      } else {
         var res;
         this.current = pageIndex;
         res = this.dp.resources.one(function(e) {
           return e.id === this.pages[pageIndex];
         }.bind(this));
         this.view.setCurrent(res);
-        this.commentsbar.setID(res.id, this.container);
+        this.commentsbar.setID(this.dp.pages.one(function(e) {return e.index === pageIndex}.bind(this)).id, this.container);
       }
     },
 
