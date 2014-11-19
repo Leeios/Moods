@@ -124,6 +124,7 @@ var Comment = r.Seed.extend({
     this.date = data.date;
     this.y = data.y;
     this.x = data.x;
+    this.bpPosition = data.bpPosition;
     this.preValid();
     this.valid(data.date);
   },
@@ -157,7 +158,7 @@ var Comment = r.Seed.extend({
   getData: function() {
     return { id: this.id, parentID: this.parentID, mainID: this.mainID, txt: this.txt,
       author: this.author || this.getAuthorName(), y: this.y, x: this.x,
-      color: this.color, areas: this.getAreas(), date: this.date};
+      color: this.color, areas: this.getAreas(), date: this.date, bpPosition: this.bpPosition};
   },
 
   getAreas: function() {

@@ -192,7 +192,7 @@ footer {
             cursor: pointer; }
           .moods .moods-container .col-comments .group-comment .wrap-comments .comment {
             padding: 3px 6px;
-            font-family: "Open Sans", sans-serif;
+            font-family: "futurastd";
             transition: top 0.3s;
             border-spacing: 6px 0px;
             box-sizing: border-box; }
@@ -230,7 +230,7 @@ footer {
                 font-weight: bold; }
               .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-info .comment-button {
                 display: inline;
-                color: #4E4E4E;
+                color: #000;
                 font-weight: bold; }
     .moods .moods-container .moods-container-view {
       position: relative;
