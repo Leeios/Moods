@@ -189,7 +189,7 @@ var CommentsGroup = r.Seed.extend({
       if (models[0].id == this.replies[i].id) {
         this.replies[i].el.remove();
         this.replies.splice(i, 1);
-        if (this.replies.length === 0) {
+        if (this.replies.length === 0 && this.collapseEl) {
           this.collapseEl.remove();
         }
         return ;

@@ -28,7 +28,7 @@ var Comment = r.Seed.extend({
       tag: ".comment.usual",
       children: [
         ['.comment-up.usual', [
-          { tag: '.comment-name', attr: {}, as: 'elName', innerHTML: this.author},
+          { tag: '.comment-name', attr: {}, as: 'elName', innerHTML: this.author + '&nbsp'},
           { tag:"p.comment-txt", as: 'elDiv',
           events: {
             keydown: function(e) {
@@ -89,7 +89,7 @@ var Comment = r.Seed.extend({
     /*HARDCODE*/
     // this.infoCom.appendChild(this.createEl);
     // this.infoCom.appendChild(document.createTextNode(' - '))
-    this.infoCom.appendChild(this.removeEl);
+    // this.infoCom.appendChild(this.removeEl);
     // this.infoCom.appendChild(this.timeDiv);
     this.elDiv.setAttribute('contenteditable', true);
   },
