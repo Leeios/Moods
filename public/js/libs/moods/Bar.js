@@ -2,6 +2,7 @@ sand.define('Moods/Bar', [
   'Seed',
   'DOM/toDOM',
   'Moods/Resource',
+  'DOM/handle',
 ], function(r) {
 
 /*
@@ -23,19 +24,40 @@ var Bar = r.Seed.extend({
         tag : ".moods"+(opt.side ? "-"+opt.side : ""),
         children : [
           {
+            tag : ".previous <<",
+            events : {
+              mouseup : function (e) {
+                this.resourcesDiv.style.left = this.resourcesDiv.style.left || "0px"
+                this.resourcesDiv.style.top = this.resourcesDiv.style.top || "0px"
+                if( (opt.side === "topbar" && $(this.resourcesDiv).width() > $(this.scope["resources-wrap"]).width() && $(this.resourcesDiv).width() > - parseInt(this.resourcesDiv.style.left)) ||  ( opt.side === "leftbar" && $(this.resourcesDiv).height() > $(this.scope["resources-wrap"]).height() && $(this.resourcesDiv).height() > - parseInt(this.resourcesDiv.style.top))) opt.side === "topbar" ? this.resourcesDiv.style.left = parseInt(this.resourcesDiv.style.left) + 72 + "px" : this.resourcesDiv.style.top = parseInt(this.resourcesDiv.style.top) + 72 + "px"
+              }.bind(this)
+            }
+          },
+          {
             tag : ".resources-wrap",
             children : [
             {
               tag : '.resources'+(opt.type || "")
             }
             ]
+          },
+          {
+            tag : ".next >>",
+            events : {
+              mouseup : function (e) {
+                this.resourcesDiv.style.left = this.resourcesDiv.style.left || "0px";
+                this.resourcesDiv.style.top = this.resourcesDiv.style.top || "0px";
+                if( $(this.resourcesDiv).width() >= $(this.scope["resources-wrap"]).width() ) opt.side === "topbar" ? this.resourcesDiv.style.left = parseInt(this.resourcesDiv.style.left) - 72 + "px" : this.resourcesDiv.style.top = parseInt(this.resourcesDiv.style.top) - 72 + "px"
+              }.bind(this)
+            }
           }
         ]
       },this.scope)
-      this.scope.resources.setAttribute("dropzone",true);
-      this.scope.resources.setAttribute("side",opt.side);
+      this.resourcesDiv = this.scope['resources'+(opt.type || "")];
+      this.resourcesDiv.setAttribute("dropzone",true);
+      this.resourcesDiv.setAttribute("side",opt.side);
 
-      this.scope['resources'+(opt.type || "")].onResourceDropped = function (id,dropIndex) {
+      this.resourcesDiv.onResourceDropped = function (id,dropIndex) {
           this.fire('onResourceDropped',{id: id, index: dropIndex});
       }.bind(this)
 
@@ -48,6 +70,27 @@ var Bar = r.Seed.extend({
         }.bind(this));
         //this.query('dp').pages.on('delete', this.deleteResource.bind(this));
       }
+
+      /*this.handle = r.handle(this.el);
+
+      this.handle.drag({
+        start : function (e) {
+          this.sL = this.resourcesDiv.style.left;
+          this.sT = this.resourcesDiv.style.top;
+            
+          this.oL = $(this.resourcesDiv).offset().left;
+          this.oT = $(this.resourcesDiv).offset().top;
+
+          this.cOffsetX = e.xy[0] - $(this.resourcesDiv).offset().left;
+          this.cOffsetY = e.xy[1] - $(this.resourcesDiv).offset().top;
+        }.bind(this),
+        drag : function (e) {
+          if(e.shiftKey){
+            console.log( e.xy[0] - this.oL  - this.cOffsetX + "px")
+            this.resourcesDiv.style.left = e.xy[0] - this.oL - this.cOffsetX + "px";
+          }
+        }.bind(this)
+      }) */
 
     },
 
