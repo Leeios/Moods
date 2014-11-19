@@ -100,10 +100,14 @@ footer {
     height: 75px;
     float: left;
     margin: 6px 3px 20px 3px; }
-    .moods .moods-topbar .resources {
-      width: 60%;
+    .moods .moods-topbar .resources-wrap {
+      overflow: hidden;
+      min-width: 1000px;
       min-height: 72px;
-      right: 0px;
+      left: 170px;
+      position: absolute; }
+    .moods .moods-topbar .resources {
+      max-height: 72px;
       position: absolute; }
   .moods .moods-leftbar {
     background-color: #1B1B1B;
@@ -168,13 +172,13 @@ footer {
           z-index: 100;
           position: absolute;
           top: 12px;
-          left: -1px; }
+          left: -30px; }
         .moods .moods-container .col-comments .group-comment .pin-picto {
           float: left;
           width: 30px;
           height: 30px;
           border-radius: 15px;
-          border: 1px solid black; }
+          border: 2px solid black; }
         .moods .moods-container .col-comments .group-comment .wrap-comments {
           margin: 6px;
           box-sizing: border-box;
@@ -195,19 +199,21 @@ footer {
             .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-down {
               text-align: center; }
             .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-name {
+              float: left;
               display: inline;
               position: absolute;
               top: 0px;
               left: 0px;
               font-weight: bold;
-              vertical-align: top; }
+              font-size: 14px; }
             .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-txt {
-              display: inline;
+              display: inline-block;
               width: 100%;
               min-width: 72px;
               min-height: 14px;
               color: #efefef;
-              font-size: 14px; }
+              font-size: 14px;
+              word-break: break-word; }
               .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-txt[contenteditable=true] {
                 outline: 0px solid transparent; }
             .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-info {
@@ -217,6 +223,12 @@ footer {
               .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-info .comment-date {
                 float: right;
                 font-style: italic; }
+              .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-info .delete-button {
+                color: #980000;
+                padding: 1px 1px;
+                border-radius: 3px;
+                display: inline;
+                font-weight: bold; }
               .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-info .comment-button {
                 display: inline;
                 color: #4E4E4E;

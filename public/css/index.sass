@@ -103,10 +103,14 @@ footer
     height: 75px
     float: left
     margin: 6px 3px 20px 3px
-    .resources
-      width : 60%
+    .resources-wrap
+      overflow : hidden
+      min-width : 1000px
       min-height : 72px
-      right : 0px
+      left : 170px
+      position : absolute
+    .resources
+      max-height : 72px
       position : absolute
 
 
@@ -169,13 +173,13 @@ footer
           z-index: 100
           position: absolute
           top: 12px
-          left: -1px
+          left: -30px
         .pin-picto
           float: left
           width: 30px
           height: 30px
           border-radius: 15px
-          border: 1px solid black
+          border: 2px solid black
         overflow: visible
         position: absolute
         float: left
@@ -206,22 +210,22 @@ footer
             .comment-down
               text-align: center
             .comment-name
+              float: left
               display: inline
               position: absolute
               top: 0px
               left: 0px
               font-weight: bold
-              vertical-align: top
+              font-size: 14px
             .comment-txt
-              display: inline
-              // display: inline-block
+              display: inline-block
               width: 100%
               min-width: 72px
               min-height: 14px
               color: #efefef
               font-size: 14px
               // white-space: pre
-              // word-break: break-all
+              word-break: break-word
               &[contenteditable = true]
                 outline: 0px solid transparent
             .comment-info
@@ -231,6 +235,15 @@ footer
               .comment-date
                 float: right
                 font-style: italic
+              .delete-button
+                color: #980000
+                padding: 1px 1px
+                border-radius: 3px
+                display: inline
+                font-weight: bold
+              // .delete-button:hover
+              //   background-color : rgba(87, 87, 87, 0.65)
+              //   opacity : 0.9
               .comment-button
                 display: inline
                 color: #4E4E4E

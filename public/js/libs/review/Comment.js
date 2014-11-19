@@ -45,16 +45,16 @@ var Comment = r.Seed.extend({
             { tag:".comment-button.button", as: 'createEl', innerHTML: 'Create', events: {
               click: function(){ this.valid(); this.onCreate(); }.bind(this)
             }},
-            { tag:".comment-button.button", as: 'replyEl', innerHTML: 'Reply', events: {
+            { tag:".comment-button.button R", as: 'replyEl', events: {
               click: this.onReply.bind(this)
             }},
-            { tag:".comment-button.button", as: 'editEl', innerHTML: 'Edit', events: {
+            { tag:".comment-button.button E", as: 'editEl', events: {
               click: function(){
                 if (this.elDiv.isContentEditable) { this.valid(); this.edit();}
                 else { this.elDiv.setAttribute('contenteditable', true); this.preValid(); this.switchEdit(); }
               }.bind(this)
             }},
-            { tag:".comment-button.button", as: 'removeEl', innerHTML: 'Delete', events: {
+            { tag:".delete-button.button X", as: 'removeEl', events: {
               click: function(){ this.onRemove(this.id); }.bind(this)
             }},
             { tag: '.comment-date', as: 'timeDiv'}

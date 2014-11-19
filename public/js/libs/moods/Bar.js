@@ -19,7 +19,19 @@ var Bar = r.Seed.extend({
     '+init' : function(opt) {
       this.side = opt.side;
       this.scope = {}
-      this.el = r.toDOM({ tag : ".moods"+(opt.side ? "-"+opt.side : ""), children : [{ tag : '.resources'+(opt.type || "")}]} , this.scope);
+      this.el = r.toDOM({
+        tag : ".moods"+(opt.side ? "-"+opt.side : ""),
+        children : [
+          {
+            tag : ".resources-wrap",
+            children : [
+            {
+              tag : '.resources'+(opt.type || "")
+            }
+            ]
+          }
+        ]
+      },this.scope)
       this.scope.resources.setAttribute("dropzone",true);
       this.scope.resources.setAttribute("side",opt.side);
 

@@ -65,7 +65,7 @@ sand.define('Moods/Master', [
       this.create(r.ComModule, {attachEl: this.containerView, dp: this.dp, id: 'cover'}, 'commentsbar');
       this.topbar.el.insertBefore(this.create(r.Upload, {complete: function(file) {
         this.dp.resources.insert({src: file.content, title: file.name});
-      }.bind(this)}, 'upload').el,this.topbar.scope.resources);
+      }.bind(this)}, 'upload').el,this.topbar.scope["resources-wrap"]);
       this.leftbar.on('onResourceDropped', function(data) {
         data.index++;/*DIRTY TO LET COVER AS 0*/
         this.dp.pages.insert(data);
