@@ -72,6 +72,7 @@ sand.define('Moods/Master', [
       }.bind(this));
 
       /*Listeners*/
+      this.leftbar.on('setPage', this.setView.bind(this));
       ['insert', 'edit', 'delete'].each(function(e) {
         this.dp.pages.on(e, function(model, options) {
           this[e + 'Page'](model, options);
@@ -154,9 +155,11 @@ sand.define('Moods/Master', [
         this.current = 0;
         this.view.setCurrent(this.cover);
         this.commentsbar.setID('cover', this.container);
-      } else {
+      }
+      else {
+        var res;
         this.current = pageIndex;
-        var res = this.dp.resources.one(function(e) {
+        res = this.dp.resources.one(function(e) {
           return e.id === this.pages[pageIndex];
         }.bind(this));
         this.view.setCurrent(res);
