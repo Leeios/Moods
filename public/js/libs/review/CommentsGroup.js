@@ -217,10 +217,11 @@ var CommentsGroup = r.Seed.extend({
             })
             $(this.pinPicto.line).insertBefore(this.pinPicto.parentNode.childNodes[0])
           }
-          this.pinPicto.cOffsetX = $(this.pinPicto).offset().left;
-          this.pinPicto.cOffsetY = $(this.pinPicto).offset().top;
-          this.pinPicto.style.left = $(document.body).scrollLeft() - this.pinPicto.oL + "px";
-          this.pinPicto.style.top = $(document.body).scrollTop()- this.pinPicto.oT  + "px";
+          console.log(e.xy)
+          this.pinPicto.cOffsetX = e.xy[0] - $(this.pinPicto).offset().left;
+          this.pinPicto.cOffsetY = e.xy[1] - $(this.pinPicto).offset().top;
+          this.pinPicto.style.left = e.xy[0] - $(document.body).scrollLeft() - this.pinPicto.oL + "px";
+          this.pinPicto.style.top = e.xy[1] - $(document.body).scrollTop()- this.pinPicto.oT  + "px";
           this.pinPicto.style.pointerEvents = "none"
         }.wrap(this),
         drag : function (e) {
@@ -242,8 +243,8 @@ var CommentsGroup = r.Seed.extend({
   },
 
   setBP: function () {
+    console.log('setbp')
     this.pinPicto.style.position = "relative"
-    console.log(this.pinPicto.style.left,$(this.pinPicto).offset().left);
     if(!this.pinPicto.oL) this.pinPicto.oL = $(this.pinPicto).offset().left;
     if(!this.pinPicto.oT) this.pinPicto.oT = $(this.pinPicto).offset().top;
     if(!this.pinPicto.line) {
@@ -258,8 +259,8 @@ var CommentsGroup = r.Seed.extend({
       $(this.pinPicto.line).insertBefore(this.pinPicto.parentNode.childNodes[0])
     }
 
-    this.pinPicto.cOffsetX = $(this.pinPicto).offset().left;
-    this.pinPicto.cOffsetY = $(this.pinPicto).offset().top;
+    this.pinPicto.cOffsetX = - $(this.pinPicto).offset().left;
+    this.pinPicto.cOffsetY = - $(this.pinPicto).offset().top;
     this.pinPicto.style.left = $(document.body).scrollLeft() - this.pinPicto.oL + "px";
     this.pinPicto.style.top = $(document.body).scrollTop()- this.pinPicto.oT  + "px";
 

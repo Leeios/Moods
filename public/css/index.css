@@ -173,12 +173,15 @@ footer {
           position: absolute;
           top: 12px;
           left: -30px; }
-        .moods .moods-container .col-comments .group-comment .pin-picto {
-          float: left;
-          width: 30px;
-          height: 30px;
-          border-radius: 15px;
-          border: 2px solid black; }
+          .moods .moods-container .col-comments .group-comment .wrap-picto .pin-picto {
+            float: left;
+            width: 30px;
+            height: 30px;
+            border-radius: 15px;
+            border: 2px solid black; }
+            .moods .moods-container .col-comments .group-comment .wrap-picto .pin-picto .line {
+              left: 30px;
+              top: 17px; }
         .moods .moods-container .col-comments .group-comment .wrap-comments {
           margin: 6px;
           box-sizing: border-box;
