@@ -181,6 +181,8 @@ sand.define('Moods/Case', [
 						var deltaX = e.xy[0] - this.posClick[0];
 						var deltaY = e.xy[1] - this.posClick[1];
 						var delta = e.translation || [deltaX,deltaY] || [0,0]
+						var sLeft = parseInt(this.img.style.left);
+						var sTop = parseInt(this.img.style.top);
 
 						//this.debugDelta = delta;
 						//this.debugScope.innerHTML = delta; //for mobile testing purpose
@@ -205,6 +207,7 @@ sand.define('Moods/Case', [
 						}
 						this.fire('case:imageMovedPx',this.img.style.left,this.img.style.top,this.img.style.width,this.img.style.height);
 						this.fire('case:imageMovedInt',parseInt(this.img.style.left),parseInt(this.img.style.top),parseInt(this.img.style.width),parseInt(this.img.style.height));
+						this.fire('case:delta',parseInt(this.img.style.left)-sLeft,parseInt(this.img.style.top)-sTop)
 					}
 					this.posClick[0] = e.xy[0]
 					this.posClick[1] = e.xy[1]

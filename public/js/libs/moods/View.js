@@ -37,8 +37,19 @@ sand.define('Moods/View',['Moods/Case','DOM/toDOM','Moods/BP','Seed'], function 
 			},this.scope);
 
 			if(this.type === "stories"){
-				this.el.appendChild(this.create(r.Case,{ width : 400, height : 400, imgSrc : this.src },'imgCase').el);
-				//this.el.appendChild(this.create(r.BP,null,'comments').el);
+				this.el.appendChild(this.create(r.Case,{ width : 355, height : 355, imgSrc : this.src },'imgCase').el);
+				this.el.appendChild(this.create(r.BP,null,'comments').el);
+				this.imgCase.on('case:delta', function (dx,dy) {
+					for(var i = 0, n = $('.bp-commentaries .pin-picto').length; i < n; i++) {
+						if($('.bp-commentaries .pin-picto')[i].previousSibling){
+							$('.bp-commentaries .pin-picto')[i].style.left = parseInt($('.bp-commentaries .pin-picto')[i].style.left) + dx + 'px';
+							$('.bp-commentaries .pin-picto')[i].style.top = parseInt($('.bp-commentaries .pin-picto')[i].style.top) + dy + 'px';
+							$('.bp-commentaries .pin-picto')[i].previousSibling.style.transformOrigin = "0 0";
+							$('.bp-commentaries .pin-picto')[i].previousSibling.style.transform = "rotate("+Math.atan2(parseInt($('.bp-commentaries .pin-picto')[i].style.top)+0.5*$($('.bp-commentaries .pin-picto')[i]).height(),(parseInt($('.bp-commentaries .pin-picto')[i].style.left)+0.5*$($('.bp-commentaries .pin-picto')[i]).width()))*180/Math.PI+"deg)";
+							$('.bp-commentaries .pin-picto')[i].previousSibling.style.width = Math.sqrt(Math.pow(parseInt($('.bp-commentaries .pin-picto')[i].style.left)+0.5*$($('.bp-commentaries .pin-picto')[i]).width(),2) + Math.pow(parseInt($('.bp-commentaries .pin-picto')[i].style.top)+0.5*$($('.bp-commentaries .pin-picto')[i]).height(),2)) +"px";
+						}
+					}
+				})
 			} else if (this.type === "moods"){
 
 				this.caseBox = r.toDOM({
@@ -72,7 +83,7 @@ sand.define('Moods/View',['Moods/Case','DOM/toDOM','Moods/BP','Seed'], function 
 		},
             setCurrent: function(model) {
               if (!model) return ;
-              if (model.el) {
+              if (model.el && this.type == "stories") {
                 this.cover = model.el;
                 this.imgCase.el.remove();
                 this.el.appendChild(model.el);
