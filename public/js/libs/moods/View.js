@@ -36,6 +36,31 @@ sand.define('Moods/View',['Moods/Case','DOM/toDOM','Moods/BP','Seed'], function 
 				]
 			},this.scope);
 
+			this.caseBox = r.toDOM({
+					tag : '.caseBox',
+					style : {
+						position : "absolute",
+					},
+					children : [
+						this.create(r.Case,{ width : 475, height : 400, fit : true, imgSrc : this.src },'boxCase').el,
+						{
+							tag : '.label',
+							style : {
+								position : "absolute"
+							},
+							attr : {
+								contentEditable : true,
+							}
+						}
+					]
+				},this.scope)
+
+			this.boxCase.on('case:imageMovedInt',function (x,y,iWidth,iHeight) {
+					this.scope.label.style.left = Math.min(Math.max(x - 50,-50),parseInt(this.imgCase.el.style.width)) + 'px';
+					this.scope.label.style.top =  Math.max(Math.min(y + iHeight - 35,parseInt(this.imgCase.el.style.height)-35), - 35) + 'px';
+				}.bind(this));7
+
+
 			if(this.type === "stories"){
 				this.el.appendChild(this.create(r.Case,{ width : 355, height : 355, imgSrc : this.src },'imgCase').el);
 				this.el.appendChild(this.create(r.BP,null,'comments').el);
@@ -51,36 +76,24 @@ sand.define('Moods/View',['Moods/Case','DOM/toDOM','Moods/BP','Seed'], function 
 					}
 				})
 				this.imgCase.on('case:zoomFactor', function (omega,p) {
-					
+					/*for(var i = 0, n = $('.bp-commentaries .pin-picto').length; i < n; i++) {
+						if($('.bp-commentaries .pin-picto')[i].previousSibling){
+							$('.bp-commentaries .pin-picto')[i].style.left = (parseInt($('.bp-commentaries .pin-picto')[i].style.left)-p.x)*omega  + 'px';
+							$('.bp-commentaries .pin-picto')[i].style.top = (parseInt($('.bp-commentaries .pin-picto')[i].style.top)-p.y)*omega  + 'px';
+							$('.bp-commentaries .pin-picto')[i].previousSibling.style.transformOrigin = "0 0";
+							$('.bp-commentaries .pin-picto')[i].previousSibling.style.transform = "rotate("+Math.atan2(parseInt($('.bp-commentaries .pin-picto')[i].style.top)+0.5*$($('.bp-commentaries .pin-picto')[i]).height(),(parseInt($('.bp-commentaries .pin-picto')[i].style.left)+0.5*$($('.bp-commentaries .pin-picto')[i]).width()))*180/Math.PI+"deg)";
+							$('.bp-commentaries .pin-picto')[i].previousSibling.style.width = Math.sqrt(Math.pow(parseInt($('.bp-commentaries .pin-picto')[i].style.left)+0.5*$($('.bp-commentaries .pin-picto')[i]).width(),2) + Math.pow(parseInt($('.bp-commentaries .pin-picto')[i].style.top)+0.5*$($('.bp-commentaries .pin-picto')[i]).height(),2)) +"px";
+						}
+					}*/
 				})
 			} else if (this.type === "moods"){
 
-				this.caseBox = r.toDOM({
-					tag : '.caseBox',
-					style : {
-						position : "absolute",
-					},
-					children : [
-						this.create(r.Case,{ width : 475, height : 400, fit : true, imgSrc : this.src },'imgCase').el,
-						{
-							tag : '.label',
-							style : {
-								position : "absolute"
-							},
-							attr : {
-								contentEditable : true,
-							}
-						}
-					]
-				},this.scope)
+				
 
 				this.el.appendChild(this.caseBox);
 
 
-				this.imgCase.on('case:imageMovedInt',function (x,y,iWidth,iHeight) {
-					this.scope.label.style.left = Math.min(Math.max(x - 50,-50),parseInt(this.imgCase.el.style.width)) + 'px';
-					this.scope.label.style.top =  Math.max(Math.min(y + iHeight - 35,parseInt(this.imgCase.el.style.height)-35), - 35) + 'px';
-				}.bind(this));7
+				
 
 			}
 		},
