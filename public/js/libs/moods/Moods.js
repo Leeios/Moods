@@ -71,16 +71,14 @@ sand.define('Moods/Master', [
       }.bind(this)}, 'upload').el,this.topbar.scope["resources-wrap"]);
 
       this.topbar.el.insertBefore(r.toDOM({
-        tag: '.switch-button.button SWITCH',
+        tag: 'i.switch-button.button <>',
         events: {
           click: function(e) {
-            this.view.el.innerHTML = '';
             if (this.view.type === 'moods') {
-              this.view = this.create(r.View, {type: 'stories'});
+              // this.view = this.create(r.View, {type: 'stories'});
             } else if (this.view.type === 'stories') {
-              this.view = this.create(r.View, {type: 'moods'});
+              // this.view = this.create(r.View, {type: 'moods'});
             }
-            this.containerView.appendChild(this.view.el);
           }.bind(this)
         }
       }),this.topbar.scope["resources-wrap"]);
@@ -93,6 +91,7 @@ sand.define('Moods/Master', [
         }.bind(this))
       }.bind(this));
       this.leftbar.on('onResourceDropped', function(data) {
+        if (data.index === 0) data.index = 1;
         data.resourceID = data.id;
         delete data.id;
         this.insertPageDP(data);
