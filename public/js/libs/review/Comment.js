@@ -28,8 +28,8 @@ var Comment = r.Seed.extend({
       tag: ".comment.usual",
       children: [
         ['.comment-up.usual', [
-          { tag: '.comment-name', attr: {}, as: 'elName', innerHTML: this.author + '&nbsp'},
-          { tag:"p.comment-txt", as: 'elDiv',
+          { tag: 'span.comment-name', attr: {}, as: 'elName', innerHTML: this.author + '&nbsp'},
+          { tag:"span.comment-txt", as: 'elDiv',
           events: {
             keydown: function(e) {
               if (e.keyCode === 13) {
@@ -142,6 +142,7 @@ var Comment = r.Seed.extend({
       this.infoCom.appendChild(document.createTextNode(' - '))
       this.infoCom.appendChild(this.editEl);
     }
+    this.focus();
     // this.infoCom.appendChild(this.timeDiv);
   },
 

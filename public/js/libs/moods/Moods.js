@@ -83,7 +83,7 @@ sand.define('Moods/Master', [
         this.insertPageDP(data);
 
         this.offsetIndexPage([this.pages.length - 1, data.index], data.resourceID);
-        this.pages.splice(data.index + 1, 0, this.pages.splice(this.pages.length - 1)[0]);
+        // this.pages.splice(data.index, 0, this.pages.splice(this.pages.length - 1)[0]);
 
         console.log(this.pages, this.dp.pages.all)
 

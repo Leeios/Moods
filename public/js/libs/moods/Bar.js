@@ -101,7 +101,7 @@ var Bar = r.Seed.extend({
         var el = this.create(r.Resource,{ src: model[0].src,title : model[0].title, id: model[0].id},'lastResource').el;
         var index = this.query('dp').pages.one(function(e) {return e.id === pageID}.bind(this)).index;
         console.log(index, this.scope.resources.childNodes.length);
-        this.scope.resources.insertBefore(el, this.scope.resources.childNodes[index + 1]);
+        this.scope.resources.insertBefore(el, this.scope.resources.childNodes[index]);
 
         var tmp = this.lastResource;
         tmp.el.addEventListener('mousedown', function(e) {
