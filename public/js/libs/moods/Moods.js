@@ -73,14 +73,8 @@ sand.define('Moods/Master', [
       this.topbar.el.insertBefore(r.toDOM({
         tag: 'i.switch-button.button <>',
         events: {
-          click: function(e) {
-            if (this.view.type === 'moods') {
-              this.view.setStories();
-              this.view.type = 'stories';
-            } else if (this.view.type === 'stories') {
-              this.view.setMoods();
-              this.view.type = 'moods';
-            }
+          click: function() {
+            this.view.setAlongType();
             this.setView(this.current);
           }.bind(this)
         }
