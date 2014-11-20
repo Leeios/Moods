@@ -257,6 +257,8 @@ footer {
             transition: top 0.3s;
             border-spacing: 6px 0px;
             box-sizing: border-box; }
+            .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-up {
+              width: 100%; }
             .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-down {
               text-align: center; }
             .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-name {
@@ -267,7 +269,6 @@ footer {
               font-weight: bold;
               font-size: 14px; }
             .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-txt {
-              display: block;
               min-width: 72px;
               min-height: 14px;
               color: #efefef;

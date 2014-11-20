@@ -12,7 +12,8 @@
 		"express": "latest",
 		"socket.io": "latest",
 		"jade": "latest",
-		"node-sass": "latest",
-		"config": "latest"
+		"node-sass": "0.4.1",
+		"config": "latest",
+		"forever": "latest"
 	}
 }

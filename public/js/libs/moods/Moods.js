@@ -92,13 +92,20 @@ sand.define('Moods/Master', [
         data.resourceID = data.id;
         delete data.id;
         this.insertPageDP(data);
-
         this.offsetIndexPage([this.pages.length - 1, data.index], data.resourceID);
-        // this.pages.splice(data.index, 0, this.pages.splice(this.pages.length - 1)[0]);
-
-        console.log(this.pages, this.dp.pages.all)
-
         this.setView(data.index);
+      }.bind(this));
+      this.leftbar.on('onResourceSwaped', function(indexes) {
+        var tmp = this.pages.splice(indexes[0], 1);
+        this.pages.splice(indexes[1], 0, tmp);
+        var tmp = this.dp.pages.one(function(e) { return e.index === indexes.from }.bind(this));
+        this.dp.pages.where(function(e) { return e.index > indexes.from}.bind(this)).each(
+          function(e) {
+            e.edit({index: e.index - 1});
+          }.bind(this))
+        tmp.edit({index: indexes.to});
+        this.leftbar.swapResources(indexes);
+        console.log(this.pages, this.dp.pages.all);
       }.bind(this));
 
       /*Insert cover*/

@@ -103,9 +103,7 @@ sand.define('Moods/View',['Moods/Case','DOM/toDOM','Moods/BP','Seed'], function 
       if (!model) return ;
       if (model.el) {
         this.cover = model.el;
-        //this.setAlongType();
-        console.log(this.el, model.el);
-        console.log('cleaning');
+        this.setAlongType();
         this.imgCase.changeImage('');
         this.boxCase.changeImage('');
         this.imgCase.el.style.display = "none"

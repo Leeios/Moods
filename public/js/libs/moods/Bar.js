@@ -60,6 +60,10 @@ var Bar = r.Seed.extend({
       this.resourcesDiv.onResourceDropped = function (id,dropIndex) {
           this.fire('onResourceDropped',{id: id, index: dropIndex});
       }.bind(this)
+      this.resourcesDiv.onResourceSwaped = function (from, to) {
+        if (from === to) return ;
+        this.fire('onResourceSwaped', {from: from, to: to});
+      }.bind(this)
 
       if(this.side == "topbar"){
         this.query('dp').resources.on('insert', this.insertResource.bind(this));
@@ -92,6 +96,11 @@ var Bar = r.Seed.extend({
         }.bind(this)
       }) */
 
+    },
+
+    swapResources: function(indexes) {
+      var el = this.scope.resources.removeChild(this.scope.resources.childNodes[indexes.from]);
+      this.scope.resources.insertBefore(el, this.scope.resources.childNodes[indexes.to]);
     },
 
     insertResource : function (model, pageID) {
