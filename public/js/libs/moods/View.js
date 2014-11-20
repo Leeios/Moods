@@ -77,7 +77,7 @@ sand.define('Moods/View',['Moods/Case','DOM/toDOM','Moods/BP','Seed'], function 
 			if(this.type === "stories"){
 				this.el.appendChild(this.imgCase.el);
 				this.el.appendChild(this.comments.el);
-				
+
 				this.imgCase.on('case:zoomFactor', function (omega,p) {
 					/*for(var i = 0, n = $('.bp-commentaries .pin-picto').length; i < n; i++) {
 						if($('.bp-commentaries .pin-picto')[i].previousSibling){
@@ -89,16 +89,16 @@ sand.define('Moods/View',['Moods/Case','DOM/toDOM','Moods/BP','Seed'], function 
 						}
 					}*/
 				})
-			
+
 			} else if (this.type === "moods"){
 
-				
 
-				this.el.appendChild(this.caseBox);	
+
+				this.el.appendChild(this.caseBox);
 
 			}
 		},
-    
+
     setCurrent: function(model) {
       if (!model) return ;
       if (model.el) {
@@ -146,8 +146,8 @@ sand.define('Moods/View',['Moods/Case','DOM/toDOM','Moods/BP','Seed'], function 
     },
 
     setAlongType : function () {
-    	this.type == "moods" ? this.setMoods(): this.setStories();
+      this.type == "moods" ? this.setMoods(): this.setStories();
     }
 
-	})
+  })
 })

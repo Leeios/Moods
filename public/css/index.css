@@ -100,6 +100,13 @@ footer {
     height: 75px;
     float: left;
     margin: 6px 3px 20px 3px; }
+    .moods .moods-topbar .switch-button {
+      float: left;
+      width: 36px;
+      height: 36px;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer; }
     .moods .moods-topbar .previous {
       position: absolute;
       background-color: #2B2B2B;
@@ -260,7 +267,7 @@ footer {
               font-weight: bold;
               font-size: 14px; }
             .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-txt {
-              display: inline-block;
+              display: block;
               min-width: 72px;
               min-height: 14px;
               color: #efefef;
