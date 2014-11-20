@@ -105,7 +105,7 @@ sand.define('Moods/Resource', [
 						var dropIndex = [].concat.apply([],this.hintDiv.parentNode.childNodes).indexOf(this.hintDiv);
 						this.hintDiv.parentNode.onResourceDropped(this.id || "no Id",dropIndex);
 
-					} else if (if(this.hintDiv.parentNode && this.hintDiv.parentNode.getAttribute("side") == "leftbar" && this.fParent.getAttribute("side") == "leftbar")){
+					} else if (this.hintDiv.parentNode && this.hintDiv.parentNode.getAttribute("side") == "leftbar" && this.fParent.getAttribute("side") == "leftbar"){
 						/*ICI METTRE LE CODE A LANCER APRES LE D&D DE LA LEFTBAR SUR LA LEFTBAR (CAS DU SWAP)*/
 
 						var dropIndex = [].concat.apply([],this.hintDiv.parentNode.childNodes).indexOf(this.hintDiv); //Index d'insertion

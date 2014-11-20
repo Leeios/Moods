@@ -64,15 +64,35 @@ sand.define('Moods/View',['Moods/Case','DOM/toDOM','Moods/BP','Seed'], function 
 			this.create(r.BP,null,'comments').el;
 			this.imgCase.on('case:delta', function (dx,dy) {
 					for(var i = 0, n = $('.bp-commentaries .pin-picto').length; i < n; i++) {
-						if($('.bp-commentaries .pin-picto')[i].previousSibling){
+						if($('.bp-commentaries .pin-picto')[i].previousSibling && $('.bp-commentaries .pin-picto')[i].off){
+							$('.bp-commentaries .pin-picto')[i].style.pointerEvents = "none";
 							$('.bp-commentaries .pin-picto')[i].style.left = parseInt($('.bp-commentaries .pin-picto')[i].style.left) + dx + 'px';
 							$('.bp-commentaries .pin-picto')[i].style.top = parseInt($('.bp-commentaries .pin-picto')[i].style.top) + dy + 'px';
 							$('.bp-commentaries .pin-picto')[i].previousSibling.style.transformOrigin = "0 0";
 							$('.bp-commentaries .pin-picto')[i].previousSibling.style.transform = "rotate("+Math.atan2(parseInt($('.bp-commentaries .pin-picto')[i].style.top)+0.5*$($('.bp-commentaries .pin-picto')[i]).height(),(parseInt($('.bp-commentaries .pin-picto')[i].style.left)+0.5*$($('.bp-commentaries .pin-picto')[i]).width()))*180/Math.PI+"deg)";
 							$('.bp-commentaries .pin-picto')[i].previousSibling.style.width = Math.sqrt(Math.pow(parseInt($('.bp-commentaries .pin-picto')[i].style.left)+0.5*$($('.bp-commentaries .pin-picto')[i]).width(),2) + Math.pow(parseInt($('.bp-commentaries .pin-picto')[i].style.top)+0.5*$($('.bp-commentaries .pin-picto')[i]).height(),2)) +"px";
+							
+							if (document.elementFromPoint(parseInt($('.bp-commentaries .pin-picto')[i].style.left) + $('.bp-commentaries .pin-picto')[i].off.left - $(document.body).scrollLeft(), parseInt($('.bp-commentaries .pin-picto')[i].style.top) + $('.bp-commentaries .pin-picto')[i].off.top - $(document.body).scrollTop()) !== this.imgCase.img) {
+								$('.bp-commentaries .pin-picto')[i].style.visibility = "hidden";
+								$('.bp-commentaries .pin-picto')[i].previousSibling.style.visibility = "hidden";
+							} else {
+								$('.bp-commentaries .pin-picto')[i].style.visibility = "visible";
+								$('.bp-commentaries .pin-picto')[i].previousSibling.style.visibility = "visible";
+							}
+							//console.log(document.elementFromPoint(parseInt($('.bp-commentaries .pin-picto')[i].style.left) + $('.bp-commentaries .pin-picto')[i].off.left /*- $(document.body).scrollLeft()*/, parseInt($('.bp-commentaries .pin-picto')[i].style.top) + $('.bp-commentaries .pin-picto')[i].off.top /*- $(document.body).scrollTop()*/))
+							//console.log($(document.body).scrollLeft(),$(document.body).scrollTop())
+							$('.bp-commentaries .pin-picto')[i].style.pointerEvents = "auto";
+						} else {
+							var sL = $('.bp-commentaries .pin-picto')[i].style.left || "0px";
+							var sT = $('.bp-commentaries .pin-picto')[i].style.top || "0px";
+							$('.bp-commentaries .pin-picto')[i].style.left = "0px";
+							$('.bp-commentaries .pin-picto')[i].style.top = "0px";
+							$('.bp-commentaries .pin-picto')[i].off = $($('.bp-commentaries .pin-picto')[i]).offset();
+							$('.bp-commentaries .pin-picto')[i].style.left = sL;
+							$('.bp-commentaries .pin-picto')[i].style.top = sT;
 						}
 					}
-			})
+			}.bind(this))
 
 			if(this.type === "stories"){
 				this.el.appendChild(this.imgCase.el);

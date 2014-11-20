@@ -64,11 +64,12 @@ sand.define('Moods/BP',['DOM/toDOM','Seed','DOM/handle'], function (r) {
 
 			this.scope['bp-commentaries'].appendChild(newComment);
 			var pinPicto = scope['pin-picto'];
+
+			
 			r.handle(pinPicto).drag({
 				start : function (e) {
 
 					pinPicto.style.position = "relative"
-					console.log(pinPicto.style.left,$(pinPicto).offset().left);
 					if(!pinPicto.oL) pinPicto.oL = $(pinPicto).offset().left;
 					if(!pinPicto.oT) pinPicto.oT = $(pinPicto).offset().top;
 					if(!pinPicto.line) {
