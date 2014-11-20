@@ -50,6 +50,9 @@ sand.define('Moods/View',['Moods/Case','DOM/toDOM','Moods/BP','Seed'], function 
 						}
 					}
 				})
+				this.imgCase.on('case:zoomFactor', function (omega,p) {
+					
+				})
 			} else if (this.type === "moods"){
 
 				this.caseBox = r.toDOM({

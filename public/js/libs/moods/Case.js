@@ -243,6 +243,8 @@ sand.define('Moods/Case', [
 
 		zoom : function (factor) {// Merci Geo !
 			this.imgRect = this.imgRect.move({staticPoint : this.staticPoint, scale : factor});
+			var sW = parseInt(this.img.style.width);
+			var sH = parseInt(this.img.style.height);
 			this.img.style.width = this.imgRect.segX.getLength() + 'px';
 			this.img.style.height = this.imgRect.segY.getLength() + 'px';
 			this.img.style.left =  this.imgRect.segX.c1 + 'px';
@@ -262,6 +264,7 @@ sand.define('Moods/Case', [
 				this.img.style.left =  this.imgRect.segX.c1 + 'px';
 				this.img.style.top = this.imgRect.segY.c1 + 'px';
 			}
+			this.fire('case:zoomFactor',parseInt(this.img.style.width)/sW,this.staticPoint);
 		},
 
 		loadCase : function (firstLoad) {//methode permettant d'initialiser la position de l'image
