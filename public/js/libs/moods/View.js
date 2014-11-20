@@ -100,7 +100,7 @@ sand.define('Moods/View',['Moods/Case','DOM/toDOM','Moods/BP','Seed'], function 
 		},
             setCurrent: function(model) {
               if (!model) return ;
-              if (model.el && this.type == "stories") {
+              if (model.el) {
                 this.cover = model.el;
                 this.imgCase.el.remove();
                 this.el.appendChild(model.el);

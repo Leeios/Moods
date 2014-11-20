@@ -70,6 +70,21 @@ sand.define('Moods/Master', [
         this.dp.resources.insert({src: file.content, title: file.name});
       }.bind(this)}, 'upload').el,this.topbar.scope["resources-wrap"]);
 
+      this.topbar.el.insertBefore(r.toDOM({
+        tag: '.switch-button.button SWITCH',
+        events: {
+          click: function(e) {
+            this.view.el.innerHTML = '';
+            if (this.view.type === 'moods') {
+              this.view = this.create(r.View, {type: 'stories'});
+            } else if (this.view.type === 'stories') {
+              this.view = this.create(r.View, {type: 'moods'});
+            }
+            this.containerView.appendChild(this.view.el);
+          }.bind(this)
+        }
+      }),this.topbar.scope["resources-wrap"]);
+
       /*Listeners*/
       this.leftbar.on('setPage', this.setView.bind(this));
       ['insert', 'edit', 'delete'].each(function(e) {
@@ -139,7 +154,7 @@ sand.define('Moods/Master', [
       var newIndex = index[1];
       if (prevIndex === newIndex) return ;
       this.dp.pages.where(function(e) {
-        return (e.resourceID !== resourceID && e.index < Math.min(prevIndex, newIndex) + Math.abs(prevIndex - newIndex)
+        return (e.resourceID !== resourceID && e.index <= Math.min(prevIndex, newIndex) + Math.abs(prevIndex - newIndex)
                     && e.index >= Math.min(prevIndex, newIndex));
       }.bind(this)).each(function(e) {
         e.edit({index: e.index + 1})
