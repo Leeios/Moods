@@ -91,13 +91,13 @@ var ComModule = r.Seed.extend({
     this.id = id;
     this.el.remove();
     this.colCom = this.create(r.ColComments, {mainID: this.id});
+    this.setDisplay('column');
+    this.colCom.display();
     this.el = this.colCom.el;
     this.el.style.left = prevLeft;
     if (prevLeft === '0px') container.appendChild(this.el);
     this.colCom.setHeight(this.attachEl.clientHeight || this.attachEl.offsetHeight || this.attachEl.scrollHeight || this.attachEl.style.height || 0);
     this.colCom.refreshDP();
-    this.setDisplay('column');
-    this.colCom.display();
   },
 
   guid: function() {
