@@ -75,10 +75,13 @@ sand.define('Moods/Master', [
         events: {
           click: function(e) {
             if (this.view.type === 'moods') {
-              // this.view = this.create(r.View, {type: 'stories'});
+              this.view.setStories();
+              this.view.type = 'stories';
             } else if (this.view.type === 'stories') {
-              // this.view = this.create(r.View, {type: 'moods'});
+              this.view.setMoods();
+              this.view.type = 'moods';
             }
+            this.setView(this.current);
           }.bind(this)
         }
       }),this.topbar.scope["resources-wrap"]);

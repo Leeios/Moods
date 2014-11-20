@@ -56,8 +56,8 @@ sand.define('Moods/View',['Moods/Case','DOM/toDOM','Moods/BP','Seed'], function 
 				},this.scope)
 
 			this.boxCase.on('case:imageMovedInt',function (x,y,iWidth,iHeight) {
-					this.scope.label.style.left = Math.min(Math.max(x - 50,-50),parseInt(this.imgCase.el.style.width)) + 'px';
-					this.scope.label.style.top =  Math.max(Math.min(y + iHeight - 35,parseInt(this.imgCase.el.style.height)-35), - 35) + 'px';
+					this.scope.label.style.left = Math.min(Math.max(x - 50,-50),parseInt(this.boxCase.el.style.width)) + 'px';
+					this.scope.label.style.top =  Math.max(Math.min(y + iHeight - 35,parseInt(this.boxCase.el.style.height)-35), - 35) + 'px';
 				}.bind(this));
 
 			this.create(r.Case,{ width : 355, height : 355, imgSrc : this.src },'imgCase');
@@ -98,20 +98,54 @@ sand.define('Moods/View',['Moods/Case','DOM/toDOM','Moods/BP','Seed'], function 
 
 			}
 		},
-            setCurrent: function(model) {
-              if (!model) return ;
-              if (model.el && this.type === 'stories') {
-                this.cover = model.el;
-                this.imgCase.el.remove();
-                this.el.appendChild(model.el);
-                return ;
-              }
-              this.cover.remove();
-              this.el.appendChild(this.imgCase.el);
-              this.src = model.src;
-              this.imgCase.img.src = model.src;
-              this.imgCase.loadCase(true);
-              console.log(this.src)
-            }
-	})
+
+    setCurrent: function(model) {
+      if (!model) return ;
+      if (model.el) {
+        this.cover = model.el;
+        this.imgCase.el.remove();
+        this.setAlongType();
+        this.el.appendChild(model.el);
+        return ;
+      }
+      this.cover.remove();
+      //this.el.appendChild(this.imgCase.el);
+      this.src = model.src;
+      if(this.type == "stories") {
+      	this.imgCase.changeImage(this.src)
+      } else if (this.type == "moods") {
+      	this.boxCase.changeImage(this.src)
+      }
+      /*this.imgCase.img.src = model.src;
+      this.imgCase.loadCase(true);*/
+      console.log(this.src)
+
+    },
+
+    setMoods : function(){
+    	if(this.imgCase.el.parentNode) this.imgCase.el.parentNode.removeChild(this.imgCase.el);
+    	else if(this.comments.el.parentNode) this.comments.el.parentNode.removeChild(this.comments.el);
+
+    	this.el.appendChild(this.caseBox);
+
+    	this.el.className = "view moods";
+    	this.type = "moods"
+
+    },
+
+    setStories : function () {
+    	if(this.caseBox.parentNode) this.caseBox.parentNode.removeChild(this.caseBox);
+
+    	this.el.appendChild(this.imgCase.el);
+			this.el.appendChild(this.comments.el);
+
+			this.el.className = "view stories";
+			this.type = "stories"
+    },
+
+    setAlongType : function () {
+      this.type == "moods" ? this.setMoods(): this.setStories();
+    }
+
+  })
 })
