@@ -103,12 +103,21 @@ sand.define('Moods/View',['Moods/Case','DOM/toDOM','Moods/BP','Seed'], function 
       if (!model) return ;
       if (model.el) {
         this.cover = model.el;
-        //this.imgCase.el.remove();
-        this.setAlongType();
+        //this.setAlongType();
+        console.log(this.el, model.el);
+        console.log('cleaning');
+        this.imgCase.changeImage('');
+        this.boxCase.changeImage('');
+        this.imgCase.el.style.display = "none"
+        this.caseBox.style.display = "none"
+        this.comments.el.style.display = "none"
         this.el.appendChild(model.el);
         return ;
       }
       this.cover.remove();
+      this.imgCase.el.style.display = "block";
+			this.caseBox.style.display = "block";
+			this.comments.el.style.display = "block";
       //this.el.appendChild(this.imgCase.el);
       this.src = model.src;
       if(this.type == "stories") {
@@ -146,7 +155,8 @@ sand.define('Moods/View',['Moods/Case','DOM/toDOM','Moods/BP','Seed'], function 
     },
 
     setAlongType : function () {
-      this.type == "moods" ? this.setMoods(): this.setStories();
+      console.log(this.type)
+      this.type == "stories" ? this.setMoods(): this.setStories();
     }
 
   })
