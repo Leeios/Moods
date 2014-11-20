@@ -348,7 +348,8 @@ footer {
         position: absolute;
         width: 200px;
         height: 450px;
-        top: 17%; }
+        top: 17%;
+        z-index: 1; }
         .moods .moods-container .moods-container-view .view.stories .bp-commentaries .comment {
           min-height: 10px;
           width: 100%;
