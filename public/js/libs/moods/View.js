@@ -58,13 +58,11 @@ sand.define('Moods/View',['Moods/Case','DOM/toDOM','Moods/BP','Seed'], function 
 			this.boxCase.on('case:imageMovedInt',function (x,y,iWidth,iHeight) {
 					this.scope.label.style.left = Math.min(Math.max(x - 50,-50),parseInt(this.imgCase.el.style.width)) + 'px';
 					this.scope.label.style.top =  Math.max(Math.min(y + iHeight - 35,parseInt(this.imgCase.el.style.height)-35), - 35) + 'px';
-				}.bind(this));7
+				}.bind(this));
 
-
-			if(this.type === "stories"){
-				this.el.appendChild(this.create(r.Case,{ width : 355, height : 355, imgSrc : this.src },'imgCase').el);
-				this.el.appendChild(this.create(r.BP,null,'comments').el);
-				this.imgCase.on('case:delta', function (dx,dy) {
+			this.create(r.Case,{ width : 355, height : 355, imgSrc : this.src },'imgCase');
+			this.create(r.BP,null,'comments').el;
+			this.imgCase.on('case:delta', function (dx,dy) {
 					for(var i = 0, n = $('.bp-commentaries .pin-picto').length; i < n; i++) {
 						if($('.bp-commentaries .pin-picto')[i].previousSibling){
 							$('.bp-commentaries .pin-picto')[i].style.left = parseInt($('.bp-commentaries .pin-picto')[i].style.left) + dx + 'px';
@@ -74,7 +72,12 @@ sand.define('Moods/View',['Moods/Case','DOM/toDOM','Moods/BP','Seed'], function 
 							$('.bp-commentaries .pin-picto')[i].previousSibling.style.width = Math.sqrt(Math.pow(parseInt($('.bp-commentaries .pin-picto')[i].style.left)+0.5*$($('.bp-commentaries .pin-picto')[i]).width(),2) + Math.pow(parseInt($('.bp-commentaries .pin-picto')[i].style.top)+0.5*$($('.bp-commentaries .pin-picto')[i]).height(),2)) +"px";
 						}
 					}
-				})
+			})
+
+			if(this.type === "stories"){
+				this.el.appendChild(this.imgCase.el);
+				this.el.appendChild(this.comments.el);
+				
 				this.imgCase.on('case:zoomFactor', function (omega,p) {
 					/*for(var i = 0, n = $('.bp-commentaries .pin-picto').length; i < n; i++) {
 						if($('.bp-commentaries .pin-picto')[i].previousSibling){
@@ -86,14 +89,12 @@ sand.define('Moods/View',['Moods/Case','DOM/toDOM','Moods/BP','Seed'], function 
 						}
 					}*/
 				})
+			
 			} else if (this.type === "moods"){
 
 				
 
-				this.el.appendChild(this.caseBox);
-
-
-				
+				this.el.appendChild(this.caseBox);	
 
 			}
 		},
