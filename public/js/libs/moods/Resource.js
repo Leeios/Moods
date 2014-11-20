@@ -101,8 +101,21 @@ sand.define('Moods/Resource', [
 				end: function (e) {
 					this.hint(e,this.hintDiv);
 					if(this.hintDiv.parentNode && this.hintDiv.parentNode.getAttribute("side") == "leftbar" && this.fParent.getAttribute("side") != "leftbar") {
+						
 						var dropIndex = [].concat.apply([],this.hintDiv.parentNode.childNodes).indexOf(this.hintDiv);
 						this.hintDiv.parentNode.onResourceDropped(this.id || "no Id",dropIndex);
+
+					} else if (if(this.hintDiv.parentNode && this.hintDiv.parentNode.getAttribute("side") == "leftbar" && this.fParent.getAttribute("side") == "leftbar")){
+						/*ICI METTRE LE CODE A LANCER APRES LE D&D DE LA LEFTBAR SUR LA LEFTBAR (CAS DU SWAP)*/
+
+						var dropIndex = [].concat.apply([],this.hintDiv.parentNode.childNodes).indexOf(this.hintDiv); //Index d'insertion
+						
+						//NOTE : this.sIndex = index de départ
+						
+						//this.hintDiv.parentNode <==> leftbar
+						//je te conseille de faire dans Bar.js une methode this.el.onResourceSwaped qui appelera ta méthode d'échange entre deux pages
+						// comme ça tu pourra faire this.hintDiv.parentNode.onResourceSwaped
+
 					} else if(e.target.className == 'case') e.target.refresh(this.src);
 
 					if(this.hintDiv.parentNode) this.hintDiv.parentNode.removeChild(this.hintDiv);
