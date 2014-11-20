@@ -103,7 +103,7 @@ sand.define('Moods/View',['Moods/Case','DOM/toDOM','Moods/BP','Seed'], function 
       if (!model) return ;
       if (model.el) {
         this.cover = model.el;
-        this.imgCase.el.remove();
+        //this.imgCase.el.remove();
         this.setAlongType();
         this.el.appendChild(model.el);
         return ;
@@ -127,6 +127,7 @@ sand.define('Moods/View',['Moods/Case','DOM/toDOM','Moods/BP','Seed'], function 
     	else if(this.comments.el.parentNode) this.comments.el.parentNode.removeChild(this.comments.el);
 
     	this.el.appendChild(this.caseBox);
+    	this.boxCase.changeImage(this.src)
 
     	this.el.className = "view moods";
     	this.type = "moods"
@@ -138,6 +139,7 @@ sand.define('Moods/View',['Moods/Case','DOM/toDOM','Moods/BP','Seed'], function 
 
     	this.el.appendChild(this.imgCase.el);
 			this.el.appendChild(this.comments.el);
+			this.imgCase.changeImage(this.src);
 
 			this.el.className = "view stories";
 			this.type = "stories"
