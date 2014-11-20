@@ -243,7 +243,6 @@ var CommentsGroup = r.Seed.extend({
   },
 
   setBP: function () {
-    console.log('setbp')
     this.pinPicto.style.position = "relative"
     if(!this.pinPicto.oL) this.pinPicto.oL = $(this.pinPicto).offset().left;
     if(!this.pinPicto.oT) this.pinPicto.oT = $(this.pinPicto).offset().top;

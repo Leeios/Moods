@@ -70,12 +70,6 @@ sand.define('Moods/Master', [
         this.dp.resources.insert({src: file.content, title: file.name});
       }.bind(this)}, 'upload').el,this.topbar.scope["resources-wrap"]);
 
-      this.leftbar.on('onResourceDropped', function(data) {
-        data.resourceID = data.id;
-        delete data.id;
-        this.dp.pages.insert(data);
-      }.bind(this));
-
       /*Listeners*/
       this.leftbar.on('setPage', this.setView.bind(this));
       ['insert', 'edit', 'delete'].each(function(e) {
@@ -83,11 +77,16 @@ sand.define('Moods/Master', [
           this[e + 'Page'](model, options);
         }.bind(this))
       }.bind(this));
-      this.leftbar.on('resourceDrop', function(data) {
-        var trueIndex = data.index || 0;
-        data.index = this.pages.length;
+      this.leftbar.on('onResourceDropped', function(data) {
+        data.resourceID = data.id;
+        delete data.id;
         this.insertPageDP(data);
-        this.offsetIndexPage([this.pages.length - 1], trueIndex);
+
+        this.offsetIndexPage([this.pages.length - 1, data.index], data.resourceID);
+        this.pages.splice(data.index + 1, 0, this.pages.splice(this.pages.length - 1)[0]);
+
+        console.log(this.pages, this.dp.pages.all)
+
         this.setView(data.index);
       }.bind(this));
 
@@ -98,27 +97,26 @@ sand.define('Moods/Master', [
       this.showCom();
     },
 
-  /*Interface/ Droit d'utiliser*/
   insertPageDP: function(model) {
-    /*Parse model ?*/
     this.dp.pages.insert(model);
   },
   editPageDP: function(model, options) {
-    /*Parse model ?*/
     this.dp.pages.edit(model, options);
   },
   deletePageDP: function(model) {
-    /*Parse model ?*/
     this.dp.pages.delete(model);
   },
 
   /*Page Managing*/
     insertPage: function(model) {
-      this.pages[model[0].index] = model[0].resourceID;
-      // this.pages.splice(model.index || this.pages.length - 1, 0, model);
+      this.pages.splice(model[0].index, 0, model[0].resourceID);
+      // this.pages[model[0].index] = model[0].resourceID;
     },
 
     editPage: function(model, options) {
+      return ;
+      /*Should add a lot of stuff to manage arrays*/
+      /*Not enough time*/
       for (var i = 0, len = this.pages.length; i < len; i++) {
         if (model.resourceID === this.pages[i]) {
             if (options.index) this.pages[model.index] = model.resourceID;
@@ -136,24 +134,20 @@ sand.define('Moods/Master', [
       }
     },
 
-    offsetIndexPage: function (indexes) {
+    offsetIndexPage: function (index, resourceID) {
       var prevIndex = index[0];
       var newIndex = index[1];
-      this.dp.pages.edit(
-        this.dp.pages.one(function(e) {e.index === prevIndex}.bind(this)),
-        {index: newIndex}
-      )
-      for (var i = 0, len = this.pages.length; i < len; i++) {
-        this.dp.pages.where(function(e) {
-          return e.index > Math.min(prevIndex, newIndex) + Math.abs(prevIndex - newIndex);
-        }.bind(this)).each(function(e) {
-          this.dp.pages.edit(e, {index: e.index + 1})
-        }.bind(this))
-      }
+      if (prevIndex === newIndex) return ;
+      this.dp.pages.where(function(e) {
+        return (e.resourceID !== resourceID && e.index < Math.min(prevIndex, newIndex) + Math.abs(prevIndex - newIndex)
+                    && e.index >= Math.min(prevIndex, newIndex));
+      }.bind(this)).each(function(e) {
+        e.edit({index: e.index + 1})
+      }.bind(this))
     },
 
     setView: function(pageIndex) {
-      console.log('Set view: ', pageIndex, this.pages)
+      console.log('Set view: ', pageIndex)
       if (pageIndex === 0) {
         this.current = 0;
         this.view.setCurrent(this.cover);

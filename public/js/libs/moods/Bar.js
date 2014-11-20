@@ -95,14 +95,21 @@ var Bar = r.Seed.extend({
     },
 
     insertResource : function (model, pageID) {
-      this.scope.resources.appendChild(this.create(r.Resource,{ src: model[0].src,title : model[0].title, id: model[0].id},'lastResource').el);
-      var tmp = this.lastResource;
-      tmp.el.addEventListener('mousedown', function(e) {
-        if (this.side !== 'leftbar') return ;
-        this.fire('setPage', this.query('dp').pages.one(function(e) {
-          return (e.resourceID === tmp.id) && (typeof pageID === 'undefined' ? 1 : e.id === pageID);
-        }.bind(this)).index);
-      }.bind(this))
+      if (this.side === 'topbar') {
+        this.scope.resources.appendChild(this.create(r.Resource,{ src: model[0].src,title : model[0].title, id: model[0].id},'lastResource').el);
+      } else if (this.side === 'leftbar') {
+        var el = this.create(r.Resource,{ src: model[0].src,title : model[0].title, id: model[0].id},'lastResource').el;
+        var index = this.query('dp').pages.one(function(e) {return e.id === pageID}.bind(this)).index;
+        console.log(index, this.scope.resources.childNodes.length);
+        this.scope.resources.insertBefore(el, this.scope.resources.childNodes[index + 1]);
+
+        var tmp = this.lastResource;
+        tmp.el.addEventListener('mousedown', function(e) {
+          this.fire('setPage', this.query('dp').pages.one(function(e) {
+            return (e.resourceID === tmp.id) && (typeof pageID === 'undefined' ? 1 : e.id === pageID);
+          }.bind(this)).index);
+        }.bind(this))
+      }
     },
 
     deleteResource: function(model, options) {
