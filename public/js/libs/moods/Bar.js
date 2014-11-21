@@ -100,7 +100,8 @@ var Bar = r.Seed.extend({
 
     swapResources: function(indexes) {
       var el = this.scope.resources.removeChild(this.scope.resources.childNodes[indexes.from]);
-      this.scope.resources.insertBefore(el, this.scope.resources.childNodes[indexes.to]);
+      console.log('virer');
+      this.scope.resources.insertBefore(el, this.scope.resources.childNodes[indexes.to + 1]);
     },
 
     insertResource : function (model, pageID) {
