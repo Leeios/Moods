@@ -163,6 +163,7 @@ sand.define('Moods/Case', [
 					}else if (this.fit) {
 						//this.staticPoint = new r.Geo.Point(this.imgCenter);
 						this.zoom(this.lastFactor);
+						this.fire('case:zoomFactor',e);
 						this.fire('case:imageMovedPx',this.img.style.left,this.img.style.top,this.img.style.width,this.img.style.height);
 						this.fire('case:imageMovedInt',parseInt(this.img.style.left),parseInt(this.img.style.top),parseInt(this.img.style.width),parseInt(this.img.style.height));
 					}
@@ -264,7 +265,7 @@ sand.define('Moods/Case', [
 				this.img.style.left =  this.imgRect.segX.c1 + 'px';
 				this.img.style.top = this.imgRect.segY.c1 + 'px';
 			}
-			this.fire('case:zoomFactor',parseInt(this.img.style.width)/sW,this.staticPoint);
+			
 		},
 
 		loadCase : function (firstLoad) {//methode permettant d'initialiser la position de l'image
