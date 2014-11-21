@@ -269,6 +269,7 @@ footer {
               font-weight: bold;
               font-size: 14px; }
             .moods .moods-container .col-comments .group-comment .wrap-comments .comment .comment-txt {
+              display: block;
               min-width: 72px;
               min-height: 14px;
               color: #efefef;

@@ -61,6 +61,7 @@ var Bar = r.Seed.extend({
           this.fire('onResourceDropped',{id: id, index: dropIndex});
       }.bind(this)
       this.resourcesDiv.onResourceSwaped = function (from, to) {
+        console.log('Swap from :', from, 'to', to);
         if (from === to) return ;
         this.fire('onResourceSwaped', {from: from, to: to});
       }.bind(this)

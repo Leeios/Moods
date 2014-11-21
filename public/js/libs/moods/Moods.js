@@ -168,7 +168,7 @@ sand.define('Moods/Master', [
                     && e.index >= Math.min(prevIndex, newIndex));
       }.bind(this)).each(function(e) {
         console.log('push offset ', e.resourceID, e.index);
-        e.edit({index: e.index + 1})
+        e.edit({index: e.index += newIndex > prevIndex ? -1 : 1})
       }.bind(this))
     },
 
