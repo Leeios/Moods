@@ -88,22 +88,25 @@ sand.define('Moods/Master', [
         }.bind(this))
       }.bind(this));
       this.leftbar.on('onResourceDropped', function(data) {
-        if (data.index === 0) data.index = 1;
+        console.log('index', data.index)
+        if (data.index <= 0) data.index = 1;
         data.resourceID = data.id;
         delete data.id;
         this.insertPageDP(data);
         this.offsetIndexPage([this.pages.length - 1, data.index], data.resourceID);
         this.setView(data.index);
       }.bind(this));
+
       this.leftbar.on('onResourceSwaped', function(indexes) {
-        console.log(indexes.from, indexes.to, this.pages);
+        console.log(indexes.from, indexes.to, this.dp.pages.all);
         var tmp = this.pages.splice(indexes.from, 1);
         this.pages.splice(indexes.to, 0, tmp[0]);
         var tmp = this.dp.pages.one(function(e) { return e.index === indexes.from }.bind(this));
-        this.dp.pages.where(function(e) { return e.index > indexes.from}.bind(this)).each(
-          function(e) {
-            e.edit({index: e.index - 1});
-          }.bind(this))
+        // this.dp.pages.where(function(e) { return e.index > indexes.from}.bind(this)).each(
+        //   function(e) {
+        //     e.edit({index: e.index - 1});
+        //   }.bind(this))
+        this.offsetIndexPage([indexes.from, indexes.to], tmp.resourceID);
         tmp.edit({index: indexes.to});
         this.leftbar.swapResources(indexes);
         console.log(this.pages, this.dp.pages.all);
@@ -118,6 +121,7 @@ sand.define('Moods/Master', [
     },
 
   insertPageDP: function(model) {
+    console.log('Insert ', model)
     this.dp.pages.insert(model);
   },
   editPageDP: function(model, options) {
@@ -159,9 +163,11 @@ sand.define('Moods/Master', [
       var newIndex = index[1];
       if (prevIndex === newIndex) return ;
       this.dp.pages.where(function(e) {
-        return (e.resourceID !== resourceID && e.index <= Math.min(prevIndex, newIndex) + Math.abs(prevIndex - newIndex)
+        console.log(e.resourceID, resourceID)
+        return (e.resourceID !== resourceID && e.index <= Math.max(prevIndex, newIndex)
                     && e.index >= Math.min(prevIndex, newIndex));
       }.bind(this)).each(function(e) {
+        console.log('push offset ', e.resourceID, e.index);
         e.edit({index: e.index + 1})
       }.bind(this))
     },
