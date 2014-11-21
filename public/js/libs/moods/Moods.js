@@ -88,7 +88,6 @@ sand.define('Moods/Master', [
         }.bind(this))
       }.bind(this));
       this.leftbar.on('onResourceDropped', function(data) {
-        console.log('index', data.index)
         if (data.index <= 0) data.index = 1;
         data.resourceID = data.id;
         delete data.id;
@@ -98,18 +97,12 @@ sand.define('Moods/Master', [
       }.bind(this));
 
       this.leftbar.on('onResourceSwaped', function(indexes) {
-        console.log(indexes.from, indexes.to, this.dp.pages.all);
         var tmp = this.pages.splice(indexes.from, 1);
         this.pages.splice(indexes.to, 0, tmp[0]);
         var tmp = this.dp.pages.one(function(e) { return e.index === indexes.from }.bind(this));
-        // this.dp.pages.where(function(e) { return e.index > indexes.from}.bind(this)).each(
-        //   function(e) {
-        //     e.edit({index: e.index - 1});
-        //   }.bind(this))
         this.offsetIndexPage([indexes.from, indexes.to], tmp.resourceID);
         tmp.edit({index: indexes.to});
         this.leftbar.swapResources(indexes);
-        console.log(this.pages, this.dp.pages.all);
         this.setView(indexes.to);
       }.bind(this));
 

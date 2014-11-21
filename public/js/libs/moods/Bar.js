@@ -62,7 +62,9 @@ var Bar = r.Seed.extend({
       }.bind(this)
       this.resourcesDiv.onResourceSwaped = function (from, to) {
         console.log('Swap from :', from, 'to', to);
-        if (from === to) return ;
+        to--;
+        if (from === to || from === 0) return ;
+        if (to === 0) to = 1;
         this.fire('onResourceSwaped', {from: from, to: to});
       }.bind(this)
 
@@ -100,8 +102,7 @@ var Bar = r.Seed.extend({
     },
 
     swapResources: function(indexes) {
-      var el = this.scope.resources.removeChild(this.scope.resources.childNodes[indexes.from]);
-      console.log('virer');
+      var el = this.scope.resources.removeChild(this.scope.resources.childNodes[indexes.from + (indexes.from > indexes.to ? 1 : 0)]);
       this.scope.resources.insertBefore(el, this.scope.resources.childNodes[indexes.to]);
     },
 
@@ -111,7 +112,6 @@ var Bar = r.Seed.extend({
       } else if (this.side === 'leftbar') {
         var el = this.create(r.Resource,{ src: model[0].src,title : model[0].title, id: model[0].id},'lastResource').el;
         var index = this.query('dp').pages.one(function(e) {return e.id === pageID}.bind(this)).index;
-        console.log(index, this.scope.resources.childNodes.length);
         this.scope.resources.insertBefore(el, this.scope.resources.childNodes[index]);
 
         var tmp = this.lastResource;

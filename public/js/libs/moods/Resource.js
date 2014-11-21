@@ -106,9 +106,11 @@ sand.define('Moods/Resource', [
 						this.hintDiv.parentNode.onResourceDropped(this.id || "no Id",dropIndex);
 
 					} else if (this.hintDiv.parentNode && this.hintDiv.parentNode.getAttribute("side") == "leftbar" && this.fParent.getAttribute("side") == "leftbar"){
+						/*Au lieu de renvoie 1-1 il renvoie 1-4*/
+						var dropIndex;
 
-						var dropIndex = [].concat.apply([],this.hintDiv.parentNode.childNodes).indexOf(this.hintDiv); //Index d'insertion
-						this.hintDiv.parentNode.onResourceSwaped(this.sIndex, dropIndex)
+						dropIndex = [].concat.apply([],this.hintDiv.parentNode.childNodes).indexOf(this.hintDiv); //Index d'insertion
+						this.hintDiv.parentNode.onResourceSwaped(this.sIndex, dropIndex);
 
 					} else if(e.target.className == 'case') e.target.refresh(this.src);
 
