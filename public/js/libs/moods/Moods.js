@@ -107,6 +107,7 @@ sand.define('Moods/Master', [
         tmp.edit({index: indexes.to});
         this.leftbar.swapResources(indexes);
         console.log(this.pages, this.dp.pages.all);
+        this.setView(indexes.to);
       }.bind(this));
 
       /*Insert cover*/
