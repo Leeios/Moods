@@ -96,8 +96,9 @@ sand.define('Moods/Master', [
         this.setView(data.index);
       }.bind(this));
       this.leftbar.on('onResourceSwaped', function(indexes) {
-        var tmp = this.pages.splice(indexes[0], 1);
-        this.pages.splice(indexes[1], 0, tmp);
+        console.log(indexes.from, indexes.to, this.pages);
+        var tmp = this.pages.splice(indexes.from, 1);
+        this.pages.splice(indexes.to, 0, tmp[0]);
         var tmp = this.dp.pages.one(function(e) { return e.index === indexes.from }.bind(this));
         this.dp.pages.where(function(e) { return e.index > indexes.from}.bind(this)).each(
           function(e) {
