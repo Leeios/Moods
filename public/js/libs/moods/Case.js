@@ -157,13 +157,13 @@ sand.define('Moods/Case', [
 					if( this.potentialRect.segX.length() >= this.divRect.segX.length() && this.potentialRect.segY.length() >= this.divRect.segY.length()  )  {
 
 						this.zoom(this.lastFactor);
+						this.fire('case:zoomFactor',this.staticPoint);
 						this.fire('case:imageMovedPx',this.img.style.left,this.img.style.top,this.img.style.width,this.img.style.height);
 						this.fire('case:imageMovedInt',parseInt(this.img.style.left),parseInt(this.img.style.top),parseInt(this.img.style.width),parseInt(this.img.style.height));
 
 					}else if (this.fit) {
 						//this.staticPoint = new r.Geo.Point(this.imgCenter);
 						this.zoom(this.lastFactor);
-						this.fire('case:zoomFactor',e);
 						this.fire('case:imageMovedPx',this.img.style.left,this.img.style.top,this.img.style.width,this.img.style.height);
 						this.fire('case:imageMovedInt',parseInt(this.img.style.left),parseInt(this.img.style.top),parseInt(this.img.style.width),parseInt(this.img.style.height));
 					}

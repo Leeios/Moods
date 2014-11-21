@@ -92,9 +92,9 @@ sand.define('Moods/View',['Moods/Case','DOM/toDOM','Moods/BP','Seed'], function 
 					}
 			}.bind(this))
 
-			this.imgCase.on('case:zoomFactor', function (e) {
-					console.log(e.xy);
-			})
+			this.imgCase.on('case:zoomFactor', function (sp) {
+					console.log(sp.x + $(this.imgCase.el).offset().left,sp.y + $(this.imgCase.el).offset().top);
+			}.bind(this))
 
 			if(this.type === "stories"){
 				this.el.appendChild(this.imgCase.el);
